@@ -21,10 +21,11 @@ from django.conf.urls.static import static
 from accounts.views import login_view, register_view, logout_view
 from .views import *
 from templates import *
+from general.views import home_screen_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', home, name='home'),
+    path('', home_screen_view, name='homepage'),
     path('Post/', include('Post.urls')),
     path('Post/', include('Post.urls')),
     path('login/', login_view, name='login'),

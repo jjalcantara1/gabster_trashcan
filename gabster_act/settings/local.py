@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # New apps
+    'general',
     'Post',
     'accounts',
 ]
