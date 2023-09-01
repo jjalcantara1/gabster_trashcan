@@ -18,19 +18,22 @@ from django.contrib import admin
 from django.urls import path, include #para mainclude ung views ng posts app
 from django.conf import settings
 from django.conf.urls.static import static
-from accounts.views import login_view, register_view, logout_view
+from accounts.views import login_view, register_view, logout_view, profile_view
 from .views import *
 from templates import *
 from general.views import home_screen_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', home_screen_view, name='homepage'),
-    path('Post/', include('Post.urls')),
+    path('', home_screen_view, name='homepage'),\
+   # path('', include('accounts.urls')),
     path('Post/', include('Post.urls')),
     path('login/', login_view, name='login'),
     path('logout/', logout_view, name='logout'),
     path('register/', register_view, name='register'),
+    #path('accounts/', include('accounts.urls')),
+    #path('accounts/', include('allauth.urls')),
+    path('profile/', profile_view, name='profile'),
 ]
 
 if settings.DEBUG:

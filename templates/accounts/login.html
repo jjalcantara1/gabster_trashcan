@@ -1,10 +1,59 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>LOGIN</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gabster Login</title>
+  <link rel="stylesheet" href="{% static 'login/style.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+  <style type="text/css">
+    @import url({% static 'login/stylesheet.css' %});
+    .wrapper header {
+        font-family: friendster;
+    }
+    .wrapper header h2 {
+        font-family: friendster;
+    }
+    .wrapper header h1 {
+        font-family: friendster;
+    }
+  </style>
 </head>
 <body>
-PASTE LOGIN CODE HERE
+  <div class="wrapper">
+    <header>
+      <h1>Gabster</h1>
+    </header>
+    <form method="post">
+      {% csrf_token %}
+        {{ form.as_p }}
+      <div class="field email">
+        <div class="input-area">
+          <label>
+            <input type="text" name="email" placeholder="email">
+          </label>
+          <i class="icon fas fa-envelope"></i>
+          <i class="error error-icon fas fa-exclamation-circle"></i>
+        </div>
+        <div class="error error-txt">Email can't be blank</div>
+      </div>
+      <div class="field password">
+        <div class="input-area">
+          <label>
+            <input type="password" name="password" placeholder="Password">
+          </label>
+          <i class="icon fas fa-lock"></i>
+          <i class="error error-icon fas fa-exclamation-circle"></i>
+        </div>
+        <div class="error error-txt">Password can't be blank</div>
+      </div>
+      <div class="pass-txt"><a href="#">Forgot password?</a></div>
+      <input type="submit" value="Login">
+    </form>
+    <div class="sign-txt">Not a member yet? <a href="{% url 'register' %}">Signup now</a></div>
+  </div>
+
+  <script src="{% static 'login/script.js' %}"></script>
 </body>
 </html>

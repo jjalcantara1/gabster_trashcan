@@ -1,14 +1,18 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import authenticate
 from django.contrib.auth.forms import authenticate
 from django.forms import EmailField
-
+from django.forms.utils import ErrorList
 from accounts.models import UserAccount
+from django.contrib.auth import get_user_model
+
+UserAccount = get_user_model()
 
 
 class RegistrationForm(UserCreationForm):
-    email: EmailField = forms.EmailField(max_length=225,
-                                         help_text="An email address is required. Please add a valid email address.")
+    email = forms.EmailField(max_length=255,
+                             help_text="An email address is required. Please add a valid email address.")
 
     class Meta:
         model = UserAccount
@@ -37,6 +41,24 @@ class AccountAuthenticationForm(forms.ModelForm):
     class Meta:
         model = UserAccount
         fields = ('email', 'password')
+
+    def __init__(
+            self,
+            data=None,
+            files=None,
+            auto_id="id_%s",
+            prefix=None,
+            initial=None,
+            error_class=ErrorList,
+            label_suffix=None,
+            empty_permitted=False,
+            instance=None,
+            use_required_attribute=None,
+            renderer=None,
+    ):
+        super().__init__(data, files, auto_id, prefix, initial, error_class, label_suffix, empty_permitted, instance,
+                         use_required_attribute, renderer)
+        self.cleaned = None
 
     def clean_password(self):
         if self.is_valid():
