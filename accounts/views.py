@@ -11,11 +11,6 @@ from django.views import View
 from templates import *
 
 
-# Create your views here.
-class Index(View):
-    def get(self, request, *args, **kwargs):
-        return render(request, 'general/homepage.html')
-
 
 def register_view(request, *args, **kwargs):
     user = request.user
@@ -26,19 +21,19 @@ def register_view(request, *args, **kwargs):
     if request.POST:
         form = RegistrationForm(request.POST)
         if form.is_valid():
-            user = form.save()
+            form.save()
             email = form.cleaned_data.get('email').lower()
             raw_password = form.cleaned_data.get('password1')
             account = authenticate(email=email, password=raw_password)
             login(request, account)
-            destination = get_redirect_if_exists(request)
+            destination = kwargs.get('next')
             if destination:  # if destination is not equal to none
                 return redirect(destination)
-            return redirect('profile')
+            return redirect('home')
         else:
             context['registration_form'] = form
 
-    return render(request, 'accounts/register.html')
+    return render(request, 'accounts/register.html', context)
 
 
 def logout_view(request):

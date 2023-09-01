@@ -22,7 +22,7 @@ class RegistrationForm(UserCreationForm):
         email = self.cleaned_data['email'].lower()
         try:
             account = UserAccount.objects.get(email=email)
-        except UserAccount.DoesNotExist:
+        except Exception as e:
             return email
         raise forms.ValidationError(f'Email {email} is already in use.')
 
@@ -30,9 +30,9 @@ class RegistrationForm(UserCreationForm):
         username = self.cleaned_data['username'].lower()
         try:
             account = UserAccount.objects.get(username=username)
-        except UserAccount.DoesNotExist:
+        except Exception as e:
             return username
-        raise forms.ValidationError(f'Username {username} is already in use.')
+        raise forms.ValidationError(f"Username {username} is already in use.")
 
 
 class AccountAuthenticationForm(forms.ModelForm):

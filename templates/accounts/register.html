@@ -10,32 +10,26 @@
 <body>
   <div class="wrapper">
     <h2>Registration</h2>
-      <form class="form-register" method="POST">
-      {% csrf_token %}
+      <form class="form-signin" method="post"> {% csrf_token %}
       <div class="input-box">
           <label>
-              <input type="text" name="username" placeholder="Username" required>
+              <input type="text" name="username" id="inputUsername" class="form-control" placeholder="Username" required>
           </label>
       </div>
 
       <div class="input-box">
-          <label>
-              <input type="email" name="email" placeholder="Email Address" required>
-          </label>  <!-- Use 'email' input type -->
+              <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email Address" required>
         <i class="icon fas fa-envelope"></i>
         <i class="error error-icon fas fa-exclamation-circle"></i>
       </div>
 
       <div class="input-box">
-          <label>
-              <input type="password" name="password1" placeholder="Create password" required>
-          </label>
+              <input type="password" name="password1" id="inputPassword1" class="form-control" placeholder="Create password" required>
       </div>
 
       <div class="input-box">
-          <label>
-              <input type="password" name="password2" placeholder="Confirm password" required>
-          </label>
+              <input type="password" name="password2" id="inputPassword2" class="form-control"  placeholder="Confirm password" required>
+
       </div>
 
           {% for field in registration_form %}
@@ -52,9 +46,7 @@
         {% endif %}
 
       <div class="policy">
-          <label>
               <input type="checkbox" name="accept_terms" required>
-          </label>  <!-- Add a name to the checkbox -->
         <h3>I accept all terms & condition</h3>
       </div>
 
