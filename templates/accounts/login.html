@@ -25,14 +25,10 @@
     <header>
       <h1>Gabster</h1>
     </header>
-    <form method="post">
-      {% csrf_token %}
-        {{ form.as_p }}
+    <form class="form-signin" method="post"> {% csrf_token %}
       <div class="field email">
         <div class="input-area">
-          <label>
-            <input type="text" name="email" placeholder="email">
-          </label>
+            <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email" required>
           <i class="icon fas fa-envelope"></i>
           <i class="error error-icon fas fa-exclamation-circle"></i>
         </div>
@@ -40,9 +36,9 @@
       </div>
       <div class="field password">
         <div class="input-area">
-          <label>
-            <input type="password" name="password" placeholder="Password">
-          </label>
+
+            <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+
           <i class="icon fas fa-lock"></i>
           <i class="error error-icon fas fa-exclamation-circle"></i>
         </div>
@@ -50,6 +46,19 @@
       </div>
       <div class="pass-txt"><a href="#">Forgot password?</a></div>
       <input type="submit" value="Login">
+        {% for field in login_form %}
+				<p>
+				{% for error in field.errors %}
+				<p style="color: red">{{ error }}</p>
+				{% endfor %}
+				</p>
+				{% endfor %}
+				{% if login_form.non_field_errors %}
+				<div style="color: red">
+				<p>{{login_form.non_field_errors}}</p>
+				</div>
+
+				{% endif %}
     </form>
     <div class="sign-txt">Not a member yet? <a href="{% url 'register' %}">Signup now</a></div>
   </div>

@@ -37,6 +37,7 @@ def register_view(request, *args, **kwargs):
 
 
 def logout_view(request):
+    logout(request)
     return redirect('home')
 
 
@@ -47,6 +48,9 @@ def login_view(request, *args, **kwargs):
     if user.is_authenticated:
         return redirect('profile')
 
+    destination = get_redirect_if_exists(request)
+    print("destination: " + str(destination))
+
     if request.POST:
         form = AccountAuthenticationForm(request.POST)
         if form.is_valid():
@@ -55,11 +59,12 @@ def login_view(request, *args, **kwargs):
             user = authenticate(email=email, password=password)
             if user:
                 login(request, user)
-                destination = get_redirect_if_exists(request)
+               # destination = kwargs.get('next')
                 if destination:
                     return redirect(destination)
-                return redirect('home')
+                return redirect('profile')
             else:
+                form = AccountAuthenticationForm()
                 context['login_form'] = form
     return render(request, 'accounts/login.html', context)
 

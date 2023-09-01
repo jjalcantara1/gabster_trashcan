@@ -23,7 +23,11 @@
     <option name="TEMPLATE_CONFIGURATION" value="Django" />
     <option name="TEMPLATE_FOLDERS">
       <list>
-        <option value="$MODULE_DIR$/../gabster_act\templates" />
+        <option value="$MODULE_DIR$/templates" />
+        <option value="$MODULE_DIR$/templates/accounts" />
+        <option value="$MODULE_DIR$/templates/general" />
+        <option value="$MODULE_DIR$/templates/posts" />
+        <option value="$MODULE_DIR$/templates/profile" />
       </list>
     </option>
   </component>

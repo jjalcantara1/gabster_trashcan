@@ -4,6 +4,8 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager  # AbstractBaseUser - user creation
 from django.contrib.auth.models import PermissionsMixin
 from django.contrib.auth import get_user_model
+from django.core.files.storage import FileSystemStorage
+import os
 
 
 # BaseUserManager- managing users
@@ -100,3 +102,4 @@ class UserAccount(AbstractBaseUser):
 
     def has_module_perms(self, app_label):
         return self.is_superuser
+    # return True
