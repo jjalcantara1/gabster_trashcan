@@ -1,5 +1,11 @@
 from django.shortcuts import render
 
 
-def home(request):
-    return render(request, 'home.html', {})
+# Create your views here.
+
+def home_screen_view(request, *args, **kwargs):
+    context = {}  # allows to pass variables in the view
+    return render(request, 'general/home.html', context)
+
+def profile(request):
+    return render(request, "profile/profile.html", {})
