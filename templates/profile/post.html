@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Gabster | Create a New Post</title>
+
+	<meta name="viewport" content="width-device-width, initial scale=1, maximum-scale=1, minimum-scale=1">
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap" rel="stylesheet">
+
+    <link href="{% static 'profile/post.css' %}" rel="stylesheet">
+
+	<link id="theme-style" rel="stylesheet" type="text/css" href="">
+</head>
+<body>
+	<!-- <section class="Post"> -->
+		<div class="post-container">
+			<h1 style="text-align: center">Create a New Post</h1>
+
+			<form id="post-form">
+
+				<label>Subject</label>
+				<input class="subject-field" type="text" name="subject">
+
+				<label>What's on your mind?</label>
+				<textarea class="post-field" name="message"></textarea> 
+
+				<input id="photo-btn" type="submit" value="Add Photo">
+				<input id="video-btn" type="submit" value="Add Video">
+				<input id="submit" type="submit" value="Post">
+
+			</form>
+		</div>
+	<!-- </section> -->
+
+</body>
+</html>

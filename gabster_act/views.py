@@ -18,3 +18,6 @@ def profile_view(request, username):
 
 def profile(request):
     return render(request, "profile/profile.html", {})
+
+def post(request):
+    return render(request, "profile/post.html", {})

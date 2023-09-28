@@ -28,7 +28,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home_screen_view, name='home'),
    # path('', include('accounts.urls')),
-    path('Post/', include('Post.urls')),
+    path('post/', post, name='post'),
     path('login/', login_view, name='login'),
     path('logout/', logout_view, name='logout'),
     path('register/', register_view, name='register'),
@@ -36,6 +36,7 @@ urlpatterns = [
     #path('accounts/', include('allauth.urls')),
     path('profile/', profile, name='profile'), #Addition so that the main page is your (logged in user) profile
     path('profile/<str:username>', profile_view, name='profile_view'),
+
 
 
 ]

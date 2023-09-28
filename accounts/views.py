@@ -79,3 +79,6 @@ def get_redirect_if_exists(request):
 
 def profile_view(request):
     return redirect('profile')
+
+def post(request):
+    return render(request, "profile/post.html", {})
