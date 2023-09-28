@@ -288,8 +288,36 @@ d-flex justify-content-between mb-2 pb-2 border-bottom {
 
     border: 0px solid #f2f4f9;
 }
+#gallery-section{
+    margin-top: 17px;
+}
+#post-btn {
+    margin-top: 10px;
+    width: 150px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: #fff;
+    background-color: #FE8116;
+    border: 1px solid black;
+    border-radius: 20px;
+    position: absolute;
+    top: 40px;
+    left: 1125px;
+}
 
-
+#testimonial-btn {
+    margin-top: 10px;
+    width: 150px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: #fff;
+    background-color: #FE8116;
+    border: 1px solid black;
+    border-radius: 20px;
+    position: absolute;
+    top: 40px;
+    left: 960px;
+}
 
 
 /*

@@ -35,19 +35,23 @@ body {
 	background-color: #FE8116;
 }
 
-.Post{
+.Testimonial{
 	background-color: #FE8116;
 	border-bottom: 1px solid #FE8116 ;
 	overflow: auto;
 }
 
-.post-container{
+#rate {
+	padding-left: 15px;
+}
+
+.testimonial-container{
 	padding-top: 50px;
 	width: 1200px;
 	margin: 0 auto;
 }
 
-#post-form{
+#testimonial-form{
 	display: block;
 	max-width: 600px;
 	margin: 0 auto;
@@ -62,55 +66,23 @@ body {
 	box-shadow: 20px 20px 16px 3px rgba(0,0,0,0.75);
 }
 
-#post-form label{
+#testimonial-form label{
 	line-height: 2.7em;
 }
 
-#post-form textarea{
+#testimonial-form textarea{
 	min-height: 130px;
 	font-size: 14px;
 }
 
-.subject-field{
+.testimonial-field{
 	width: 99%;
 	padding-top: 10px;
-	padding-bottom:10px;
+	padding-bottom:10px; 
 	background-color: var(--secondaryColor);
 	border-radius: 5px;
 	border:1px solid var(--borderColor);
 	font-size: 14px;
-}
-
-.post-field{
-	width: 99%;
-	padding-top: 10px;
-	padding-bottom:10px;
-	background-color: var(--secondaryColor);
-	border-radius: 5px;
-	border:1px solid var(--borderColor);
-	font-size: 14px;
-}
-
-#photo-btn{
-	margin-top: 10px;
-	margin-right: 4px;
-	width: 49%;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	color: #fff;
-	background-color: var(--btnColor);
-	border: none;
-}
-
-#video-btn{
-	margin-top: 10px;
-	margin-left: 4px;
-	width: 49%;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	color: #fff;
-	background-color: var(--btnColor);
-	border: none;
 }
 
 #submit-btn{
@@ -128,3 +100,4 @@ body {
 		width: 95%;
 	}
 }
+

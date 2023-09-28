@@ -36,6 +36,7 @@ urlpatterns = [
     #path('accounts/', include('allauth.urls')),
     path('profile/', profile, name='profile'), #Addition so that the main page is your (logged in user) profile
     path('profile/<str:username>', profile_view, name='profile_view'),
+    path('testimonials/', testimonials, name='testimonials'),
 
 
 

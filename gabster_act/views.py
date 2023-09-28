@@ -21,3 +21,6 @@ def profile(request):
 
 def post(request):
     return render(request, "profile/post.html", {})
+
+def testimonials(request):
+    return render(request, "profile/testimonials.html", {})

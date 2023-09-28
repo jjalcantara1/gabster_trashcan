@@ -13,8 +13,10 @@
                     </figure>
                     <div class="cover-body d-flex justify-content-between align-items-center">
                         <div>
-                            <img class="profile-pic" src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="profile">
-                            <span class="profile-name">Amiah Burton</span>
+                            <img class="profile-pic" src="{% static 'profile/profile.png' %}" alt="profile">
+                            <a href="/post"><input id="post-btn" type="submit" value="Create Post"></a>
+                            <a href="/testimonials"><input id="testimonial-btn" type="submit" value="Add Testimonial"></a>
+                            <span class="profile-name">{{user.username}}</span>
                         </div>
                     </div>
                 </div>
@@ -47,7 +49,7 @@
                     </div>
                     <div class="mt-3">
                         <label class="tx-11 font-weight-bold mb-0 text-uppercase">Email:</label>
-                        <p class="text-muted">me@nobleui.com</p>
+                        <p class="text-muted">{{user.email}}</p>
                     </div>
                     <div class="mt-3">
                         <label class="tx-11 font-weight-bold mb-0 text-uppercase">Website:</label>
@@ -56,7 +58,7 @@
 
                 </div>
             </div>
-          <div class="col-md-12 grid-margin">
+          <div id="gallery-section">
                     <div class="card rounded" style="background-image: linear-gradient( #e52e71, #ff8a00)">
                         <div class="card-body">
                             <h6 class="card-title">Gallery</h6>
@@ -134,7 +136,7 @@
                                 <div class="d-flex align-items-center">
                                     <img class="img-xs rounded-circle" src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="">
                                     <div class="ml-2">
-                                        <p>Mike Popescu</p>
+                                        <p>{{user.username}}</p>
                                         <p class="tx-11 text-muted">1 min ago</p>
                                     </div>
                                 </div>
@@ -169,7 +171,7 @@
                                 <div class="d-flex align-items-center">
                                     <img class="img-xs rounded-circle" src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="">
                                     <div class="ml-2">
-                                        <p>Mike Popescu</p>
+                                        <p>{{user.username}}</p>
                                         <p class="tx-11 text-muted">5 min ago</p>
                                     </div>
                                 </div>
