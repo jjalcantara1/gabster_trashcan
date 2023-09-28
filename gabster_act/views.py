@@ -15,3 +15,6 @@ def profile_view(request, username):
         'user': user,
     }
     return render(request, 'profile/profile.html', context)
+
+def profile(request):
+    return render(request, "profile/profile.html", {})

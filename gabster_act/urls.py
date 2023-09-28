@@ -34,8 +34,8 @@ urlpatterns = [
     path('register/', register_view, name='register'),
     #path('accounts/', include('accounts.urls')),
     #path('accounts/', include('allauth.urls')),
-    #path('profile/', profile, name='profile')
-    path('profile/<str:username>', profile_view, name='profile'),
+    path('profile/', profile, name='profile'), #Addition so that the main page is your (logged in user) profile
+    path('profile/<str:username>', profile_view, name='profile_view'),
 
 
 ]
