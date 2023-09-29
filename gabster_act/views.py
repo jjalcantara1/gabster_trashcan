@@ -9,11 +9,15 @@ def home_screen_view(request, *args, **kwargs):
     return render(request, 'general/home.html', context)
 
 def profile_view(request, username):
-    user = UserAccount(username=username)
-    print(user)
+    # print(request.user.username)
+    user = get_object_or_404(UserAccount, username=username)
+    # user = get_object_or_404(UserAccount, username=username)
+    # print(user)
     # Add any additional data or context you want to pass to the user profile template
     context = {
-        'user': request.user,
+        'user': user,
+        'person': request.user,
+        'asd': 'asd',
     }
     return render(request, 'profile/profile.html', context)
 

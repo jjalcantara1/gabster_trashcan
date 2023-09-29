@@ -19,7 +19,7 @@
 <body>
 	<div class="header">
 		<header id="header">
-    <a id="logo" href="{% url 'profile' user.username %}">
+    <a id="logo" href="{% url 'profile' request.user.username %}">
         <img src="{% static 'profile/black.png' %}" id="logo">
     </a>
     <div class="box">

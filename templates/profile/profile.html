@@ -16,10 +16,19 @@
 
                     <div class="cover-body d-flex justify-content-between align-items-center">
                         <div>
-                            {{ person }}
+
+                            {% if person.username != user.username %}
+                                <a href="/testimonials"><input id="testimonial-btn" type="submit" value="Add Testimonial"></a>
+                            {% else %}
+                                <a href="/post"><input id="post-btn" type="submit" value="Create Post"></a>
+
+                            {% endif %}
+{#                            {% if person.username == user.username %}#}
+{##}
+{#                            {% endif %}#}
                             <img class="profile-pic" src="{% static 'profile/profile.png' %}" alt="profile">
-                            <a href="/post"><input id="post-btn" type="submit" value="Create Post"></a>
-                            <a href="/testimonials"><input id="testimonial-btn" type="submit" value="Add Testimonial"></a>
+
+
                             <span class="profile-name">{{user.username}}</span>
                         </div>
                     </div>
