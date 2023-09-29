@@ -7,6 +7,8 @@ from django.contrib.auth import get_user_model
 from django.core.files.storage import FileSystemStorage
 import os
 
+from django.shortcuts import get_object_or_404
+
 
 # BaseUserManager- managing users
 
@@ -102,4 +104,7 @@ class UserAccount(AbstractBaseUser):
 
     def has_module_perms(self, app_label):
         return self.is_superuser
+
+    def get_object():
+        return get_object_or_404(UserAccount, username=self.kwargs['username'])
     # return True

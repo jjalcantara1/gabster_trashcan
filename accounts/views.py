@@ -81,7 +81,7 @@ def profile_view(request):
     return redirect('profile')
 
 def post(request):
-    return render(request, "profile/post.html", {})
+    return render(request, "posts/post.html", {})
 
 def testimonials(request):
-    return render(request, "profile/testimonials.html", {})
+    return render(request, "posts/testimonials.html", {})

@@ -15,13 +15,15 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include #para mainclude ung views ng posts app
+from django.template.defaulttags import url
+from django.urls import path, include, re_path  # para mainclude ung views ng posts app
 from django.conf import settings
 from django.conf.urls.static import static
 from accounts.views import login_view, register_view, logout_view, profile_view
 from .views import *
 from templates import *
 from general.views import home_screen_view
+# from django.conf.urls import url
 
 
 urlpatterns = [
@@ -34,8 +36,9 @@ urlpatterns = [
     path('register/', register_view, name='register'),
     #path('accounts/', include('accounts.urls')),
     #path('accounts/', include('allauth.urls')),
-    path('profile/', profile, name='profile'), #Addition so that the main page is your (logged in user) profile
-    path('profile/<str:username>', profile_view, name='profile_view'),
+    re_path(r'^profile/(?P<username>[\w.@+-]+)/$', profile_view, name='profile'),
+    # path('profile/', profile, name='profile'), #Addition so that the main page is your (logged in user) profile
+    # path('profile/<str:username>', profile_view, name='profile_view'),
     path('testimonials/', testimonials, name='testimonials'),
 
 
