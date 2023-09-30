@@ -43,6 +43,7 @@ def logout_view(request):
 
 
 def login_view(request, *args, **kwargs):
+    # form = AccountAuthenticationForm(request.POST)
     context = {}
 
     user = request.user
@@ -55,6 +56,7 @@ def login_view(request, *args, **kwargs):
 
     if request.POST:
         form = AccountAuthenticationForm(request.POST)
+        print(form.non_field_errors())
         if form.is_valid():
             email = request.POST['email']
             password = request.POST['password']
@@ -64,12 +66,14 @@ def login_view(request, *args, **kwargs):
                 # destination = kwargs.get('next')
                 if destination:
                     return redirect(destination)
-                return render(request, 'profile/profile.html', context)
+                return redirect('profile', request.user.username)
                 # return redirect('profile_view')
             else:
                 form = AccountAuthenticationForm()
+
                 context['login_form'] = form
-    return render(request, 'accounts/login.html', context)
+    form = AccountAuthenticationForm(request.POST)
+    return render(request, 'accounts/login.html', {'form':form})
 
 
 def get_redirect_if_exists(request):

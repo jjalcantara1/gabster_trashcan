@@ -1,9 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@700&display=swap');
 *{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
+}
+header{
+  font-family: 'Raleway', sans-serif;
+  font-size: 30px;
+  font-weight: 900;
+  color: #fe8116;
+  text-align: center;
+  margin-bottom: 10px;
 }
 body{
   width: 100%;
@@ -11,11 +19,12 @@ body{
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #FFAA33;
+  background-image: linear-gradient(#fe8116, #fcb001);
+  font-family: "Poppins", sans-serif;
 }
 ::selection{
   color: #fff;
-  background: #ffaa33;
+  background: #fe8116;
 }
 .wrapper{
   width: 380px;
@@ -62,7 +71,7 @@ form input{
   padding: 0 45px;
   font-size: 18px;
   background: none;
-  caret-color: #ffaa33;
+  caret-color: #fe8116;
   border-radius: 5px;
   border: 1px solid #bfbfbf;
   border-bottom-width: 2px;
@@ -70,7 +79,7 @@ form input{
 }
 form .field input:focus,
 form .field.valid input{
-  border-color: #ffaa33;
+  border-color: #fe8116;
 }
 form .field.shake input,
 form .field.error input{
@@ -94,7 +103,7 @@ form .field.error input{
 }
 form input:focus ~ .icon,
 form .field.valid .icon{
-  color: #ffaa33;
+  color: #fe8116;
 }
 form .field.shake input:focus ~ .icon,
 form .field.error input:focus ~ .icon{
@@ -121,7 +130,7 @@ form .pass-txt{
   margin-top: -10px;
 }
 .wrapper a{
-  color: #5372F0;
+  color: #fe8116;
   text-decoration: none;
 }
 .wrapper a:hover{
@@ -133,11 +142,27 @@ form input[type="submit"]{
   color: #fff;
   padding: 0;
   border: none;
-  background: #ffbb5b;
+  background: #fe8116;
   cursor: pointer;
   border-bottom: 2px solid rgba(0,0,0,0.1);
   transition: all 0.3s ease;
 }
 form input[type="submit"]:hover{
-  background: #FA9C1B;
+  background: #fe8116;
+}
+.input-group {
+        position: relative;
+        height: 100%;
+        width: 100%;
+}
+
+.input-group .show-password {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+.input-area {
+    margin-bottom: 20px;
 }
