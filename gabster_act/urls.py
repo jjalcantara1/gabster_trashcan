@@ -19,7 +19,7 @@ from django.template.defaulttags import url
 from django.urls import path, include, re_path  # para mainclude ung views ng posts app
 from django.conf import settings
 from django.conf.urls.static import static
-from accounts.views import login_view, register_view, logout_view, profile_view
+from accounts.views import login_view, register_view, logout_view
 from .views import *
 from templates import *
 from general.views import home_screen_view

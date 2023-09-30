@@ -9,7 +9,8 @@ from django.contrib import messages
 from accounts import *
 from django.views import View
 from templates import *
-
+from accounts.models import UserAccount
+from django.shortcuts import render, get_object_or_404
 
 
 def register_view(request, *args, **kwargs):
@@ -46,7 +47,8 @@ def login_view(request, *args, **kwargs):
 
     user = request.user
     if user.is_authenticated:
-        return redirect('profile')
+        # return redirect('profile')
+        return redirect('profile_view')
 
     destination = get_redirect_if_exists(request)
     print("destination: " + str(destination))
@@ -59,10 +61,11 @@ def login_view(request, *args, **kwargs):
             user = authenticate(email=email, password=password)
             if user:
                 login(request, user)
-               # destination = kwargs.get('next')
+                # destination = kwargs.get('next')
                 if destination:
                     return redirect(destination)
-                return redirect('profile')
+                return render(request, 'profile/profile.html', context)
+                # return redirect('profile_view')
             else:
                 form = AccountAuthenticationForm()
                 context['login_form'] = form
@@ -77,11 +80,13 @@ def get_redirect_if_exists(request):
     return redirect
 
 
-def profile_view(request):
-    return redirect('profile')
+# def profile_view(request):
+#     return redirect('profile')
+
 
 def post(request):
     return render(request, "posts/post.html", {})
+
 
 def testimonials(request):
     return render(request, "posts/testimonials.html", {})
