@@ -24,6 +24,8 @@ from .views import *
 from templates import *
 from general.views import home_screen_view
 # from django.conf.urls import url
+from accounts.views import *
+from accounts import views
 
 
 urlpatterns = [
@@ -40,6 +42,8 @@ urlpatterns = [
     # path('profile/', profile, name='profile'), #Addition so that the main page is your (logged in user) profile
     # path('profile/<str:username>', profile_view, name='profile_view'),
     path('testimonials/', testimonials, name='testimonials'),
+    path('activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/',
+         views.activate, name='activate'),
 
 
 
