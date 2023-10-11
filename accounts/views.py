@@ -131,3 +131,6 @@ def post(request):
 
 def testimonials(request):
     return render(request, "posts/testimonials.html", {})
+
+def password_reset(request):
+    return render(request, "accounts/password_reset.html", {})

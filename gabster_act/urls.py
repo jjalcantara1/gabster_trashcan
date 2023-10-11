@@ -26,26 +26,38 @@ from general.views import home_screen_view
 # from django.conf.urls import url
 from accounts.views import *
 from accounts import views
+from django.contrib.auth import views as auth_views
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home_screen_view, name='home'),
    # path('', include('accounts.urls')),
+
     path('post/', post, name='post'),
     path('login/', login_view, name='login'),
     path('logout/', logout_view, name='logout'),
     path('register/', register_view, name='register'),
+
     #path('accounts/', include('accounts.urls')),
     #path('accounts/', include('allauth.urls')),
+
     re_path(r'^profile/(?P<username>[\w.@+-]+)/$', profile_view, name='profile'),
     # path('profile/', profile, name='profile'), #Addition so that the main page is your (logged in user) profile
+
     # path('profile/<str:username>', profile_view, name='profile_view'),
     path('testimonials/', testimonials, name='testimonials'),
     path('activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/',
          views.activate, name='activate'),
 
-
+    path('password_reset/', auth_views.PasswordResetView.as_view(template_name="accounts/password_reset.html"),
+         name='reset_password'),
+    path('password_reset_sent/', auth_views.PasswordResetDoneView.as_view(template_name="accounts/password_reset_sent.html"),
+         name='password_reset_done'),
+    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name = "accounts/password_reset_form.html"),
+         name='password_reset_confirm'),
+    path('reset_password_complete/', auth_views.PasswordResetCompleteView.as_view(template_name="accounts/password_reset_done.html"),
+         name='password_reset_complete'),
 
 ]
 
