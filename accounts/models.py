@@ -6,6 +6,7 @@ from django.contrib.auth.models import PermissionsMixin
 from django.contrib.auth import get_user_model
 from django.core.files.storage import FileSystemStorage
 import os
+from uuid import uuid4
 
 from django.shortcuts import get_object_or_404
 
@@ -76,7 +77,7 @@ def has_module_perms(self, app_label):
 
 class UserAccount(AbstractBaseUser):
     email = models.EmailField(verbose_name='email', max_length=60, unique=True)
-    username = models.CharField(max_length=50, unique=False)
+    username = models.CharField(max_length=50, unique=True) # I put it as true
     date_joined = models.DateTimeField(verbose_name='date joined', auto_now_add=True)
     last_login = models.DateTimeField(verbose_name='last login', auto_now='True')
     is_admin = models.BooleanField(default=False)
