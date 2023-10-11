@@ -1,0 +1,60 @@
+{% extends "profile/header.html" %}
+{% load static %}
+{% block content %}
+    {% if users|length > 0 %}
+            <section class="projectsList">
+                <div class="grid grid--three">
+                    {% for user in users %}
+{#                        <div class="column">#}
+{##}
+{#                            <div class="card project">#}
+{##}
+{#                                <div class="card_body">#}
+{#                                    <h3 class="project_title">{{ user.username }}</h3>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+                        <div class="profile-page tx-13">
+                            <div class="row">
+
+        <div class="col-12 grid-margin">
+            <div class="profile-header">
+                <div class="cover">
+                    <div class="gray-shade"></div>
+                    <figure>
+                        <img src="https://staticg.sportskeeda.com/editor/2022/10/6298c-16668805486397-1920.jpg?w=840 class="img-fluid" alt="profile cover">
+                    </figure>
+
+                    <div class="cover-body d-flex justify-content-between align-items-center">
+                        <div>
+
+                            {% if person.username != user.username %}
+                                <a href="/testimonials"><input id="testimonial-btn" type="submit" value="Add Testimonial"></a>
+                            {% else %}
+                                <a href="/post"><input id="post-btn" type="submit" value="Create Post"></a>
+
+                            {% endif %}
+
+                            <img class="profile-pic" src="{% static 'profile/profile.png' %}" alt="profile">
+
+
+                            <span class="profile-name">{{user.username}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="header-links">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+                    {% endfor %}
+                </div>
+            </section>
+    {% else  %}
+    <h3>No users found</h3>
+    {% endif %}
+{% endblock %}
+

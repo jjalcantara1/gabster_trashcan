@@ -21,8 +21,13 @@ def profile_view(request, username):
     }
     return render(request, 'profile/profile.html', context)
 
-def post(request):
-    return render(request, "posts/post.html", {})
+def search(request):
+    if request.GET.get('search_query'):
+        search_query = request.GET.get('search_query')
+        users = UserAccount.objects.distinct().filter(username__icontains=search_query)
 
-def testimonials(request):
-    return render(request, "posts/testimonials.html", {})
+        return render(request,'profile/search.html', {'users': users})
+    else:
+        users = UserAccount.objects.all()
+
+        return render(request, 'profile/search.html', {'users': users})
