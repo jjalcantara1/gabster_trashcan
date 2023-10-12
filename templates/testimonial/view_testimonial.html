@@ -1,0 +1,140 @@
+{% extends "profile/header.html" %}
+<style>
+    .star {
+        font-size: 20px;
+        color: #FFD700; /* Gold color for filled stars */
+        display: inline-block;
+        margin-right: 5px; /* Add some spacing between stars */
+    }
+
+    .rating {
+        font-size: 0; /* Hide the text content of the rating */
+    }
+
+    .testimonial-card {
+        border-radius: 10px;
+        margin: 10px; /* Add margin to control spacing between cards */
+        padding: 15px; /* Adjust card padding */
+        max-width: 300px; /* Limit card width */
+        cursor: pointer; /* Add pointer cursor to indicate clickability */
+    }
+
+    .testimonial-header {
+        padding: 10px;
+        border-bottom: 1px solid #eee;
+    }
+
+    .testimonial-body {
+        padding: 10px;
+    }
+
+    .testimonial-list {
+        list-style: none; /* Remove bullet points */
+        padding-left: 0; /* Remove left padding for the list */
+    }
+
+    .center-content {
+        display: flex;
+        flex-wrap: wrap; /* Allow cards to wrap to the next row */
+        justify-content: center;
+        align-items: center;
+        padding: 20px; /* Add padding to create spaces between cards */
+    }
+
+    /* Limit the width of the card container */
+    .testimonial-container {
+        max-width: 800px; /* Adjust the maximum width as needed */
+        margin: 0 auto; /* Center the container horizontally */
+    }
+
+    /* Remove underlines from links */
+    .testimonial-card a {
+        text-decoration: none;
+        color: inherit; /* Inherit the text color from parent */
+    }
+
+    /* Style for the link when hovered */
+    .testimonial-card a:hover {
+        text-decoration: none;
+    }
+</style>
+{% block content %}
+<div class="center-content">
+    <div class="testimonial-container">
+     {% if testimonials_received %}
+        {% for testimonial in testimonials_received %}
+            <a href="{% url 'testimonial_detail' testimonial.user_to.username testimonial.id %}" class="testimonial-card">
+                <div class="col-md-12 grid-margin">
+                    <div class="card rounded">
+                        <div class="testimonial-header">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div class="d-flex align-items-center">
+                                    <img class="img-xs rounded-circle" src="{{ testimonial.user_from.profile_image.url }}" alt="{{ testimonial.user_from.username }}">
+                                    <div class="ml-2">
+                                        <p>{{ testimonial.user_from.username }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+{#                        <div class="testimonial-body">#}
+{#                            <ul class="testimonial-list">#}
+{#                                <li class="testimonial-item">#}
+{#                                    <div class="rating">#}
+{#                                        {% if testimonial.rating == 1 %}#}
+{#                                            <span class="star-big">&#9733;</span>#}
+{#                                            <span class="star-big">&#9734;</span>#}
+{#                                            <span class="star-big">&#9734;</span>#}
+{#                                            <span class="star-big">&#9734;</span>#}
+{#                                            <span class="star-big">&#9734;</span>#}
+{#                                        {% elif testimonial.rating == 2 %}#}
+{#                                            <span class="star-big">&#9733;</span>#}
+{#                                            <span class="star-big">&#9733;</span>#}
+{#                                            <span class="star-big">&#9734;</span>#}
+{#                                            <span class="star-big">&#9734;</span>#}
+{#                                            <span class="star-big">&#9734;</span>#}
+{#                                        {% elif testimonial.rating == 3 %}#}
+{#                                            <span class="star-big">&#9733;</span>#}
+{#                                            <span class="star-big">&#9733;</span>#}
+{#                                            <span class="star-big">&#9733;</span>#}
+{#                                            <span class="star-big">&#9734;</span>#}
+{#                                            <span class="star-big">&#9734;</span>#}
+{#                                        {% elif testimonial.rating == 4 %}#}
+{#                                            <span class="star-big">&#9733;</span>#}
+{#                                            <span class="star-big">&#9733;</span>#}
+{#                                            <span class="star-big">&#9733;</span>#}
+{#                                            <span class="star-big">&#9733;</span>#}
+{#                                            <span class="star-big">&#9734;</span>#}
+{#                                        {% elif testimonial.rating == 5 %}#}
+{#                                            <span class="star-big">&#9733;</span>#}
+{#                                            <span class="star-big">&#9733;</span>#}
+{#                                            <span class="star-big">&#9733;</span>#}
+{#                                            <span class="star-big">&#9733;</span>#}
+{#                                            <span class="star-big">&#9733;</span>#}
+{#                                        {% else %}#}
+{#                                            <!-- Handle other cases if needed -->#}
+{#                                        {% endif %}#}
+{#                                    </div>#}
+                                    <div class="testimonial-body">
+                                        <ul class="testimonial-list">
+                                            <li class="testimonial-item">
+                                                <p class="tx-14">{{ testimonial.content | truncatechars:280 }}</p>
+                                                <div class="d-flex justify-content-between">
+                                                    <p class="tx-11 text-muted">{{ testimonial.createdAt | timesince }}</p>
+                                                    <p class="tx-11 text-muted">{{ testimonial.createdAt | date:"F j, Y" }}</p>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        {% endfor %}
+        {% else %}
+            <h4 style="align-content: center">No testimonials yet.</h4>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

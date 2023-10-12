@@ -19,12 +19,15 @@ from django.template.defaulttags import url
 from django.urls import path, include, re_path  # para mainclude ung views ng posts app
 from django.conf import settings
 from django.conf.urls.static import static
+from testimonials import views
+from testimonials.views import view_testimonials, testimonial_detail, add_testimonial
 from accounts.views import login_view, register_view, logout_view
 from .views import *
 from templates import *
+from testimonials import views
 from general.views import home_screen_view
 # from django.conf.urls import url
-from accounts.views import *
+# from accounts.views import *
 from accounts import views
 from django.contrib.auth import views as auth_views
 
@@ -34,22 +37,18 @@ urlpatterns = [
     path('', home_screen_view, name='home'),
    # path('', include('accounts.urls')),
 
-    path('post/', post, name='post'),
+    # path('post/', post, name='post'),
     path('login/', login_view, name='login'),
     path('logout/', logout_view, name='logout'),
     path('register/', register_view, name='register'),
 
-    #path('accounts/', include('accounts.urls')),
-    #path('accounts/', include('allauth.urls')),
-
     re_path(r'^profile/(?P<username>[\w.@+-]+)/$', profile_view, name='profile'),
-    # path('profile/', profile, name='profile'), #Addition so that the main page is your (logged in user) profile
+    re_path(r'^testimonials/(?P<user_to_username>[\w.@+-]+)/$', view_testimonials, name='view_testimonials'),
+    path('testimonials/<str:user_to_username>/<int:testimonial_id>/', testimonial_detail, name='testimonial_detail'),
+    path('addtestimonials/<str:user_to_username>/', add_testimonial, name='add_testimonial'),
 
-    # path('profile/<str:username>', profile_view, name='profile_view'),
-    path('testimonials/', testimonials, name='testimonials'),
     path('activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/',
          views.activate, name='activate'),
-    # path('search/', include('search.urls')),
     path('search/',search, name='search'),
 
     path('password_reset/', auth_views.PasswordResetView.as_view(template_name="accounts/password_reset.html"),

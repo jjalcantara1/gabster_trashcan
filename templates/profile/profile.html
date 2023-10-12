@@ -18,7 +18,7 @@
                         <div>
 
                             {% if person.username != user.username %}
-                                <a href="/testimonials"><input id="testimonial-btn" type="submit" value="Add Testimonial"></a>
+                                <a href="{% url 'add_testimonial' user_to_username=user.username %}"><input id="testimonial-btn" type="submit" value="Add Testimonial"></a>
                             {% else %}
                                 <a href="/post"><input id="post-btn" type="submit" value="Create Post"></a>
 
@@ -226,62 +226,28 @@
                 <div class="col-md-12 grid-margin">
                     <div class="card rounded">
                         <div class="card-body">
-                            <h6 class="card-title">Testimonials</h6>
-                            <div class="d-flex justify-content-between mb-2 pb-2 border-bottom">
-                                <div class="d-flex align-items-center hover-pointer">
-                                    <img class="img-xs rounded-circle" src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="">
-                                    <div class="ml-2">
-                                        <p>Mike Popescu</p>
-                                        <p class="tx-11 text-muted">12 Mutual Friends</p>
+                            <a href="{% url 'view_testimonials' user_to_username=user.username %}">Testimonials</a>
+                            <p>Number of testimonials: {{ testimonials_received|length }}</p>
+                            <div class="testimonials-scrollable-container">
+                                {% for testimonial in testimonials_received %}
+                                    <div class="d-flex justify-content-between mb-2 pb-2 border-bottom">
+                                    <a href="{% url 'testimonial_detail' user_to_username=testimonial.user_to.username testimonial_id=testimonial.id %}">
+                                        <div class="d-flex align-items-center hover-pointer">
+                                            <img class="img-xs rounded-circle"
+                                                 src="{{ testimonial.user_from.profile_image.url }}"
+                                                 alt="{{ testimonial.user_from.username }}">
+                                            <div class="ml-2">
+                                                <p>{{ testimonial.user_from.username }}</p>
+                                                <p class="tx-11 text-muted">{{ testimonial.content | truncatechars:30 }}</p>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
+                                     </a>
+                                {% endfor %}
+{#                                <div class="load-more-button-container">#}
+{#                                <button id="load-more-testimonials">Load More Testimonials</button>#}
+{#                                </div>#}
                             </div>
-                            <div class="d-flex justify-content-between mb-2 pb-2 border-bottom">
-                                <div class="d-flex align-items-center hover-pointer">
-                                    <img class="img-xs rounded-circle" src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="">
-                                    <div class="ml-2">
-                                        <p>Mike Popescu</p>
-                                        <p class="tx-11 text-muted">12 Mutual Friends</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="d-flex justify-content-between mb-2 pb-2 border-bottom">
-                                <div class="d-flex align-items-center hover-pointer">
-                                    <img class="img-xs rounded-circle" src="https://bootdey.com/img/Content/avatar/avatar4.png" alt="">
-                                    <div class="ml-2">
-                                        <p>Mike Popescu</p>
-                                        <p class="tx-11 text-muted">12 Mutual Friends</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="d-flex justify-content-between mb-2 pb-2 border-bottom">
-                                <div class="d-flex align-items-center hover-pointer">
-                                    <img class="img-xs rounded-circle" src="https://bootdey.com/img/Content/avatar/avatar5.png" alt="">
-                                    <div class="ml-2">
-                                        <p>Mike Popescu</p>
-                                        <p class="tx-11 text-muted">12 Mutual Friends</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="d-flex justify-content-between mb-2 pb-2 border-bottom">
-                                <div class="d-flex align-items-center hover-pointer">
-                                    <img class="img-xs rounded-circle" src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="">
-                                    <div class="ml-2">
-                                        <p>Mike Popescu</p>
-                                        <p class="tx-11 text-muted">12 Mutual Friends</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="d-flex justify-content-between">
-                                <div class="d-flex align-items-center hover-pointer">
-                                    <img class="img-xs rounded-circle" src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="">
-                                    <div class="ml-2">
-                                        <p>Mike Popescu</p>
-                                        <p class="tx-11 text-muted">12 Mutual Friends</p>
-                                    </div>
-                                </div>
-                            </div>
-
                         </div>
                     </div>
                 </div>

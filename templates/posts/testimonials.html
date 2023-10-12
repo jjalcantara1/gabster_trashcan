@@ -3,73 +3,89 @@
 <html>
 <head>
 	<title>Testimonial</title>
-
-	<meta name="viewport" content="width-device-width, initial scale=1, maximum-scale=1, minimum-scale=1">
-
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
-
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap" rel="stylesheet">
-
-    <link href="{% static 'profile/testimonials.css' %}" rel="stylesheet">
-
+	<link href="{% static 'profile/testimonials.css' %}" rel="stylesheet">
 	<link id="theme-style" rel="stylesheet" type="text/css" href="">
+    <style>
+        /* Style for the disabled "Add Testimonial" button */
+        #submit-btn:disabled {
+            opacity: 0.5; /* Reduce opacity to make it appear faded */
+            background-color: #6e6c6c; /* Change the background color */
+            color: #2d2d2d; /* Change the text color */
+            cursor: not-allowed; /* Change the cursor style */
+        }
+    </style>
 </head>
 <body>
-	<!-- <section class="Testimonial"> -->
-		<div class="testimonial-container">
-			<h1 style="text-align: center">Make A Testimonial</h1>
+	<div class="testimonial-container">
+		<h1 style="text-align: center">Make A Testimonial</h1>
 
-			<form id="testimonial-form">
+		<form method="post" id="testimonial-form">
+			{% csrf_token %}
 
-				<label id="rate">Rating: </label>
+{#			<label id="rate">Rating:</label>#}
 
-					<form class="rating">
-				  <label>
-				    <input type="radio" name="stars" value="1" />
-				    <span class="icon">★</span>
-				  </label>
-				  <label>
-				    <input type="radio" name="stars" value="2" />
-				    <span class="icon">★</span>
-				    <span class="icon">★</span>
-				  </label>
-				  <label>
-				    <input type="radio" name="stars" value="3" />
-				    <span class="icon">★</span>
-				    <span class="icon">★</span>
-				    <span class="icon">★</span>   
-				  </label>
-				  <label>
-				    <input type="radio" name="stars" value="4" />
-				    <span class="icon">★</span>
-				    <span class="icon">★</span>
-				    <span class="icon">★</span>
-				    <span class="icon">★</span>
-				  </label>
-				  <label>
-				    <input type="radio" name="stars" value="5" />
-				    <span class="icon">★</span>
-				    <span class="icon">★</span>
-				    <span class="icon">★</span>
-				    <span class="icon">★</span>
-				    <span class="icon">★</span>
-				  </label>
-				</form>
-			</form>
+{#			<div class="rating">#}
+{#				<label>#}
+{#					<input type="radio" name="rating" value="1" />#}
+{#					<span class="icon">★</span>#}
+{#				</label>#}
+{#				<label>#}
+{#					<input type="radio" name="rating" value="2" />#}
+{#					<span class="icon">★</span>#}
+{#					<span class="icon">★</span>#}
+{#				</label>#}
+{#				<label>#}
+{#					<input type="radio" name="rating" value="3" />#}
+{#					<span class="icon">★</span>#}
+{#					<span class="icon">★</span>#}
+{#					<span class="icon">★</span>#}
+{#				</label>#}
+{#				<label>#}
+{#					<input type="radio" name="rating" value="4" />#}
+{#					<span class="icon">★</span>#}
+{#					<span class="icon">★</span>#}
+{#					<span class="icon">★</span>#}
+{#					<span class="icon">★</span>#}
+{#				</label>#}
+{#				<label>#}
+{#					<input type="radio" name="rating" value="5" />#}
+{#					<span class="icon">★</span>#}
+{#					<span class="icon">★</span>#}
+{#					<span class="icon">★</span>#}
+{#					<span class="icon">★</span>#}
+{#					<span class="icon">★</span>#}
+{#				</label>#}
+{#			</div>#}
 
-			<form id="testimonial-form">
+			<label for="id_content">Testimonial Content:</label>
+            <textarea id="id_content" name="content" rows="4" cols="50" class="testimonial-field" oninput="enableSubmitButton()"></textarea>
 
-				<label>Put Your Testimonial Here</label>
-				<textarea class="testimonial-field" name="message"></textarea> 
-				<input id="submit-btn" type="submit" value="Add Testimonial">
+            <input type="hidden" name="user_to_username" value="{{ user_to.username }}">
+            <input id="submit-btn" type="submit" value="Add Testimonial" disabled>
+        </form>
+	</div>
+<script>
+        function enableSubmitButton() {
+            // Get the testimonial content
+            const content = document.getElementById('id_content').value;
 
-			</form>
-		</div>
-	<!-- </section> -->
+            // Get the submit button
+            const submitButton = document.getElementById('submit-btn');
 
+            // Enable the button if content is not empty, otherwise disable it
+            if (content.trim() !== '') {
+                submitButton.disabled = false;
+            } else {
+                submitButton.disabled = true;
+            }
+        }
+</script>
 </body>
 </html>
