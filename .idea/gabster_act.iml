@@ -28,6 +28,7 @@
         <option value="$MODULE_DIR$/templates/general" />
         <option value="$MODULE_DIR$/templates/posts" />
         <option value="$MODULE_DIR$/templates/profile" />
+        <option value="$MODULE_DIR$/templates/testimonial" />
       </list>
     </option>
   </component>
