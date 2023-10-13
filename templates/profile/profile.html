@@ -18,10 +18,10 @@
                         <div>
 
                             {% if person.username != user.username %}
-                                <a href="{% url 'add_testimonial' user_to_username=user.username %}"><input id="testimonial-btn" type="submit" value="Add Testimonial"></a>
+                                <a href="{% url 'add_testimonial' user_to_username=user.username %}"><input class="testimonial-btn" type="submit" value="Add Testimonial"></a>
                             {% else %}
                                 <a href="{% url 'create_post' user %}">
-                                    <input id="post-btn" type="submit" value="Create Post">
+                                    <input class="post-btn" type="submit" value="Create Post">
                                 </a>
                             {% endif %}
                             <img class="profile-pic" src="{% static 'profile/profile.png' %}" alt="profile">
