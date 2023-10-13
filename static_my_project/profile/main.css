@@ -1,13 +1,9 @@
 body{
-	background-color: #ffffff ;
-	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 1000'%3E%3Cg %3E%3Ccircle fill='%23330055' cx='50' cy='0' r='50'/%3E%3Cg fill='%233b015d' %3E%3Ccircle cx='0' cy='50' r='50'/%3E%3Ccircle cx='100' cy='50' r='50'/%3E%3C/g%3E%3Ccircle fill='%23440266' cx='50' cy='100' r='50'/%3E%3Cg fill='%234c046e' %3E%3Ccircle cx='0' cy='150' r='50'/%3E%3Ccircle cx='100' cy='150' r='50'/%3E%3C/g%3E%3Ccircle fill='%23550576' cx='50' cy='200' r='50'/%3E%3Cg fill='%235e077f' %3E%3Ccircle cx='0' cy='250' r='50'/%3E%3Ccircle cx='100' cy='250' r='50'/%3E%3C/g%3E%3Ccircle fill='%23670987' cx='50' cy='300' r='50'/%3E%3Cg fill='%23710b90' %3E%3Ccircle cx='0' cy='350' r='50'/%3E%3Ccircle cx='100' cy='350' r='50'/%3E%3C/g%3E%3Ccircle fill='%237b0d98' cx='50' cy='400' r='50'/%3E%3Cg fill='%23850fa1' %3E%3Ccircle cx='0' cy='450' r='50'/%3E%3Ccircle cx='100' cy='450' r='50'/%3E%3C/g%3E%3Ccircle fill='%238f11a9' cx='50' cy='500' r='50'/%3E%3Cg fill='%239912b1' %3E%3Ccircle cx='0' cy='550' r='50'/%3E%3Ccircle cx='100' cy='550' r='50'/%3E%3C/g%3E%3Ccircle fill='%23a413ba' cx='50' cy='600' r='50'/%3E%3Cg fill='%23ae14c2' %3E%3Ccircle cx='0' cy='650' r='50'/%3E%3Ccircle cx='100' cy='650' r='50'/%3E%3C/g%3E%3Ccircle fill='%23b915ca' cx='50' cy='700' r='50'/%3E%3Cg fill='%23c516d3' %3E%3Ccircle cx='0' cy='750' r='50'/%3E%3Ccircle cx='100' cy='750' r='50'/%3E%3C/g%3E%3Ccircle fill='%23d016db' cx='50' cy='800' r='50'/%3E%3Cg fill='%23db17e3' %3E%3Ccircle cx='0' cy='850' r='50'/%3E%3Ccircle cx='100' cy='850' r='50'/%3E%3C/g%3E%3Ccircle fill='%23e716eb' cx='50' cy='900' r='50'/%3E%3Cg fill='%23f316f3' %3E%3Ccircle cx='0' cy='950' r='50'/%3E%3Ccircle cx='100' cy='950' r='50'/%3E%3C/g%3E%3Ccircle fill='%23FF15FB' cx='50' cy='1000' r='50'/%3E%3C/g%3E%3C/svg%3E");
-	background-attachment: fixed;
-	background-size: contain;
-    margin-top:0px;
+    transition: background 0.5s, color 0.5s;
 }
 
 #header{
-	background-color: #FE8116;
+    transition: background 0.5s, color 0.5s;
 	height: 6vh;
 	display: flex;
 	justify-content: space-between;
@@ -34,6 +30,7 @@ body{
 	cursor: pointer;
 	margin-bottom: 16px;
 	border: none;
+    margin-left: 10px;
 
 	}
 
@@ -125,7 +122,7 @@ body{
     width: 100%;
     height: 60%;
     z-index: 1;
-    background: linear-gradient(rgba(254, 129, 22, 0.01), #FE8116 99%);
+    transition: background-color 0.5s, color 0.5s;
 }
 
 .profile-page .profile-header .cover .cover-body {
@@ -161,9 +158,9 @@ body{
     display: flex;
     -webkit-justify-content: center;
     justify-content: center;
-    background: #fff;
+    /*background: #fff;*/
     border-radius: 0 0 .25rem .25rem;
-        background-color: #FE8116;
+        /*background-color: #FE8116;*/
 }
 
 .profile-page .profile-header .header-links ul {
@@ -240,7 +237,7 @@ img {
 .card-header {
     padding: 0.875rem 1.5rem;
     margin-bottom: 0;
-    background-color: rgba(0, 0, 0, 0);
+    /*background-color: rgba(0, 0, 0, 0);*/
 }
 
 .card-footer:last-child {
@@ -248,7 +245,7 @@ img {
 }
 .card-footer {
     padding: 0.875rem 1.5rem;
-    background-color: rgba(0, 0, 0, 0);
+    /*background-color: rgba(0, 0, 0, 0);*/
 }
 
 .grid-margin {
@@ -263,7 +260,7 @@ img {
 }
 .rounded {
     border-radius: 0.25rem !important;
-    background-image: linear-gradient(#ff8a00, #e52e71);
+    /*background-image: linear-gradient(#ff8a00, #e52e71);*/
 }
 .card {
     position: relative;
@@ -271,8 +268,7 @@ img {
     flex-direction: column;
     min-width: 0;
     word-wrap: break-word;
-    background-color: #fff;
-    background-clip: border-box;
+    /*background-clip: border-box;*/
     border: 0px solid #f2f4f9;
     border-radius: 0.25rem;
 }
@@ -290,13 +286,13 @@ d-flex justify-content-between mb-2 pb-2 border-bottom {
 #gallery-section{
     margin-top: 17px;
 }
-#post-btn {
+.post-btn {
     margin-top: 10px;
     width: 150px;
     padding-top: 10px;
     padding-bottom: 10px;
     color: #fff;
-    background-color: #FE8116;
+    transition: background 0.5s, color 0.5s;
     border: 1px solid black;
     border-radius: 20px;
     position: absolute;
@@ -304,13 +300,13 @@ d-flex justify-content-between mb-2 pb-2 border-bottom {
     left: 1125px;
 }
 
-#testimonial-btn {
+.testimonial-btn {
     margin-top: 10px;
     width: 150px;
     padding-top: 10px;
     padding-bottom: 10px;
     color: #fff;
-    background-color: #FE8116;
+    transition: background 0.5s, color 0.5s;
     border: 1px solid black;
     border-radius: 20px;
     position: absolute;
@@ -326,36 +322,65 @@ d-flex justify-content-between mb-2 pb-2 border-bottom {
     color: #29262b;
 }
 
-	   .dropdown {
-            position: relative;
-            display: inline-block;
-        }
+.dropdown {
+    position: relative;
+    display: inline-block;
+    transition: background 0.5s, color 0.5s;
+}
 
 
-        .dropdown-content {
-        	border-radius: 10px;
-            display: none;
-            position: absolute;
-            margin-top: -2px;
-            margin-left: -122px;
-            background-color: #FE8116;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
-        }
+.dropdown-content {
+    border-radius: 10px;
+    display: none;
+    position: absolute;
+    margin-top: -2px;
+    margin-left: -122px;
+    transition: background 0.5s, color 0.5s;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
 
-        .dropdown-content a {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-        }
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
 
-        .dropdown-content a:hover {
-        	border-color: #FE8116;
-            background-color: #FEDEBE;
-        }
+.dropdown-content a:hover {
+    border-color: #FE8116;
+    background-color: #FEDEBE;
+}
 
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+.color-button {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin: 5px;
+    cursor: pointer;
+    border: 0px solid #000; /* Add an outline */
+}
+
+#blackButton {
+    background-color: #000000;
+}
+
+#gunmetalButton {
+    background-color: #1B2D2A;
+}
+
+#beigeButton {
+    background-color: #fff0db;
+}
+
+#viridianButton {
+    background-color: #55917F;
+}
+
+.profile-page .profile-header .header-links .rounded .card{
+        transition: background-color 0.5s, color 0.5s;
+}
