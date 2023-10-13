@@ -20,10 +20,10 @@
                             {% if person.username != user.username %}
                                 <a href="{% url 'add_testimonial' user_to_username=user.username %}"><input id="testimonial-btn" type="submit" value="Add Testimonial"></a>
                             {% else %}
-                                <a href="/post"><input id="post-btn" type="submit" value="Create Post"></a>
-
+                                <a href="{% url 'create_post' user %}">
+                                    <input id="post-btn" type="submit" value="Create Post">
+                                </a>
                             {% endif %}
-
                             <img class="profile-pic" src="{% static 'profile/profile.png' %}" alt="profile">
 
 
@@ -37,7 +37,6 @@
             </div>
         </div>
     </div>
-
     <div class="row profile-body">
 
 
@@ -129,98 +128,55 @@
         </div>
         <!-- left wrapper end -->
 
-
-
-
-
-
-
-
-
-
-        <!-- middle wrapper start -->
         <div class="col-md-8 col-xl-6 middle-wrapper">
             <div class="row">
-                <div class="col-md-12 grid-margin">
-                    <div class="card rounded">
-                        <div class="card-header">
-                            <div class="d-flex align-items-center justify-content-between">
-                                <div class="d-flex align-items-center">
-                                    <img class="img-xs rounded-circle" src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="">
-                                    <div class="ml-2">
-                                        <p>{{user.username}}</p>
-                                        <p class="tx-11 text-muted">1 min ago</p>
+                {% for post in post %}
+
+                    <div class="col-md-12 grid-margin">
+                        <div class="card rounded">
+                            <div class="card-header">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div class="d-flex align-items-center">
+                                        <img class="img-xs rounded-circle" src="{{ post.user.profile.picture.url }}" alt="">                                        <div class="ml-2">
+                                            <p>{{ post.user.username }}</p>
+                                            <p class="tx-11 text-muted">{{ post.createdAt }}</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="card-body">
-                            <p class="mb-3 tx-14">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus minima delectus nemo unde quae recusandae assumenda.</p>
-                            <img class="img-fluid" src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="">
-                        </div>
-                        <div class="card-footer">
-                            <div class="d-flex post-actions">
-                                <a href="javascript:;" class="d-flex align-items-center text-muted mr-4" style="text-decoration: none">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart icon-md">
-                                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                                    </svg>
-                                    <p class="d-none d-md-block ml-2">&nbsp; Like &nbsp; </p>
-                                </a>
-                                <a href="javascript:;" class="d-flex align-items-center text-muted mr-4" style="text-decoration: none">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square icon-md">
-                                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-                                    </svg>
-                                    <p class="d-none d-md-block ml-2">&nbsp; Comment &nbsp;</p>
-                                </a>
+                            <div class="card-body">
+                                <p class="mb-3 tx-14">{{ post.content }}</p>
+
+                                {% if post.post_type == "picture" and post.picture %}
+                                    <img class="img-fluid" src="{{ post.picture.url }}" alt="">
+                                {% elif post.post_type == "video" and post.video %}
+                                    <video controls>
+                                        <source src="{{ post.video.url }}" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                {% else %}
+
+                                {% endif %}
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <div class="card rounded">
-                        <div class="card-header">
-                            <div class="d-flex align-items-center justify-content-between">
-                                <div class="d-flex align-items-center">
-                                    <img class="img-xs rounded-circle" src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="">
-                                    <div class="ml-2">
-                                        <p>{{user.username}}</p>
-                                        <p class="tx-11 text-muted">5 min ago</p>
-                                    </div>
+                            <div class="card-footer">
+                                <div class="d-flex post-actions">
+                                    <a href="javascript:;" class="d-flex align-items-center text-muted mr-4" style="text-decoration: none">
+                                        <!-- Add your like button here -->
+                                    </a>
+                                    <a href="javascript:;" class="d-flex align-items-center text-muted mr-4" style="text-decoration: none">
+                                        <!-- Add your comment button here -->
+                                    </a>
                                 </div>
                             </div>
                         </div>
-                        <div class="card-body">
-                            <p class="mb-3 tx-14">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                            <img class="img-fluid" src="../../../assets/images/sample2.jpg" alt="">
-                        </div>
-                        <div class="card-footer">
-                            <div class="d-flex post-actions">
-                                <a href="javascript:;" class="d-flex align-items-center text-muted mr-4" style="text-decoration: none">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart icon-md">
-                                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                                    </svg>
-                                    <p class="d-none d-md-block ml-2">&nbsp; Like &nbsp; </p>
-                                </a>
-                                <a href="javascript:;" class="d-flex align-items-center text-muted mr-4" style="text-decoration: none">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square icon-md">
-                                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-                                    </svg>
-                                    <p class="d-none d-md-block ml-2">&nbsp; Comment &nbsp;</p>
-                                </a>
-                            </div>
-                        </div>
                     </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
-        <!-- middle wrapper end -->
 
 
 
-
-
-
-        <!-- right wrapper start -->
+               <!-- right wrapper start -->
         <div class="d-none d-xl-block col-xl-3 right-wrapper">
             <div class="row">
                 <div class="col-md-12 grid-margin">
@@ -254,8 +210,9 @@
             </div>
         </div>
         <!-- right wrapper end -->
+
     </div>
 </div>
 </div>
-{#    #}
+
 {% endblock %}

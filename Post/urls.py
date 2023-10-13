@@ -7,5 +7,6 @@ from templates import *
 
 
 urlpatterns = [
-    path('', PostListView.as_view(), name='list-view'),
+    # path('', PostListView.as_view(), name='list-view'),
+    path('create_post/', create_post, name='create_post'),
 ]

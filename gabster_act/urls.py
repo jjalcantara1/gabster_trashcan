@@ -30,6 +30,7 @@ from general.views import home_screen_view
 # from accounts.views import *
 from accounts import views
 from django.contrib.auth import views as auth_views
+from Post.views import *
 
 
 urlpatterns = [
@@ -46,6 +47,7 @@ urlpatterns = [
     re_path(r'^testimonials/(?P<user_to_username>[\w.@+-]+)/$', view_testimonials, name='view_testimonials'),
     path('testimonials/<str:user_to_username>/<int:testimonial_id>/', testimonial_detail, name='testimonial_detail'),
     path('addtestimonials/<str:user_to_username>/', add_testimonial, name='add_testimonial'),
+    path('createpost/<str:username>/', create_post, name='create_post'),
 
     path('activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/',
          views.activate, name='activate'),

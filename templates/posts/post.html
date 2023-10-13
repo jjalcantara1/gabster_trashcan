@@ -1,43 +1,177 @@
+{#{% load static %}#}
+{#<!DOCTYPE html>#}
+{#<html>#}
+{#<head>#}
+{#	<title>Create a New Post</title>#}
+{##}
+{#	<meta name="viewport" content="width-device-width, initial scale=1, maximum-scale=1, minimum-scale=1">#}
+{##}
+{#	<link rel="preconnect" href="https://fonts.googleapis.com">#}
+{#	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>#}
+{#	<link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">#}
+{##}
+{#	<link rel="preconnect" href="https://fonts.googleapis.com">#}
+{#	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>#}
+{#	<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap" rel="stylesheet">#}
+{##}
+{#    <link href="{% static 'profile/post.css' %}" rel="stylesheet">#}
+{##}
+{#	<link id="theme-style" rel="stylesheet" type="text/css" href="">#}
+{#</head>#}
+{#<body>#}
+{#    <div class="post-container">#}
+{#        <h1 style="text-align: center">Create a New Post</h1>#}
+{##}
+{#        <form method="post" enctype="multipart/form-data" id="post-form">#}
+{#            {% csrf_token %}#}
+{#            {{ form.as_p }}#}
+{##}
+{#            <div id="picture-upload" style="display: none;">#}
+{#                <label>Upload Picture:</label>#}
+{#                {{ form.picture }}#}
+{#            </div>#}
+{##}
+{#            <div id="video-upload" style="display: none;">#}
+{#                <label>Upload Video:</label>#}
+{#                {{ form.video }}#}
+{#            </div>#}
+{##}
+{#            <input type="submit" value="Post">#}
+{#        </form>#}
+{##}
+{#        <!-- Existing posts will be appended here dynamically -->#}
+{#        <div class="col-md-8 col-xl-6 middle-wrapper">#}
+{#            <div class="row" id="posts-container">#}
+{#                <!-- Existing posts will be appended here dynamically -->#}
+{#            </div>#}
+{#        </div>#}
+{##}
+{#        <script>#}
+{#            document.addEventListener('DOMContentLoaded', function() {#}
+{#                let pictureRadio = document.querySelector('input[value="picture"]');#}
+{#                let videoRadio = document.querySelector('input[value="video"]');#}
+{#                let pictureUpload = document.getElementById('picture-upload');#}
+{#                let videoUpload = document.getElementById('video-upload');#}
+{##}
+{#                pictureRadio.addEventListener('change', function() {#}
+{#                    toggleUploadSection(pictureUpload, videoUpload);#}
+{#                });#}
+{##}
+{#                videoRadio.addEventListener('change', function() {#}
+{#                    toggleUploadSection(videoUpload, pictureUpload);#}
+{#                });#}
+{##}
+{#                function toggleUploadSection(showSection, hideSection) {#}
+{#                    hideSection.style.display = 'none';#}
+{#                    showSection.style.display = 'block';#}
+{#                }#}
+{#            });#}
+{#        </script>#}
+{#    </div>#}
+{#</body>#}
+{#</html>#}
+
 {% load static %}
+
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Create a New Post</title>
+    <title>Create a New Post</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
 
-	<meta name="viewport" content="width-device-width, initial scale=1, maximum-scale=1, minimum-scale=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
 
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
-
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap" rel="stylesheet">
 
     <link href="{% static 'profile/post.css' %}" rel="stylesheet">
 
-	<link id="theme-style" rel="stylesheet" type="text/css" href="">
+    <link id="theme-style" rel="stylesheet" type="text/css" href="">
 </head>
 <body>
-	<!-- <section class="Post"> -->
-		<div class="post-container">
-			<h1 style="text-align: center">Create a New Post</h1>
+    <div class="post-container">
+        <h1 style="text-align: center">Create a New Post</h1>
 
-			<form id="post-form">
+{#        <form method="post" enctype="multipart/form-data" id="post-form">#}
+{#            {% csrf_token %}#}
+{##}
+{#            <label for="content">What's on your mind?</label>#}
+{#            <textarea class="post-field" name="content" id="content"></textarea>#}
+{##}
+{#            <label>Select Type:</label>#}
+{#            <label for="picture">#}
+{#                <input type="radio" name="post-type" value="picture" id="post_type"> Picture#}
+{#            </label>#}
+{#            <label for="video">#}
+{#                <input type="radio" name="post-type" value="video" id="post_type"> Video#}
+{#            </label>#}
+{##}
+{#            <div id="picture-upload" style="display: none;">#}
+{#                <label for="picture-file">Upload Picture:</label>#}
+{#                <input type="file" name="picture" id="picture">#}
+{#            </div>#}
+{##}
+{#            <div id="video-upload" style="display: none;">#}
+{#                <label for="video-file">Upload Video:</label>#}
+{#                <input type="file" name="video" id="video">#}
+{#            </div>#}
+{##}
+{#            <input id="submit-btn" type="submit" value="Post">#}
+{#        </form>#}
 
-				<label>Subject</label>
-				<input class="subject-field" type="text" name="subject">
+                <form method="post" enctype="multipart/form-data" id="post-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Post">
+        </form>
 
-				<label>What's on your mind?</label>
-				<textarea class="post-field" name="message"></textarea> 
+{#                <div class="col-md-8 col-xl-6 middle-wrapper">#}
+{#                    <div class="row" id="posts-container">#}
+{#                        <!-- Existing posts will be appended here dynamically -->#}
+{#                    </div>#}
+{#                </div>#}
 
-				<input id="photo-btn" type="submit" value="Add Photo">
-				<input id="video-btn" type="submit" value="Add Video">
-				<input id="submit-btn" type="submit" value="Post">
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    let pictureRadio = document.querySelector('input[value="picture"]');
+                    let videoRadio = document.querySelector('input[value="video"]');
+                    let pictureInput = document.querySelector('input[name="picture"]');
+                    let videoInput = document.querySelector('input[name="video"]');
 
-			</form>
-		</div>
-	<!-- </section> -->
+                    let currentSelection = null;
+
+                    pictureRadio.addEventListener('change', function() {
+                        toggleUploadSection('picture-upload', 'video-upload', pictureInput, videoInput);
+                    });
+
+                    videoRadio.addEventListener('change', function() {
+                        toggleUploadSection('video-upload', 'picture-upload', videoInput, pictureInput);
+                    });
+
+                    function toggleUploadSection(showSectionId, hideSectionId, showFileInput, hideFileInput) {
+                        let showSection = document.getElementById(showSectionId);
+                        let hideSection = document.getElementById(hideSectionId);
+
+
+                        hideFileInput.disabled = true;
+
+                        if (currentSelection === showSectionId) {
+                            return;
+                        }
+
+                        showFileInput.value = '';
+                        showFileInput.disabled = false;
+
+                        showSection.style.display = 'block';
+                        hideSection.style.display = 'none';
+
+                        currentSelection = showSectionId;
+                    }
+                });
+            </script>
 
 </body>
 </html>
