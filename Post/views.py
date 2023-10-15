@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Post
 from django.urls import reverse_lazy
@@ -31,6 +31,7 @@ def create_post(request, username):
     return render(request, 'posts/post.html', {'form': form})
 
 
-def post_list(request):
-    posts = Post.objects.all()  # You can adjust this query as needed
-    return render(request, 'profile/profile.html', {'posts': posts})
+def post_detail(request, post_id):
+    # Retrieve the post based on the primary key (post_id)
+    post = get_object_or_404(Post, pk=post_id)
+    return render(request, 'posts/posts_detail.html', {'post': post})

@@ -45,9 +45,11 @@ urlpatterns = [
 
     re_path(r'^profile/(?P<username>[\w.@+-]+)/$', profile_view, name='profile'),
     re_path(r'^testimonials/(?P<user_to_username>[\w.@+-]+)/$', view_testimonials, name='view_testimonials'),
-    path('testimonials/<str:user_to_username>/<int:testimonial_id>/', testimonial_detail, name='testimonial_detail'),
-    path('addtestimonials/<str:user_to_username>/', add_testimonial, name='add_testimonial'),
-    path('createpost/<str:username>/', create_post, name='create_post'),
+    re_path(r'^testimonials/(?P<user_to_username>[\w.@+-]+)/(?P<testimonial_id>\d+)/$', testimonial_detail,
+            name='testimonial_detail'),
+    re_path(r'^addtestimonials/(?P<user_to_username>[\w.@+-]+)/$', add_testimonial, name='add_testimonial'),
+    re_path(r'^createpost/(?P<username>[\w.@+-]+)/$', create_post, name='create_post'),
+    re_path(r'^post/(?P<post_id>\d+)/$', post_detail, name='post_detail'),
 
     path('activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/',
          views.activate, name='activate'),

@@ -1,0 +1,51 @@
+{% extends "profile/header.html" %}
+
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+    <div class="card rounded" style="width: 60rem; max-height: none;">
+        <div class="card-header">
+            <a href="{% url 'profile' username=post.user.username %}">
+                <div class="d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center">
+                        <img class="img-xs rounded-circle" src="{{ post.user.profile.picture.url }}" alt="">
+                        <div class="ml-2">
+                            <p>{{ post.user.username }}</p>
+                            <p class="tx-11 text-muted">{{ post.createdAt }}</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="card-body" style="max-height: none;">
+            <p class="mb-3 tx-14">{{ post.content }}</p>
+
+            {% if post.post_type == "picture" and post.picture %}
+                <img class="img-fluid" src="{{ post.picture.url }}" alt="">
+            {% elif post.post_type == "video" and post.video %}
+                <video controls>
+                    <source src="{{ post.video.url }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            {% else %}
+
+            {% endif %}
+        </div>
+        <div class="card-footer">
+            <div class="d-flex justify-content-between">
+                <div class="d-flex post-actions">
+                    <a href="javascript:;" class="d-flex align-items-center text-muted" style="text-decoration: none">
+                        <!-- Like button with icon -->
+                        <i class="far fa-thumbs-up"></i> Like
+                    </a>
+                </div>
+                <div class="d-flex post-actions">
+                    <a href="javascript:;" class="d-flex align-items-center text-muted" style="text-decoration: none">
+                        <!-- Comment button with icon -->
+                        <i class="far fa-comment"></i> Comment
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
