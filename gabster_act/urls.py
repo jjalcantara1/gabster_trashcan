@@ -50,6 +50,7 @@ urlpatterns = [
     re_path(r'^addtestimonials/(?P<user_to_username>[\w.@+-]+)/$', add_testimonial, name='add_testimonial'),
     re_path(r'^createpost/(?P<username>[\w.@+-]+)/$', create_post, name='create_post'),
     re_path(r'^post/(?P<post_id>\d+)/$', post_detail, name='post_detail'),
+    path('', include('Post.urls')),
 
     path('activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/',
          views.activate, name='activate'),

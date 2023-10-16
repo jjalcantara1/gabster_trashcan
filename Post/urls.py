@@ -7,6 +7,6 @@ from templates import *
 
 
 urlpatterns = [
-    # path('', PostListView.as_view(), name='list-view'),
-    # path('create_post/', create_post, name='create_post'),
+    path('profile/<str:username>/<int:post_id>/like/', like, name='like'),
+
 ]
