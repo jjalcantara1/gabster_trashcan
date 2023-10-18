@@ -16,6 +16,16 @@
     <header>
       <h1>Gabster.</h1>
     </header>
+        <div class="alert-container">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert">
+                    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
     <form class="form-signin" method="post">
       {% csrf_token %}
       <div class="input-area">
