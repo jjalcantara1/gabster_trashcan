@@ -32,18 +32,17 @@
         </div>
         <div class="card-footer">
             <div class="d-flex justify-content-between">
-                          <div class="d-flex post-actions">
-               <form method="post" class="like-form" data-like-url="{% url 'like' user.username post.id %}">
-                    {% csrf_token %}
-                    <button type="button" class="bg-green-500 text-white px-2 py-1 rounded-full flex items-center like-button">
-                        <i class="fas fa-thumbs-up"></i>
-                    </button>
-                    <span class="ml-2 text-sm">{{ post.likes }} Likes</span>
-                </form>
-
-            </div>
                 <div class="d-flex post-actions">
-                    <a  class="d-flex align-items-center text-muted" style="text-decoration: none">
+                    <form method="post" class="like-form" data-like-url="{% url 'like' post.user.username post.id %}">
+                        {% csrf_token %}
+                        <button type="button" class="bg-green-500 text-white px-2 py-1 rounded-full flex items-center like-button">
+                            <i class="fas fa-thumbs-up"></i>
+                        </button>
+                        <span class="ml-2 text-sm" id="likes-count">{{ post.likes }} Likes</span>
+                    </form>
+                </div>
+                <div class="d-flex post-actions">
+                    <a class="d-flex align-items-center text-muted" style="text-decoration: none">
                         <!-- Comment button with icon -->
                         <i class="far fa-comment"></i> Comment
                     </a>
@@ -52,31 +51,114 @@
         </div>
     </div>
 </div>
-{% block script %}
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Include jQuery -->
+<!-- Modal -->
+<div id="likes-modal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Liked by</h2>
+        <ul id="likes-list">
+            <!-- Usernames who liked the post will be added here dynamically -->
+        </ul>
+    </div>
+</div>
+<style>
+    /* Modal styles */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.7);
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 400px;
+        text-align: center;
+        position: relative;
+    }
+
+    .close {
+        position: absolute;
+        right: 10px;
+        top: 5px;
+        font-size: 20px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    #likes-list {
+        list-style: none;
+        padding: 0;
+    }
+</style>
+
+{% block script %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function () {
         $(".like-button").click(function () {
-            // Get the like form associated with the clicked button
             const likeForm = $(this).closest(".like-form");
-
-            // Send an AJAX request to the like URL
             $.ajax({
                 type: "POST",
                 url: likeForm.data("like-url"),
-                data: likeForm.serialize(), // Serialize the form data
+                data: likeForm.serialize(),
                 success: function (data) {
-                    // Update the like count without reloading the page
                     const likeCount = likeForm.find(".text-sm");
                     likeCount.text(data.likes + " Likes");
                 },
                 error: function (error) {
-                    // Handle any errors here
                     console.error("Error: " + JSON.stringify(error));
                 }
             });
         });
+
+        function showLikesModal() {
+            const modal = document.getElementById("likes-modal");
+            modal.style.display = "block";
+
+            // Fetch the list of liked users from the server
+            $.ajax({
+                type: "GET",
+                url: "{% url 'get_likes' post.user.username post.id %}",
+                success: function (data) {
+                    const likedUsers = data.liked_users;
+                    const likesList = document.getElementById("likes-list");
+                    likesList.innerHTML = "";  // Clear previous entries
+                    likedUsers.forEach((user) => {
+                        const listItem = document.createElement("li");
+                        listItem.innerText = user;
+                        likesList.appendChild(listItem);
+                    });
+                },
+                error: function (error) {
+                    console.error("Error: " + JSON.stringify(error));
+                }
+            });
+        }
+
+        const closeModal = document.querySelector(".close");
+        closeModal.addEventListener("click", function () {
+            const modal = document.getElementById("likes-modal");
+            modal.style.display = "none";
+        });
+
+        const likesCount = document.getElementById("likes-count");
+        likesCount.addEventListener("click", function () {
+            showLikesModal();
+        });
+        $("#likes-count").click(function () {
+    showLikesModal();
+    });
     });
 </script>
 {% endblock %}

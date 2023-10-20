@@ -20,17 +20,17 @@ class Post(models.Model):
     likes = models.PositiveIntegerField(default=0)
     liked_by = models.ManyToManyField(UserAccount, related_name='liked_posts', blank=True)
 
-
     def __str__(self):
         return str(self.content)
 
     def __repr__(self):
         return f"Post('{self.content}', '{self.createdAt}')"
 
+
 class UserLike(models.Model):
     voter = models.ForeignKey(UserAccount, on_delete=models.CASCADE)
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)  # Changed from target_post
-    is_liked = models.BooleanField(default=True)  # Changed from is_upvote
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    is_liked = models.BooleanField(default=True)
 
     class Meta:
         unique_together = ('voter', 'post')
