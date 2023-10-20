@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
+from django.views.decorators.http import require_POST
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 from accounts.models import UserAccount
@@ -43,19 +44,32 @@ def like(request, username, post_id):
 
     try:
         user_like, created = UserLike.objects.get_or_create(voter=user, post=target_post)
-        if not created and user_like.is_liked:
-            user_like.delete()
-            if target_post.likes > 0:
-                target_post.likes -= 1
-                target_post.save()
-        else:
+
+        if created:
+            target_post.likes += 1
+            target_post.save()
+            target_post.likes.add(user)
+        elif not user_like.is_liked:
             user_like.is_liked = True
             user_like.save()
             target_post.likes += 1
             target_post.save()
+            target_post.liked_by.add(user)
+        else:
+            user_like.is_liked = False
+            user_like.save()
+            target_post.likes -= 1
+            target_post.save()
+            target_post.liked_by.remove(user)
 
-        # Return a JSON response with the updated like count
         return JsonResponse({'likes': target_post.likes})
     except Post.DoesNotExist:
         return JsonResponse({'error': 'The post does not exist.'}, status=404)
+
+
+@login_required()
+def get_likes(request, post_id, username):
+    post = get_object_or_404(Post, pk=post_id)
+    liked_users = [user.username for user in post.liked_by.all()]
+    return JsonResponse({'liked_users': liked_users})
 

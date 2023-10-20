@@ -160,7 +160,9 @@
                             </a>
                         </div>
                         <div class="card-footer">
+
                             <div class="d-flex justify-content-between">
+
                                 <form method="post" class="like-form" data-like-url="{% url 'like' user.username post.id %}">
                                         {% csrf_token %}
                                         <button type="button" id="like" class="bg-green-500 text-white px-2 py-1 rounded-full flex items-center like-button">
