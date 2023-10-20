@@ -18,10 +18,10 @@
                         <div>
 
                             {% if person.username != user.username %}
-                                <a href="{% url 'add_testimonial' user_to_username=user.username %}"><input class="testimonial-btn" type="submit" value="Add Testimonial"></a>
+                                <a href="{% url 'add_testimonial' user_to_username=user.username %}"><input id="testimonial-btn" type="submit" value="Add Testimonial"></a>
                             {% else %}
                                 <a href="{% url 'create_post' user %}">
-                                    <input class="post-btn" type="submit" value="Create Post">
+                                    <input id="post-btn" type="submit" value="Create Post">
                                 </a>
                             {% endif %}
                             <img class="profile-pic" src="{% static 'profile/profile.png' %}" alt="profile">
@@ -127,26 +127,27 @@
                 </div>
         </div>
         <!-- left wrapper end -->
-
         <div class="col-md-8 col-xl-6 middle-wrapper">
-            <div class="row">
-                {% for post in post %}
-
-                    <div class="col-md-12 grid-margin">
-                        <div class="card rounded">
-                            <div class="card-header">
+        <div class="row">
+            {% for post in post %}
+                <div class="col-md-12 grid-margin">
+                    <div class="card rounded">
+                        <div class="card-header">
+{#                            <a href="{% url 'profile' username=post.user.username %}">#}
                                 <div class="d-flex align-items-center justify-content-between">
                                     <div class="d-flex align-items-center">
-                                        <img class="img-xs rounded-circle" src="{{ post.user.profile.picture.url }}" alt="">                                        <div class="ml-2">
+                                        <img class="img-xs rounded-circle" src="{{ post.user.profile.picture.url }}" alt="">
+                                        <div class="ml-2">
                                             <p>{{ post.user.username }}</p>
                                             <p class="tx-11 text-muted">{{ post.createdAt }}</p>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="card-body">
+                            </a>
+                        </div>
+                        <div class="card-body">
+                            <a href="{% url 'post_detail' post.id %}">
                                 <p class="mb-3 tx-14">{{ post.content }}</p>
-
                                 {% if post.post_type == "picture" and post.picture %}
                                     <img class="img-fluid" src="{{ post.picture.url }}" alt="">
                                 {% elif post.post_type == "video" and post.video %}
@@ -155,26 +156,28 @@
                                         Your browser does not support the video tag.
                                     </video>
                                 {% else %}
-
                                 {% endif %}
-                            </div>
-                            <div class="card-footer">
-                                <div class="d-flex post-actions">
-                                    <a href="javascript:;" class="d-flex align-items-center text-muted mr-4" style="text-decoration: none">
-                                        <!-- Add your like button here -->
-                                    </a>
-                                    <a href="javascript:;" class="d-flex align-items-center text-muted mr-4" style="text-decoration: none">
-                                        <!-- Add your comment button here -->
-                                    </a>
+                            </a>
+                        </div>
+                        <div class="card-footer">
+                            <div class="d-flex justify-content-between">
+                                <form method="post" class="like-form" data-like-url="{% url 'like' user.username post.id %}">
+                                        {% csrf_token %}
+                                        <button type="button" class="bg-green-500 text-white px-2 py-1 rounded-full flex items-center like-button">
+                                            <i class="fas fa-thumbs-up"></i>
+                                        </button>
+                                        <span class="ml-2 text-sm">{{ post.likes }} Likes</span>
+                                    </form>
+                                <div class="d-flex align-items-center text-muted" style="text-decoration: none">
+                                    <i class="far fa-comment"></i> Comment
                                 </div>
                             </div>
                         </div>
                     </div>
-                {% endfor %}
-            </div>
+                </div>
+            {% endfor %}
         </div>
-
-
+    </div>
 
                <!-- right wrapper start -->
         <div class="d-none d-xl-block col-xl-3 right-wrapper">
@@ -200,9 +203,7 @@
                                     </div>
                                      </a>
                                 {% endfor %}
-{#                                <div class="load-more-button-container">#}
-{#                                <button id="load-more-testimonials">Load More Testimonials</button>#}
-{#                                </div>#}
+
                             </div>
                         </div>
                     </div>
@@ -214,5 +215,27 @@
     </div>
 </div>
 </div>
+{% block script %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".like-button").click(function () {
+            const likeForm = $(this).closest(".like-form");
 
+            $.ajax({
+                type: "POST",
+                url: likeForm.data("like-url"),
+                data: likeForm.serialize(),
+                success: function (data) {
+                    const likeCount = likeForm.find(".text-sm");
+                    likeCount.text(data.likes + " Likes");
+                },
+                error: function (error) {
+                    console.error("Error: " + JSON.stringify(error));
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}
 {% endblock %}
