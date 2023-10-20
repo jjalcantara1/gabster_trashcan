@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@700&display=swap');
 *{
   margin: 0;
@@ -22,133 +22,88 @@ body{
   background-image: linear-gradient(#fe8116, #fcb001);
   font-family: "Poppins", sans-serif;
 }
-::selection{
-  color: #fff;
-  background: #fe8116;
-}
 .wrapper{
-  width: 380px;
-  padding: 40px 30px 50px 30px;
+  position: relative;
+  max-width: 430px;
+  width: 100%;
   background: #fff;
-  border-radius: 5px;
-  text-align: center;
-  box-shadow: 10px 10px 15px rgba(0,0,0,0.1);
+  padding: 34px;
+  border-radius: 6px;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.2);
 }
-.wrapper header{
-  font-size: 35px;
+.wrapper h2{
+  position: relative;
+  font-size: 22px;
   font-weight: 600;
+  color: #333;
+}
+.wrapper h2::before{
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 28px;
+  border-radius: 12px;
+  /*background: #fe8116;*/
 }
 .wrapper form{
-  margin: 40px 0;
+  margin-top: 30px;
 }
-form .field{
-  width: 100%;
-  margin-bottom: 20px;
+.wrapper form .input-box{
+  height: 52px;
+  margin: 18px 0;
 }
-form .field.shake{
-  animation: shake 0.3s ease-in-out;
-}
-@keyframes shake {
-  0%, 100%{
-    margin-left: 0px;
-  }
-  20%, 80%{
-    margin-left: -12px;
-  }
-  40%, 60%{
-    margin-left: 12px;
-  }
-}
-form .field .input-area{
-  height: 50px;
-  width: 100%;
-  position: relative;
-}
-form input{
-  width: 100%;
+form .input-box input{
   height: 100%;
+  width: 100%;
   outline: none;
-  padding: 0 45px;
-  font-size: 18px;
-  background: none;
-  caret-color: #fe8116;
-  border-radius: 5px;
-  border: 1px solid #bfbfbf;
-  border-bottom-width: 2px;
-  transition: all 0.2s ease;
+  padding: 0 15px;
+  font-size: 17px;
+  font-weight: 400;
+  color: #333;
+  border: 1.5px solid #C7BEBE;
+  border-bottom-width: 2.5px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
 }
-form .field input:focus,
-form .field.valid input{
+.input-box input:focus,
+.input-box input:valid{
   border-color: #fe8116;
 }
-form .field.shake input,
-form .field.error input{
-  border-color: #dc3545;
+form .policy{
+  display: flex;
+  align-items: center;
 }
-.field .input-area i{
-  position: absolute;
-  top: 50%;
-  font-size: 18px;
-  pointer-events: none;
-  transform: translateY(-50%);
+form h3{
+  color: #707070;
+  font-size: 14px;
+  font-weight: 500;
+  margin-left: 10px;
 }
-.input-area .icon{
-  left: 15px;
-  color: #bfbfbf;
-  transition: color 0.2s ease;
-}
-.input-area .error-icon{
-  right: 15px;
-  color: #dc3545;
-}
-form input:focus ~ .icon,
-form .field.valid .icon{
-  color: #fe8116;
-}
-form .field.shake input:focus ~ .icon,
-form .field.error input:focus ~ .icon{
-  color: #bfbfbf;
-}
-form input::placeholder{
-  color: #bfbfbf;
-  font-size: 17px;
-}
-form .field .error-txt{
-  color: #dc3545;
-  text-align: left;
-  margin-top: 5px;
-}
-form .field .error{
-  display: none;
-}
-form .field.shake .error,
-form .field.error .error{
-  display: block;
-}
-form .pass-txt{
-  text-align: left;
-  margin-top: -10px;
-}
-.wrapper a{
-  color: #fe8116;
-  text-decoration: none;
-}
-.wrapper a:hover{
-  text-decoration: underline;
-}
-form input[type="submit"]{
-  height: 50px;
-  margin-top: 30px;
+.input-box.button input{
   color: #fff;
-  padding: 0;
+  letter-spacing: 1px;
   border: none;
   background: #fe8116;
   cursor: pointer;
-  border-bottom: 2px solid rgba(0,0,0,0.1);
-  transition: all 0.3s ease;
 }
-form input[type="submit"]:hover{
-  background: #fe8116;
+/*form .text h3{*/
+/* color: #333;*/
+/* width: 100%;*/
+/* text-align: center;*/
+/*}*/
+/*form .text h3 a{*/
+/*  color: #fe8116;*/
+/*  text-decoration: none;*/
+/*}*/
+/*form .text h3 a:hover{*/
+/*  text-decoration: underline;*/
+/*}*/
+.wrapper a{
+  color: #fe8116;
+  text-align: center;
+  text-decoration: none;
 }
 .input-group {
         position: relative;
@@ -163,38 +118,15 @@ form input[type="submit"]:hover{
   transform: translateY(-50%);
   cursor: pointer;
 }
-.input-area {
-    margin-bottom: 20px;
-}
-login css
 
-
-.alert-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 10px;
+.logo{
+  /*background-color: white;*/
+  position: relative;
+  right: 100px;
+  bottom:60px;
 }
 
-.alert {
-    padding: 10px;
-    margin-bottom: 10px;
-    max-width: 300px;
-    text-align: center;
-    position: relative;
+.logo h1{
+  position: absolute;
+  left: 80px;
 }
-
-.closebtn {
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 10px;
-    cursor: pointer;
-}
-

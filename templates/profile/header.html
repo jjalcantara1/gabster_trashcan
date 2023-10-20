@@ -24,37 +24,34 @@
         <img src="{% static 'profile/black.png' %}" id="logo">
     </a>
 
+
         <form id='searchForm' class ="box" action = "{% url 'search' %}" method="get">
                 <input class="input input--text" id="formInput#search" type="text" name="search_query"
                        placeholder="Search a user" value="{{ search_query }}"/>
                 <button type="submit"><i class="bi bi-search" value="Search"></i></button>
         </form>
-    <div class="color-button" id="viridianButton"></div>
-    <div class="color-button" id="beigeButton"></div>
-    <div class="color-button" id="gunmetalButton"></div>
-    <div class="color-button" id="blackButton"></div>
+
+            <div class="color-button">
+                <button class="btn btn-success btn-lg mt-3" id="viridianButton"></button>
+                <button class="btn btn-success btn-lg mt-3" id="beigeButton"></button>
+                <button class="btn btn-success btn-lg mt-3" id="gunmetalButton"></button>
+                <button class="btn btn-success btn-lg mt-3" id="blackButton"></button>
+            </div>
 
 
 
 
 <div class="dropdown">
 
-    <a class = "btn btn-success btn-lg mt-3" id="button">
-        <img src="{% static 'profile/friends.png' %}" >
+    <a class = "btn btn-success btn-l mt-3" id="button">
+        <img src="{% static 'profile/profile.png' %}" >
     </a>
     <div class="dropdown-content" id="myDropdown">
-{#        <a class = "btn btn-success btn-lg mt-3" id="button">#}
-{#          <img src="{% static 'profile/friends.png' %}" >#}
-{#      </a>#}
         <a href=" "> Profile</a>
         <a href=" ">Settings</a>
         <a href="/logout ">Log Out</a>
     </div>
 </div>
-
-{#  <a href="facebook.com" class = "btn btn-success btn-lg mt-3" id="button">#}
-{#          <img src="{% static 'profile/friends.png' %}" onclick="buttonClickFunction()">#}
-{#  </a>#}
         </header>
 
     </div>
@@ -67,7 +64,7 @@
         const viridianButton = document.getElementById('viridianButton');
         const gunmetalButton = document.getElementById('gunmetalButton');
         const beigeButton = document.getElementById('beigeButton');
-        const contentBoxes = document.querySelectorAll('.card, .card-body, .header, .profile-header, .cover, dropdown, .dropdown-content, .testimonial-btn, .post-btn');
+        const contentBoxes = document.querySelectorAll('.card, .card-body, .profile-header, .cover, dropdown, .dropdown-content, .testimonial-btn, .post-btn, #gallery-bg, #testimonial-border ');
         const fadeBoxes = document.querySelectorAll('.gray-shade');
         const body = document.body;
 

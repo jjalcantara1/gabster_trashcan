@@ -1,76 +1,3 @@
-{#{% load static %}#}
-{#<!DOCTYPE html>#}
-{#<html>#}
-{#<head>#}
-{#	<title>Create a New Post</title>#}
-{##}
-{#	<meta name="viewport" content="width-device-width, initial scale=1, maximum-scale=1, minimum-scale=1">#}
-{##}
-{#	<link rel="preconnect" href="https://fonts.googleapis.com">#}
-{#	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>#}
-{#	<link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">#}
-{##}
-{#	<link rel="preconnect" href="https://fonts.googleapis.com">#}
-{#	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>#}
-{#	<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap" rel="stylesheet">#}
-{##}
-{#    <link href="{% static 'profile/post.css' %}" rel="stylesheet">#}
-{##}
-{#	<link id="theme-style" rel="stylesheet" type="text/css" href="">#}
-{#</head>#}
-{#<body>#}
-{#    <div class="post-container">#}
-{#        <h1 style="text-align: center">Create a New Post</h1>#}
-{##}
-{#        <form method="post" enctype="multipart/form-data" id="post-form">#}
-{#            {% csrf_token %}#}
-{#            {{ form.as_p }}#}
-{##}
-{#            <div id="picture-upload" style="display: none;">#}
-{#                <label>Upload Picture:</label>#}
-{#                {{ form.picture }}#}
-{#            </div>#}
-{##}
-{#            <div id="video-upload" style="display: none;">#}
-{#                <label>Upload Video:</label>#}
-{#                {{ form.video }}#}
-{#            </div>#}
-{##}
-{#            <input type="submit" value="Post">#}
-{#        </form>#}
-{##}
-{#        <!-- Existing posts will be appended here dynamically -->#}
-{#        <div class="col-md-8 col-xl-6 middle-wrapper">#}
-{#            <div class="row" id="posts-container">#}
-{#                <!-- Existing posts will be appended here dynamically -->#}
-{#            </div>#}
-{#        </div>#}
-{##}
-{#        <script>#}
-{#            document.addEventListener('DOMContentLoaded', function() {#}
-{#                let pictureRadio = document.querySelector('input[value="picture"]');#}
-{#                let videoRadio = document.querySelector('input[value="video"]');#}
-{#                let pictureUpload = document.getElementById('picture-upload');#}
-{#                let videoUpload = document.getElementById('video-upload');#}
-{##}
-{#                pictureRadio.addEventListener('change', function() {#}
-{#                    toggleUploadSection(pictureUpload, videoUpload);#}
-{#                });#}
-{##}
-{#                videoRadio.addEventListener('change', function() {#}
-{#                    toggleUploadSection(videoUpload, pictureUpload);#}
-{#                });#}
-{##}
-{#                function toggleUploadSection(showSection, hideSection) {#}
-{#                    hideSection.style.display = 'none';#}
-{#                    showSection.style.display = 'block';#}
-{#                }#}
-{#            });#}
-{#        </script>#}
-{#    </div>#}
-{#</body>#}
-{#</html>#}
-
 {% load static %}
 
 <!DOCTYPE html>
@@ -78,63 +5,53 @@
 <head>
     <title>Create a New Post</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&display=swap" rel="stylesheet">
     <link href="{% static 'profile/post.css' %}" rel="stylesheet">
-
     <link id="theme-style" rel="stylesheet" type="text/css" href="">
 </head>
 <body>
     <div class="post-container">
-        <h1 style="text-align: center">Create a New Post</h1>
+        <header><h1>Create Post</h1></header>
 
-{#        <form method="post" enctype="multipart/form-data" id="post-form">#}
-{#            {% csrf_token %}#}
-{##}
-{#            <label for="content">What's on your mind?</label>#}
-{#            <textarea class="post-field" name="content" id="content"></textarea>#}
-{##}
-{#            <label>Select Type:</label>#}
-{#            <label for="picture">#}
-{#                <input type="radio" name="post-type" value="picture" id="post_type"> Picture#}
-{#            </label>#}
-{#            <label for="video">#}
-{#                <input type="radio" name="post-type" value="video" id="post_type"> Video#}
-{#            </label>#}
-{##}
-{#            <div id="picture-upload" style="display: none;">#}
-{#                <label for="picture-file">Upload Picture:</label>#}
-{#                <input type="file" name="picture" id="picture">#}
-{#            </div>#}
-{##}
-{#            <div id="video-upload" style="display: none;">#}
-{#                <label for="video-file">Upload Video:</label>#}
-{#                <input type="file" name="video" id="video">#}
-{#            </div>#}
-{##}
-{#            <input id="submit-btn" type="submit" value="Post">#}
-{#        </form>#}
-
-                <form method="post" enctype="multipart/form-data" id="post-form">
+        <form method="post" enctype="multipart/form-data" id="post-form">
             {% csrf_token %}
-            {{ form.as_p }}
-            <input type="submit" value="Post">
+            <div class="input-box">
+            <textarea class="post-field" name="{{ form.content.name }}" id="{{ form.content.id_for_label }}" oninput="enableSubmitButton()" placeholder="What's on your mind?"></textarea>
+            </div>
+
+            <label>Select Type:</label>
+            <label for="{{ form.post_type.id_for_label }}">
+                <input type="radio" name="{{ form.post_type.name }}" value="picture" id="{{ form.post_type.id_for_label }}"> Picture
+            </label>
+            <label for="{{ form.post_type.id_for_label }}">
+                <input type="radio" name="{{ form.post_type.name }}" value="video" id="{{ form.post_type.id_for_label }}"> Video
+            </label>
+
+            <div id="picture-upload" style="display: none;">
+                <label for="{{ form.picture.id_for_label }}">Upload Picture:</label>
+                <input type="file" name="{{ form.picture.name }}" id="{{ form.picture.id_for_label }}">
+            </div>
+
+            <div id="video-upload" style="display: none;">
+                <label for="{{ form.video.id_for_label }}">Upload Video:</label>
+                <input type="file" name="{{ form.video.name }}" id="{{ form.video.id_for_label }}">
+            </div>
+
+            <input id="submit-btn" type="submit"  value="Create Post" disabled>
         </form>
 
-{#                <div class="col-md-8 col-xl-6 middle-wrapper">#}
-{#                    <div class="row" id="posts-container">#}
-{#                        <!-- Existing posts will be appended here dynamically -->#}
-{#                    </div>#}
-{#                </div>#}
 
-            <script>
+
+                <div class="col-md-8 col-xl-6 middle-wrapper">
+                    <div class="row" id="posts-container">
+                        <!-- Existing posts will be appended here dynamically -->
+                    </div>
+                </div>
+
+        <script>
                 document.addEventListener('DOMContentLoaded', function() {
                     let pictureRadio = document.querySelector('input[value="picture"]');
                     let videoRadio = document.querySelector('input[value="video"]');
@@ -171,7 +88,25 @@
                         currentSelection = showSectionId;
                     }
                 });
-            </script>
+                function enableSubmitButton() {
+        // Get the post content
+        const content = document.getElementById('id_content').value;
+
+        // Get the file inputs for picture and video
+        const pictureInput = document.getElementById('{{ form.picture.id_for_label }}');
+        const videoInput = document.getElementById('{{ form.video.id_for_label }}');
+
+        // Get the submit button
+        const submitButton = document.getElementById('submit-btn');
+
+        // Check if content is not empty or either picture or video input has a file selected
+        if (content.trim() !== '' || pictureInput.files.length > 0 || videoInput.files.length > 0) {
+            submitButton.disabled = false;
+        } else {
+            submitButton.disabled = true;
+        }
+    }
+        </script>
 
 </body>
 </html>

@@ -1,9 +1,14 @@
 body{
     transition: background 0.5s, color 0.5s;
+    background-image: url("https://cdn.steamstatic.com/steamcommunity/public/images/items/1442870/d53c0b372a5453f222d5201a43b408f7e5d7fd7a.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
 }
 
 #header{
-    transition: background 0.5s, color 0.5s;
+    background-color: #FE8116 ;
+    color: #FE8116;
 	height: 6vh;
 	display: flex;
 	justify-content: space-between;
@@ -22,15 +27,14 @@ body{
 #button{
 	border-radius: 50%;
 	height: 33px;
-	width: 34px;
-	overflow: hidden;
-	display: flex;
+	width: 33px;
+    overflow: hidden;
+    align-items: center;
     justify-content: center;
-   	align-items: center;
-	cursor: pointer;
+    display: flex;
+    border: none;
 	margin-bottom: 16px;
-	border: none;
-    margin-left: 10px;
+    margin-right: 10px;
 
 	}
 
@@ -357,30 +361,91 @@ d-flex justify-content-between mb-2 pb-2 border-bottom {
     display: block;
 }
 .color-button {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    margin: 5px;
-    cursor: pointer;
-    border: 0px solid #000; /* Add an outline */
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 16px;
 }
 
 #blackButton {
     background-color: #000000;
+    width: 33px;
+    height: 33px;
+    border-radius: 50%;
+    border: none;
+    margin-right: 10px;
 }
 
 #gunmetalButton {
     background-color: #1B2D2A;
+    width: 33px;
+    height: 33px;
+    border-radius: 50%;
+    border: none;
+    margin-right: 10px;
 }
 
 #beigeButton {
     background-color: #fff0db;
+    width: 33px;
+    height: 33px;
+    border-radius: 50%;
+    border: none;
+    margin-right: 10px;
 }
 
 #viridianButton {
     background-color: #55917F;
+    width: 33px;
+    height: 33px;
+    border-radius: 50%;
+    border: none;
+    margin-right: 10px;
 }
 
 .profile-page .profile-header .header-links .rounded .card{
         transition: background-color 0.5s, color 0.5s;
+}
+
+#testimonial-border{
+        border-bottom-color: black;
+        border-style: solid;
+        border-width:0px;
+        border-radius: 3px;
+        padding-top: 20px;
+}
+
+.row {
+    background: linear-gradient(to right, rgba(44,15,85,0.9), rgba(44,15,38, 0.9));
+}
+
+.card-body{
+    border-radius: 100px;
+    border-style: solid;
+    border-width: 0px;
+
+}
+
+.card-body a {
+    text-decoration: none;
+    color: black
+}
+
+#testimonial-content{
+        line-height: 6px;
+        display:inline;
+        align-items: center;
+}
+
+#testimonial-border a{
+        text-decoration: none;
+        color: black;
+        padding-bottom: 2px;
+}
+
+#testimonial-profile-pic {
+    height: 35px;
+    width: 35px;
+    overflow: hidden;
+    margin-left: 10px;
+    margin-right: 10px;
 }
