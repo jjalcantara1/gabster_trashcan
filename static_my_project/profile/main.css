@@ -7,9 +7,9 @@ body{
 }
 
 #header{
-    background-color: #FE8116 ;
-    color: #FE8116;
-	height: 6vh;
+    background-color: #242526 ;
+    color: #242526;
+	height: 7vh;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -20,7 +20,7 @@ body{
 #logo {
 	color: white;
 	text-decoration: none;
-	height: 40px;
+	height: 6vh;
 	margin-bottom: 8px;
 }
 
@@ -69,11 +69,13 @@ body{
 	outline: none;
 	font-size: 17px;
 	padding-left: 10px;
+    background-color: #3a3b3c;
 }
 
 .profile-page .profile-header {
     box-shadow: 0 0 10px 0 rgba(183, 192, 206, 0.2);
     border: 0px solid #f2f4f9;
+    border-radius: 5px;
 }
 
 .profile-page .profile-header .cover {
@@ -290,6 +292,11 @@ d-flex justify-content-between mb-2 pb-2 border-bottom {
 #gallery-section{
     margin-top: 17px;
 }
+
+#gallery-section .gal{
+    padding: 10px;
+}
+
 .post-btn {
     margin-top: 10px;
     width: 150px;
@@ -321,9 +328,19 @@ d-flex justify-content-between mb-2 pb-2 border-bottom {
 #user-search {
     font-size: 30px;
     font-weight: 620;
-    margin-left: 17px;
+    margin-left: 15px;
     text-decoration: none;
     color: #29262b;
+}
+#searchForm{
+    margin-left: 250px;
+    height: 5vh;
+    background-color: #3a3b3c;
+}
+
+#searchForm button{
+    color: #FE8116;
+    background-color: #3a3b3c;
 }
 
 .dropdown {
@@ -346,6 +363,7 @@ d-flex justify-content-between mb-2 pb-2 border-bottom {
 }
 
 .dropdown-content a {
+    height: 6vh;
     color: black;
     padding: 12px 16px;
     text-decoration: none;
@@ -361,45 +379,30 @@ d-flex justify-content-between mb-2 pb-2 border-bottom {
     display: block;
 }
 .color-button {
+    position: relative;
+    /*height: 6vh;*/
+    /*background-color: white;*/
     display: flex;
     flex-direction: row;
-    margin-bottom: 16px;
+    margin-left: 0px;
+    justify-content: center;
+    padding-bottom: 0px;
+    white-space: normal;
 }
 
-#blackButton {
-    background-color: #000000;
-    width: 33px;
-    height: 33px;
-    border-radius: 50%;
+#lightmode {
     border: none;
+    background: none;
+    font-size: 4vh;
+    color: #FE8116;
     margin-right: 10px;
 }
 
-#gunmetalButton {
-    background-color: #1B2D2A;
-    width: 33px;
-    height: 33px;
-    border-radius: 50%;
+#darkmode {
     border: none;
-    margin-right: 10px;
-}
-
-#beigeButton {
-    background-color: #fff0db;
-    width: 33px;
-    height: 33px;
-    border-radius: 50%;
-    border: none;
-    margin-right: 10px;
-}
-
-#viridianButton {
-    background-color: #55917F;
-    width: 33px;
-    height: 33px;
-    border-radius: 50%;
-    border: none;
-    margin-right: 10px;
+    background: none;
+    font-size: 3vh;
+    color: #FE8116;
 }
 
 .profile-page .profile-header .header-links .rounded .card{
@@ -416,6 +419,17 @@ d-flex justify-content-between mb-2 pb-2 border-bottom {
 
 .row {
     background: linear-gradient(to right, rgba(44,15,85,0.9), rgba(44,15,38, 0.9));
+}
+
+#upper-profile{
+    margin-top: 10px;
+    border-radius: 5px 5px 0px 0px;
+}
+
+#lower-profile{
+    border-radius: 0px 0px 5px 5px;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
 }
 
 .card-body{
@@ -449,3 +463,11 @@ d-flex justify-content-between mb-2 pb-2 border-bottom {
     margin-left: 10px;
     margin-right: 10px;
 }
+#like{
+    margin-bottom: 10px;
+    background: none;
+    border: none;
+    color: darkred;
+    font-size: 20px;
+}
+

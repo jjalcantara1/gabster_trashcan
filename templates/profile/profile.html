@@ -4,7 +4,7 @@
       <div class="container">
 
 <div class="profile-page tx-13">
-    <div class="row">
+    <div class="row" id="upper-profile">
 
         <div class="col-12 grid-margin">
             <div class="profile-header">
@@ -18,10 +18,10 @@
                         <div>
 
                             {% if person.username != user.username %}
-                                <a href="{% url 'add_testimonial' user_to_username=user.username %}"><input id="testimonial-btn" type="submit" value="Add Testimonial"></a>
+                                <a href="{% url 'add_testimonial' user_to_username=user.username %}"><input class="testimonial-btn" type="submit" value="Add Testimonial"></a>
                             {% else %}
                                 <a href="{% url 'create_post' user %}">
-                                    <input id="post-btn" type="submit" value="Create Post">
+                                    <input class="post-btn" type="submit" value="Create Post">
                                 </a>
                             {% endif %}
                             <img class="profile-pic" src="{% static 'profile/profile.png' %}" alt="profile">
@@ -37,7 +37,7 @@
             </div>
         </div>
     </div>
-    <div class="row profile-body">
+    <div class="row profile-body" id="lower-profile">
 
 
 
@@ -70,52 +70,52 @@
                 </div>
             </div>
           <div id="gallery-section">
-                    <div class="card rounded" style="background-image: linear-gradient( #e52e71, #ff8a00)">
+                    <div class="card rounded">
                         <div class="card-body">
                             <h6 class="card-title">Gallery</h6>
                             <div class="latest-photos">
-                                <div class="row">
-                                    <div class="col-md-4">
+                                <div class="row" >
+                                    <div class="col-md-4" style="background-color: #FE8116">
                                         <figure>
                                             <img class="gallery" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
                                         </figure>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-4" style="background-color: #FE8116">
                                         <figure>
                                             <img class="gallery" src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="">
                                         </figure>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-4" style="background-color: #FE8116">
                                         <figure>
                                             <img class="gallery" src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="">
                                         </figure>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-4" style="background-color: #FE8116">
                                         <figure>
                                             <img class="gallery" src="https://bootdey.com/img/Content/avatar/avatar4.png" alt="">
                                         </figure>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-4" style="background-color: #FE8116">
                                         <figure>
                                             <img class="gallery" src="https://bootdey.com/img/Content/avatar/avatar5.png" alt="">
                                         </figure>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-4" style="background-color: #FE8116">
                                         <figure>
                                             <img class="gallery" src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="">
                                         </figure>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-4" style="background-color: #FE8116">
                                         <figure>
                                             <img class="gallery" src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="">
                                         </figure>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-4" style="background-color: #FE8116">
                                         <figure">
                                             <img class="gallery" src="https://bootdey.com/img/Content/avatar/avatar8.png" alt="">
                                         </figure>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-4" style="background-color: #FE8116">
                                         <figure>
                                             <img class="gallery" src="https://bootdey.com/img/Content/avatar/avatar9.png" alt="">
                                         </figure>
@@ -128,7 +128,7 @@
         </div>
         <!-- left wrapper end -->
         <div class="col-md-8 col-xl-6 middle-wrapper">
-        <div class="row">
+        <div>
             {% for post in post %}
                 <div class="col-md-12 grid-margin">
                     <div class="card rounded">
@@ -163,8 +163,8 @@
                             <div class="d-flex justify-content-between">
                                 <form method="post" class="like-form" data-like-url="{% url 'like' user.username post.id %}">
                                         {% csrf_token %}
-                                        <button type="button" class="bg-green-500 text-white px-2 py-1 rounded-full flex items-center like-button">
-                                            <i class="fas fa-thumbs-up"></i>
+                                        <button type="button" id="like" class="bg-green-500 text-white px-2 py-1 rounded-full flex items-center like-button">
+                                            <i class="bi bi-heart-fill" id="like"></i>
                                         </button>
                                         <span class="ml-2 text-sm">{{ post.likes }} Likes</span>
                                     </form>
@@ -181,34 +181,33 @@
 
                <!-- right wrapper start -->
         <div class="d-none d-xl-block col-xl-3 right-wrapper">
-            <div class="row">
+            <div id="testimonial-wrapper">
                 <div class="col-md-12 grid-margin">
-                    <div class="card rounded">
-                        <div class="card-body">
+                    <div class="card rounded" >
+                        <div class="card-body" >
                             <a href="{% url 'view_testimonials' user_to_username=user.username %}">Testimonials</a>
                             <p>Number of testimonials: {{ testimonials_received|length }}</p>
-                            <div class="testimonials-scrollable-container">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonials-scrollable-container" >
                                 {% for testimonial in testimonials_received %}
-                                    <div class="d-flex justify-content-between mb-2 pb-2 border-bottom">
+                                    <div id="testimonial-border" class="d-flex justify-content-between mb-3 pb-1">
                                     <a href="{% url 'testimonial_detail' user_to_username=testimonial.user_to.username testimonial_id=testimonial.id %}">
-                                        <div class="d-flex align-items-center hover-pointer">
-                                            <img class="img-xs rounded-circle"
-                                                 src="{{ testimonial.user_from.profile_image.url }}"
+                                        <div class="d-flex hover-pointer">
+                                            <img class="img-xs rounded-circle" id="testimonial-profile-pic"
+                                                 src="{%    static 'profile/friends.png' %}"
                                                  alt="{{ testimonial.user_from.username }}">
-                                            <div class="ml-2">
-                                                <p>{{ testimonial.user_from.username }}</p>
+                                            <div class="ml-2"  id="testimonial-content">
+                                                <h6>{{ testimonial.user_from.username }}</h6> <p style="font-size: 12px" class="tx-11 text-muted">{{ testimonial.createdAt | date:"F j, Y" }}</p> <br> <br>
                                                 <p class="tx-11 text-muted">{{ testimonial.content | truncatechars:30 }}</p>
                                             </div>
                                         </div>
                                     </div>
                                      </a>
                                 {% endfor %}
-
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
         <!-- right wrapper end -->
 

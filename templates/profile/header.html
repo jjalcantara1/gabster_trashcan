@@ -21,7 +21,7 @@
     <div class="header">
         <header id="header">
     <a id="logo" href="{% url 'profile' request.user.username %}">
-        <img src="{% static 'profile/black.png' %}" id="logo">
+        <img src="{% static 'profile/orange.png' %}" id="logo">
     </a>
 
 
@@ -31,12 +31,10 @@
                 <button type="submit"><i class="bi bi-search" value="Search"></i></button>
         </form>
 
-            <div class="color-button">
-                <button class="btn btn-success btn-lg mt-3" id="viridianButton"></button>
-                <button class="btn btn-success btn-lg mt-3" id="beigeButton"></button>
-                <button class="btn btn-success btn-lg mt-3" id="gunmetalButton"></button>
-                <button class="btn btn-success btn-lg mt-3" id="blackButton"></button>
-            </div>
+{#            <div class="color-button">#}
+{#                <button id="lightmode"><i class="bi bi-brightness-high-fill"></i></button>#}
+{#                <button id="darkmode"><i class="bi bi-moon-fill"></i></button>#}
+{#            </div>#}
 
 
 
