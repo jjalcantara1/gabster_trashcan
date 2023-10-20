@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
@@ -43,31 +44,24 @@ def post_detail(request, post_id):
 
 @login_required
 def like(request, username, post_id):
-    user = request.user  # The user who is liking the post (login user)
-    target_post = Post.objects.get(pk=post_id)  # The post that is being liked
+    user = request.user
+    target_post = Post.objects.get(pk=post_id)
 
     try:
         user_like, created = UserLike.objects.get_or_create(voter=user, post=target_post)
         if not created and user_like.is_liked:
-            # The user has already liked the post, so remove the like
             user_like.delete()
-            if target_post.likes > 0:  # Ensure likes is not negative
-                target_post.likes -= 1  # Decrement the likes
-                target_post.save()  # Save the changes
-            # messages.success(request, f'You have removed your like for this post!')
+            if target_post.likes > 0:
+                target_post.likes -= 1
+                target_post.save()
         else:
-            # The user hasn't liked the post before or had unliked it, so create a new like
-            user_like.is_liked = True  # Change the like status
+            user_like.is_liked = True
             user_like.save()
-            target_post.likes += 1  # Increment the likes
-            target_post.save()  # Save the changes
-            # messages.success(request, f'You have liked this post!')
+            target_post.likes += 1
+            target_post.save()
 
-        # After liking, stay on the post's detailed view
-        return redirect('post_detail', post_id=post_id)  # Redirect to the post's detailed view
+        # Return a JSON response with the updated like count
+        return JsonResponse({'likes': target_post.likes})
     except Post.DoesNotExist:
-        # Handle the case where the post does not exist
-        messages.error(request, 'The post does not exist.')
-
-    # You can add more error handling for other scenarios if needed.
+        return JsonResponse({'error': 'The post does not exist.'}, status=404)
 
