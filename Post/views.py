@@ -11,14 +11,7 @@ from Post.forms import PostForm
 from django.contrib import messages
 
 
-#
-# # Create your views here.
-# class PostListView(ListView):
-#     model = Post
-#     queryset = Post.objects.all()
-#     template_name = 'posts/list_view.html'
-
-
+@login_required
 def create_post(request, username):
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
@@ -36,6 +29,7 @@ def create_post(request, username):
     return render(request, 'posts/post.html', {'form': form})
 
 
+@login_required
 def post_detail(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
     liked_users = post.liked_by.all()
