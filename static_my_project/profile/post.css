@@ -175,15 +175,6 @@ textarea{
 	border: none;
 }
 
-/*#submit-btn{*/
-/*	margin-top: 10px;*/
-/*	width: 100%;*/
-/*	padding-top: 10px;*/
-/*	padding-bottom: 10px;*/
-/*	color: #fff;*/
-/*	background-color: var(--btnColor);*/
-/*	border: none;*/
-/*}*/
 
 @media screen and (max-width: 1200px){
 	.post-container{

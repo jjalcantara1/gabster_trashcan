@@ -51,16 +51,6 @@ header{
   margin-bottom: 0px;
 }
 
-/*.Testimonial{*/
-/*	background-color: #FE8116;*/
-/*	border-bottom: 1px solid #FE8116 ;*/
-/*	overflow: auto;*/
-/*}*/
-
-/*#rate {*/
-/*	padding-left: 15px;*/
-/*}*/
-
 .testimonial-container{
 	width: 380px;
 	padding: 0px 30px 50px 30px;
@@ -125,12 +115,6 @@ header{
   border-bottom: 2px solid rgba(0,0,0,0.1);
   transition: all 0.3s ease;
 }
-
-/*@media screen and (max-width: 1200px){*/
-/*	.post-container{*/
-/*		width: 95%;*/
-/*	}*/
-/*}*/
 
 textarea{
     font-family: "Poppins", sans-serif;

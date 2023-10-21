@@ -77,8 +77,8 @@ def has_module_perms(self, app_label):
 
 class UserAccount(AbstractBaseUser):
     email = models.EmailField(verbose_name='email', max_length=60, unique=True)
-    username = models.CharField(max_length=50, unique=True) # I put it as true
-    date_joined = models.DateTimeField(verbose_name='date joined', auto_now_add=True)
+    username = models.CharField(max_length=20, unique=True) # I put it as true
+    date_joined = models.DateField(verbose_name='date joined', auto_now_add=True)
     last_login = models.DateTimeField(verbose_name='last login', auto_now='True')
     is_admin = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
@@ -91,6 +91,10 @@ class UserAccount(AbstractBaseUser):
     profile_song = models.FileField(upload_to=get_profile_song_filepath, blank=True, null=True)
     profile_background = models.ImageField(upload_to=get_profile_background_filepath, blank=True, null=True)
     hide_email = models.BooleanField(default=True)
+    # bio = models.CharField(max_length=300, null=True, blank=True)
+    # location = models.CharField(max_length=100, null=True, blank=True)
+    # color = ColorField(default='#fe8116')
+    # font_preference = models.CharField(max_length=50, default='"Poppins", sans-serif')
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
