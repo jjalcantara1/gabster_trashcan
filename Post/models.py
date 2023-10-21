@@ -1,8 +1,11 @@
 from django.db import models
 from django.conf import settings
 from django.db import models
+from django.db.models.signals import post_save
 
 from accounts.models import UserAccount
+from django.dispatch import receiver
+
 
 
 # Create your models here.
@@ -26,11 +29,31 @@ class Post(models.Model):
     def __repr__(self):
         return f"Post('{self.content}', '{self.createdAt}')"
 
+    def create_post(self, content, user, post_type=None, picture=None, video=None):
+        post = Post()
+        post.content = content
+        post.user = user
+        post.post_type = post_type
+        post.picture = picture
+        post.video = video
+        post.save()
+        return post
+
+@receiver(post_save, sender=Post)
+def create_post(sender, instance, created, **kwargs):
+    if created:
+        UserLike.objects.create(voter=instance.user, post=instance)
+
 
 class UserLike(models.Model):
     voter = models.ForeignKey(UserAccount, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    is_liked = models.BooleanField(default=True)
+    is_liked = models.BooleanField(default=False)
 
     class Meta:
         unique_together = ('voter', 'post')
+
+    def __str__(self):
+        return str(self.voter)
+
+

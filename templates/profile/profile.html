@@ -1,6 +1,7 @@
 {% extends "profile/header.html" %}
 {% load static %}
 {% block content %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
       <div class="container">
 
 <div class="profile-page tx-13">
@@ -128,7 +129,17 @@
         </div>
         <!-- left wrapper end -->
         <div class="col-md-8 col-xl-6 middle-wrapper">
+
         <div>
+        <div style="color: white">
+            {% for posts in post %}
+                {% for foo in user_like %}
+                    {% if posts == foo.post %}
+                        {{ posts }}{% if foo.is_liked %}<i class="fa-solid fa-heart" id="like"></i>{% else %}<i class="fa-regular fa-heart" id="like"></i> {% endif %}<br>
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+        </div>
             {% for post in post %}
                 <div class="col-md-12 grid-margin">
                     <div class="card rounded">
@@ -165,9 +176,33 @@
 
                                 <form method="post" class="like-form" data-like-url="{% url 'like' user.username post.id %}">
                                         {% csrf_token %}
-                                        <button type="button" id="like" class="bg-green-500 text-white px-2 py-1 rounded-full flex items-center like-button">
-                                            <i class="bi bi-heart-fill" id="like"></i>
-                                        </button>
+
+{#                                    {% for posts in post %}#}
+{#                {% for foo in user_like %}#}
+{#                    {% if posts == foo.post %}#}
+{#                        {{ posts }}{% if foo.is_liked %}<i class="fa-solid fa-heart" id="like"></i>{% else %}<i class="fa-regular fa-heart" id="like"></i> {% endif %}<br>#}
+{#                    {% endif %}#}
+{#                {% endfor %}#}
+{#            {% endfor %}#}
+                                <button onclick="changeIcon(this)" type="button" id="like" class="bg-green-500 text-white px-2 py-1 rounded-full flex items-center like-button">
+                                        {% for foo in user_like %}
+
+                                            {% if post == foo.post %}
+                                                {% if foo.is_liked %}
+                                                    <i class="fa-solid fa-heart" id="like"></i>
+
+                                                {% else %}
+                                                    <i class="fa-regular fa-heart" id="like"></i>
+                                                {% endif %}
+
+                                            {% endif %}
+
+
+
+                                        {% endfor %}
+
+                                </button>
+
                                         <span class="ml-2 text-sm">{{ post.likes }} Likes</span>
                                     </form>
                                 <div class="d-flex align-items-center text-muted" style="text-decoration: none">
@@ -237,6 +272,12 @@
             });
         });
     });
+
+    function changeIcon(anchor) {
+      var icon = anchor.querySelector("i");
+      icon.classList.toggle('fa-regular', 'fa-heart');
+      icon.classList.toggle('fa-solid', 'fa-heart');
+    }
 </script>
 {% endblock %}
 {% endblock %}

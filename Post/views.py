@@ -33,8 +33,14 @@ def create_post(request, username):
 @login_required
 def post_detail(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
+    user = request.user
     liked_users = post.liked_by.all()
-    return render(request, 'posts/posts_detail.html', {'post': post, 'liked_users': liked_users})
+    user_like = UserLike.objects.get(voter=user, post=post)
+    print('userLike')
+    print('asd', user_like)
+    return render(request, 'posts/posts_detail.html', {'post': post,
+                                                       'liked_users': liked_users,
+                                                       'user_like': user_like})
 
 
 @login_required
