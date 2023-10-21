@@ -417,19 +417,21 @@ d-flex justify-content-between mb-2 pb-2 border-bottom {
         padding-top: 20px;
 }
 
-.row {
-    background: linear-gradient(to right, rgba(44,15,85,0.9), rgba(44,15,38, 0.9));
-}
+/*.row {*/
+/*    background: linear-gradient(to right, rgba(44,15,85,0.9), rgba(44,15,38, 0.9));*/
+/*}*/
 
 #upper-profile{
     margin-top: 10px;
     border-radius: 5px 5px 0px 0px;
+    background: linear-gradient(to right, rgba(44,15,85,0.9), rgba(44,15,38, 0.9));
 }
 
 #lower-profile{
     border-radius: 0px 0px 5px 5px;
     margin-bottom: 10px;
     padding-bottom: 10px;
+    background: linear-gradient(to right, rgba(44,15,85,0.9), rgba(44,15,38, 0.9));
 }
 
 .card-body{
@@ -470,4 +472,3 @@ d-flex justify-content-between mb-2 pb-2 border-bottom {
     color: darkred;
     font-size: 20px;
 }
-

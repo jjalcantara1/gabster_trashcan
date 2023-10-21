@@ -45,7 +45,7 @@
         <img src="{% static 'profile/profile.png' %}" >
     </a>
     <div class="dropdown-content" id="myDropdown">
-        <a href=" "> Profile</a>
+        <a href="{% url 'customization' user %}"> Profile</a>
         <a href=" ">Settings</a>
         <a href="/logout ">Log Out</a>
     </div>

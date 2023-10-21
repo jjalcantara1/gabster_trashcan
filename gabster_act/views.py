@@ -39,3 +39,4 @@ def search(request):
         users = UserAccount.objects.all()
 
         return render(request, 'profile/search.html', {'users': users})
+

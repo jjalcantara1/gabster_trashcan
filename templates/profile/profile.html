@@ -63,10 +63,6 @@
                         <label class="tx-11 font-weight-bold mb-0 text-uppercase">Email:</label>
                         <p class="text-muted">{{user.email}}</p>
                     </div>
-                    <div class="mt-3">
-                        <label class="tx-11 font-weight-bold mb-0 text-uppercase">Website:</label>
-                        <p class="text-muted">www.nobleui.com</p>
-                    </div>
 
                 </div>
             </div>
@@ -75,48 +71,48 @@
                         <div class="card-body">
                             <h6 class="card-title">Gallery</h6>
                             <div class="latest-photos">
-                                <div class="row" >
-                                    <div class="col-md-4" style="background-color: #FE8116">
+                                <div class="row">
+                                    <div class="col-md-4">
                                         <figure>
                                             <img class="gallery" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
                                         </figure>
                                     </div>
-                                    <div class="col-md-4" style="background-color: #FE8116">
+                                    <div class="col-md-4">
                                         <figure>
                                             <img class="gallery" src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="">
                                         </figure>
                                     </div>
-                                    <div class="col-md-4" style="background-color: #FE8116">
+                                    <div class="col-md-4">
                                         <figure>
                                             <img class="gallery" src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="">
                                         </figure>
                                     </div>
-                                    <div class="col-md-4" style="background-color: #FE8116">
+                                    <div class="col-md-4">
                                         <figure>
                                             <img class="gallery" src="https://bootdey.com/img/Content/avatar/avatar4.png" alt="">
                                         </figure>
                                     </div>
-                                    <div class="col-md-4" style="background-color: #FE8116">
+                                    <div class="col-md-4">
                                         <figure>
                                             <img class="gallery" src="https://bootdey.com/img/Content/avatar/avatar5.png" alt="">
                                         </figure>
                                     </div>
-                                    <div class="col-md-4" style="background-color: #FE8116">
+                                    <div class="col-md-4">
                                         <figure>
                                             <img class="gallery" src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="">
                                         </figure>
                                     </div>
-                                    <div class="col-md-4" style="background-color: #FE8116">
+                                    <div class="col-md-4"">
                                         <figure>
                                             <img class="gallery" src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="">
                                         </figure>
                                     </div>
-                                    <div class="col-md-4" style="background-color: #FE8116">
+                                    <div class="col-md-4">
                                         <figure">
                                             <img class="gallery" src="https://bootdey.com/img/Content/avatar/avatar8.png" alt="">
                                         </figure>
                                     </div>
-                                    <div class="col-md-4" style="background-color: #FE8116">
+                                    <div class="col-md-4">
                                         <figure>
                                             <img class="gallery" src="https://bootdey.com/img/Content/avatar/avatar9.png" alt="">
                                         </figure>
@@ -131,15 +127,15 @@
         <div class="col-md-8 col-xl-6 middle-wrapper">
 
         <div>
-        <div style="color: white">
-            {% for posts in post %}
-                {% for foo in user_like %}
-                    {% if posts == foo.post %}
-                        {{ posts }}{% if foo.is_liked %}<i class="fa-solid fa-heart" id="like"></i>{% else %}<i class="fa-regular fa-heart" id="like"></i> {% endif %}<br>
-                    {% endif %}
-                {% endfor %}
-            {% endfor %}
-        </div>
+{#        <div style="color: white"> <!-- This is for debugging -->#}
+{#            {% for posts in post %}#}
+{#                {% for foo in user_like %}#}
+{#                    {% if posts == foo.post %}#}
+{#                        {{ posts }}{% if foo.is_liked %}<i class="fa-solid fa-heart" id="like"></i>{% else %}<i class="fa-regular fa-heart" id="like"></i> {% endif %}<br>#}
+{#                    {% endif %}#}
+{#                {% endfor %}#}
+{#            {% endfor %}#}
+{#        </div>#}
             {% for post in post %}
                 <div class="col-md-12 grid-margin">
                     <div class="card rounded">
@@ -273,10 +269,15 @@
         });
     });
 
-    function changeIcon(anchor) {
-      var icon = anchor.querySelector("i");
-      icon.classList.toggle('fa-regular', 'fa-heart');
-      icon.classList.toggle('fa-solid', 'fa-heart');
+    function changeIcon(button) {
+        const icon = button.querySelector("i");
+        if (icon.classList.contains("fa-solid")) {
+            icon.classList.remove("fa-solid");
+            icon.classList.add("fa-regular");
+        } else {
+            icon.classList.remove("fa-regular");
+            icon.classList.add("fa-solid");
+        }
     }
 </script>
 {% endblock %}

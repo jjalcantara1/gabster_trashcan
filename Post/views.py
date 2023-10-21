@@ -79,3 +79,19 @@ def get_likes(request, post_id, username):
     liked_users = [user.username for user in post.liked_by.all()]
     return JsonResponse({'liked_users': liked_users})
 
+@login_required
+def customization(request, username):
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES)
+        if form.is_valid():
+            user = request.user
+
+            post = form.save(commit=False)
+            post.user = user
+            post.save()
+
+            return redirect('profile', username=username)
+    else:
+        form = PostForm()
+
+    return render(request, 'customization/customization.html', {'form': form})
