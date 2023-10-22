@@ -52,6 +52,9 @@ urlpatterns = [
     re_path(r'^post/(?P<post_id>\d+)/$', post_detail, name='post_detail'),
     path('', include('Post.urls')),
 
+    path('email_verification_sent/', views.resend_email_ver, name='email_verification_sent'),
+    path('email_verification_success/', views.email_ver_success, name='email_verification_success'),
+
     path('activate/<str:uidb64>/<str:token>/', views.activate, name='activate'),
 
     path('search/', search, name='search'),
