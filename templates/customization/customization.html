@@ -13,20 +13,13 @@
 
 </head>
 <body>
+{#<form method="POST" enctype="multipart/form-data" class="mt-4">#}
+{#                {% csrf_token %}#}
   <div class="wrapper">
     <header>
       <h1 style="align-content: center">Profile</h1>
     </header>
       <form class="form-signin" method="post"> {% csrf_token %}
-      <div class="input-box">
-          <label>
-              <input type="text" name="username" id="inputUsername" class="form-control" placeholder="Username" required value="{{ user.username }}">
-          </label>
-      </div>
-
-      <div class="input-box">
-              <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email Address" required value="{{ user.email }}">
-      </div>
 
             <div class="input-box">
               <input type="text" name="email" id="inputLocation" class="form-control" placeholder="Location " required value="{{ user.location }}">
@@ -40,11 +33,28 @@
             <input type="color" id="color" name="color" value="{{ user.color }}">
         </div>
 
+        <div class="mb-4 w-1/2">
+            <label for="{{ form.color.id_for_label }}">Choose a background color:</label>
+            <input type="color" id="color" name="color" value="{{ user.backgroundColor }}">
+        </div>
+
           <div class="mb-4 w-1/2">
-              <label for="{{ p_form.image.id_for_label }}" class="block text-gray-600 font-medium">Profile Image:</label>
+              <label for="{{ p_form.image.id_for_label }}" class="block text-gray-600 font-medium">Background Image:</label>
               <input type="file" id="profile-image" name="image" class="border border-gray-300 p-2 rounded w-full">
           </div>
 
+          <div class="mb-4 w-1/2">
+              <label for="{{ p_form.image.id_for_label }}" class="block text-gray-600 font-medium">Profile Picture:</label>
+              <input type="file" id="profile-image" name="image" class="border border-gray-300 p-2 rounded w-full">
+          </div>
+
+          <div class="mb-4 w-1/2">
+              <label for="{{ p_form.image.id_for_label }}" class="block text-gray-600 font-medium">Profile Cover:</label>
+              <input type="file" id="profile-image" name="image" class="border border-gray-300 p-2 rounded w-full">
+          </div>
+
+    <button class="hover:bg-red-900 text-white font-semibold py-2 px-4 rounded w-1/8" style = "background: {{ user.profile.color }}" type="submit">Update Profile</button>
+    {#        </form>#}
 </body>
 <script>
         // JavaScript code to handle color selection
@@ -62,4 +72,21 @@
             });
         });
     </script>
+<script>
+        // JavaScript code to handle color selection
+        document.addEventListener('DOMContentLoaded', function() {
+            const submitButton = document.getElementById('submit-button');
+
+            submitButton.addEventListener('click', function() {
+                const selectedColor = document.querySelector('input[name="color"]:checked');
+
+                if (selectedColor) {
+                    alert('Selected color: ' + selectedColor.value);
+                } else {
+                    alert('Please select a color.');
+                }
+            });
+        });
+    </script>
+
 </html>

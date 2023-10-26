@@ -1,5 +1,5 @@
 body{
-    transition: background 0.5s, color 0.5s;
+    background-color: #151617;
     background-image: url("https://cdn.steamstatic.com/steamcommunity/public/images/items/1442870/d53c0b372a5453f222d5201a43b408f7e5d7fd7a.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -60,7 +60,7 @@ body{
 }
 .box > i{
 	font-size: 18px;
-	color: #7777777;
+	color: #777777;
 }
 .box > input{
 	flex: 1;
@@ -70,6 +70,7 @@ body{
 	font-size: 17px;
 	padding-left: 10px;
     background-color: #3a3b3c;
+    color: lightgray;
 }
 
 .profile-page .profile-header {
@@ -355,8 +356,8 @@ d-flex justify-content-between mb-2 pb-2 border-bottom {
     display: none;
     position: absolute;
     margin-top: -2px;
-    margin-left: -122px;
-    transition: background 0.5s, color 0.5s;
+    margin-left: -115px;
+    background-color: #242526;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
@@ -364,15 +365,16 @@ d-flex justify-content-between mb-2 pb-2 border-bottom {
 
 .dropdown-content a {
     height: 6vh;
-    color: black;
+    color: #fe8116;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
 }
 
 .dropdown-content a:hover {
-    border-color: #FE8116;
-    background-color: #FEDEBE;
+    border-radius: 10px ;
+    border: 1px #FE8116;
+    background-color: #3a3b3c;
 }
 
 .dropdown:hover .dropdown-content {
@@ -380,29 +382,12 @@ d-flex justify-content-between mb-2 pb-2 border-bottom {
 }
 .color-button {
     position: relative;
-    /*height: 6vh;*/
-    /*background-color: white;*/
     display: flex;
     flex-direction: row;
     margin-left: 0px;
     justify-content: center;
     padding-bottom: 0px;
     white-space: normal;
-}
-
-#lightmode {
-    border: none;
-    background: none;
-    font-size: 4vh;
-    color: #FE8116;
-    margin-right: 10px;
-}
-
-#darkmode {
-    border: none;
-    background: none;
-    font-size: 3vh;
-    color: #FE8116;
 }
 
 .profile-page .profile-header .header-links .rounded .card{
@@ -417,21 +402,18 @@ d-flex justify-content-between mb-2 pb-2 border-bottom {
         padding-top: 20px;
 }
 
-/*.row {*/
-/*    background: linear-gradient(to right, rgba(44,15,85,0.9), rgba(44,15,38, 0.9));*/
-/*}*/
-
 #upper-profile{
     margin-top: 10px;
     border-radius: 5px 5px 0px 0px;
-    background: linear-gradient(to right, rgba(44,15,85,0.9), rgba(44,15,38, 0.9));
+    background: linear-gradient(to right, rgba(40,36,36,0.9), rgba(44,22,5, 0.9));
+
 }
 
 #lower-profile{
     border-radius: 0px 0px 5px 5px;
     margin-bottom: 10px;
     padding-bottom: 10px;
-    background: linear-gradient(to right, rgba(44,15,85,0.9), rgba(44,15,38, 0.9));
+    background: linear-gradient(to right, rgba(40,36,36,0.9), rgba(44,22,5, 0.9));
 }
 
 .card-body{
@@ -472,3 +454,6 @@ d-flex justify-content-between mb-2 pb-2 border-bottom {
     color: darkred;
     font-size: 20px;
 }
+/*.card, .card-body, .profile-header, .cover, .testimonial-btn, .post-btn, #gallery-bg, #testimonial-border{*/
+/*     background: {{ user.color }};style="background: {{ user.color}}"*/
+/*}*/

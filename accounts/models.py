@@ -7,6 +7,7 @@ from django.contrib.auth import get_user_model
 from django.core.files.storage import FileSystemStorage
 import os
 from uuid import uuid4
+from colorfield.fields import ColorField
 
 from django.shortcuts import get_object_or_404
 
@@ -91,10 +92,11 @@ class UserAccount(AbstractBaseUser):
     profile_song = models.FileField(upload_to=get_profile_song_filepath, blank=True, null=True)
     profile_background = models.ImageField(upload_to=get_profile_background_filepath, blank=True, null=True)
     hide_email = models.BooleanField(default=True)
-    # bio = models.CharField(max_length=300, null=True, blank=True)
-    # location = models.CharField(max_length=100, null=True, blank=True)
-    # color = ColorField(default='#fe8116')
-    # font_preference = models.CharField(max_length=50, default='"Poppins", sans-serif')
+    bio = models.CharField(max_length=300, null=True, blank=True)
+    location = models.CharField(max_length=100, null=True, blank=True)
+    color = ColorField(default='#fe8116')
+    backgroundColor = models.TextField(default='linear-gradient(to right, rgba(88,44,4,0.9), rgba(44,22,5, 0.9))')
+    font_preference = models.CharField(max_length=50, default='"Poppins", sans-serif')
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']

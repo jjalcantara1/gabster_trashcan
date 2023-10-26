@@ -5,11 +5,11 @@
       <div class="container">
 
 <div class="profile-page tx-13">
-    <div class="row" id="upper-profile">
+        <div class="row" id="upper-profile">
 
         <div class="col-12 grid-margin">
-            <div class="profile-header">
-                <div class="cover">
+            <div style="background: {{ user.color}}"  class="profile-header">
+                <div style="background: {{ user.color}}" class="cover">
                     <div class="gray-shade"></div>
                     <figure>
                         <img src="https://staticg.sportskeeda.com/editor/2022/10/6298c-16668805486397-1920.jpg?w=840 class="img-fluid" alt="profile cover">
@@ -19,10 +19,10 @@
                         <div>
 
                             {% if person.username != user.username %}
-                                <a href="{% url 'add_testimonial' user_to_username=user.username %}"><input class="testimonial-btn" type="submit" value="Add Testimonial"></a>
+                                <a href="{% url 'add_testimonial' user_to_username=user.username %}"><input style="background: {{ user.color}}"  class="testimonial-btn" type="submit" value="Add Testimonial"></a>
                             {% else %}
                                 <a href="{% url 'create_post' user %}">
-                                    <input class="post-btn" type="submit" value="Create Post">
+                                    <input  style="background: {{ user.color}}" class="post-btn" type="submit" value="Create Post">
                                 </a>
                             {% endif %}
                             <img class="profile-pic" src="{% static 'profile/profile.png' %}" alt="profile">
@@ -45,8 +45,8 @@
 
         <!-- left wrapper start -->
         <div class="d-none d-md-block col-md-4 col-xl-3 left-wrapper">
-            <div class="card rounded">
-                <div class="card-body">
+            <div style="background: {{ user.color}}" class="card rounded">
+                <div class="card-body" >
                     <div class="d-flex align-items-center justify-content-between mb-2">
                         <h6 class="card-title mb-0">About</h6>
                     </div>
@@ -67,7 +67,7 @@
                 </div>
             </div>
           <div id="gallery-section">
-                    <div class="card rounded">
+                    <div style="background: {{ user.color}}" class="card rounded">
                         <div class="card-body">
                             <h6 class="card-title">Gallery</h6>
                             <div class="latest-photos">
@@ -138,7 +138,7 @@
 {#        </div>#}
             {% for post in post %}
                 <div class="col-md-12 grid-margin">
-                    <div class="card rounded">
+                    <div style="background: {{ user.color}}" class="card rounded">
                         <div class="card-header">
 {#                            <a href="{% url 'profile' username=post.user.username %}">#}
                                 <div class="d-flex align-items-center justify-content-between">
@@ -216,7 +216,7 @@
         <div class="d-none d-xl-block col-xl-3 right-wrapper">
             <div id="testimonial-wrapper">
                 <div class="col-md-12 grid-margin">
-                    <div class="card rounded" >
+                    <div style="background: {{ user.color}}" class="card rounded" >
                         <div class="card-body" >
                             <a href="{% url 'view_testimonials' user_to_username=user.username %}">Testimonials</a>
                             <p>Number of testimonials: {{ testimonials_received|length }}</p>
@@ -226,7 +226,7 @@
             </div>
             <div class="testimonials-scrollable-container" >
                                 {% for testimonial in testimonials_received %}
-                                    <div id="testimonial-border" class="d-flex justify-content-between mb-3 pb-1">
+                                    <div style="background: {{ user.color}}"  id="testimonial-border" class="d-flex justify-content-between mb-3 pb-1">
                                     <a href="{% url 'testimonial_detail' user_to_username=testimonial.user_to.username testimonial_id=testimonial.id %}">
                                         <div class="d-flex hover-pointer">
                                             <img class="img-xs rounded-circle" id="testimonial-profile-pic"
