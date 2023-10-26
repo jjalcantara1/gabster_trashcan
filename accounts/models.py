@@ -10,6 +10,7 @@ from uuid import uuid4
 from colorfield.fields import ColorField
 
 from django.shortcuts import get_object_or_404
+from django.utils import timezone
 
 
 # BaseUserManager- managing users
@@ -45,6 +46,7 @@ class MyAccountManager(BaseUserManager):
         )
         user.is_admin = True
         user.is_staff = True
+        user.is_email_verified = True
         user.is_superuser = True
         user.save(using=self._db)
         return user
@@ -102,6 +104,10 @@ class UserAccount(AbstractBaseUser):
     REQUIRED_FIELDS = ['username']
 
     objects = MyAccountManager()
+
+    def update_user_joined_date(self):
+        self.date_joined = timezone.now()
+        self.save()
 
     # shows what to be displayed when creating user object
     def __str__(self):
