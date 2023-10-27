@@ -26,7 +26,6 @@ def profile_view(request, username):
         'post': post,
         'user_like': user_like
     }
-    # print(post)
     return render(request, 'profile/profile.html', context)
 
 def search(request):
