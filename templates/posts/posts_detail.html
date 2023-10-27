@@ -142,7 +142,7 @@
                 data: likeForm.serialize(),
                 success: function (data) {
                     const likeCount = likeForm.find(".text-sm");
-                    likeCount.text(data.likes + " Likes");
+                    likeCount.text(data.likes + " ");
                 },
                 error: function (error) {
                     console.error("Error: " + JSON.stringify(error));
