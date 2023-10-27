@@ -25,7 +25,7 @@ def add_testimonial(request, user_to_username):
             print("Testimonial saved successfully")
             form.cleaned_data['content'] = ""
 
-            return redirect(reverse('view_testimonials', kwargs={'user_to_username': user_to_username}))
+            return redirect('profile', username=user_to.username)
         else:
             print("Form errors:", form.errors)
     else:
@@ -50,7 +50,7 @@ def view_testimonials(request, user_to_username):
         # If the user is viewing another user's profile
         testimonials_received = Testimonial.objects.filter(user_to=user).order_by('-createdAt')
 
-    return render(request, 'profile/profile.html', {
+    return render(request, 'testimonial/view_testimonial.html', {
         'user': user,
         'testimonials_received': testimonials_received,
     })
