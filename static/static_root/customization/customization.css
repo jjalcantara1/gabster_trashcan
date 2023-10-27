@@ -20,7 +20,7 @@ body{
   align-items: center;
   justify-content: center;
   background-image: linear-gradient(#fe8116, #fcb001);
-  font-family: "Poppins", sans-serif;
+    font-family: "Poppins", sans-serif;
 }
 .wrapper{
   position: relative;
@@ -88,18 +88,6 @@ form h3{
   background: #fe8116;
   cursor: pointer;
 }
-/*form .text h3{*/
-/* color: #333;*/
-/* width: 100%;*/
-/* text-align: center;*/
-/*}*/
-/*form .text h3 a{*/
-/*  color: #fe8116;*/
-/*  text-decoration: none;*/
-/*}*/
-/*form .text h3 a:hover{*/
-/*  text-decoration: underline;*/
-/*}*/
 
 .wrapper a{
   color: #fe8116;
@@ -119,15 +107,21 @@ form h3{
   transform: translateY(-50%);
   cursor: pointer;
 }
-
-.logo{
-  /*background-color: white;*/
-  position: relative;
-  right: 100px;
-  bottom:60px;
+#inputBio{
+    width: 100%;
+    height: 100px;
+    outline: none;
+    padding: 15px;
+    font-family: "Poppins", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: #333;
+    border: 1px solid #C7BEBE;
+    border-bottom-width: 2.5px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+#inputBio:focus{
+  border-color: #fe8116;
 }
 
-.logo h1{
-  position: absolute;
-  left: 80px;
-}
