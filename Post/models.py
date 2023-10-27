@@ -1,3 +1,6 @@
+import os
+import random
+
 from django.db import models
 from django.conf import settings
 from django.db import models
@@ -7,8 +10,18 @@ from accounts.models import UserAccount
 from django.dispatch import receiver
 
 
-
 # Create your models here.
+def get_filename_ext(filepath):
+    base_name = os.path.basename(filepath)
+    name, ext = os.path.splitext(base_name)
+    return name, ext
+
+
+def upload_picture_path(instance, filename):
+    new_filename = random.randint(1, 3910209312)
+    name, ext = get_filename_ext(filename)
+    final_filename = '{new_filename}{ext}'.format(new_filename=new_filename, ext=ext)
+    return 'pictures/{final_filename}'.format(new_filename=new_filename, final_filename=final_filename)
 
 
 class Post(models.Model):
@@ -16,7 +29,7 @@ class Post(models.Model):
     content = models.CharField(max_length=500)
     post_type = models.CharField(max_length=20, choices=[('picture', 'Picture'), ('video', 'Video')], default=None,
                                  null=True)
-    picture = models.ImageField(upload_to='pictures/', blank=True, null=True, default=None)
+    picture = models.ImageField(upload_to=upload_picture_path, blank=True, null=True, default=None)
     video = models.FileField(upload_to='videos/', blank=True, null=True, default=None)
     updated = models.DateTimeField(auto_now=True)
     createdAt = models.DateTimeField(auto_now_add=True)
@@ -39,6 +52,7 @@ class Post(models.Model):
         post.save()
         return post
 
+
 @receiver(post_save, sender=Post)
 def create_post(sender, instance, created, **kwargs):
     if created:
@@ -55,5 +69,3 @@ class UserLike(models.Model):
 
     def __str__(self):
         return str(self.voter)
-
-
