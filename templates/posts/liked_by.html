@@ -1,0 +1,60 @@
+{% extends "profile/header.html" %}
+
+<style>
+    .liked-users-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 20px;
+    }
+
+    .liked-user-card {
+        border: 1px solid #cc5d00;
+        border-radius: 10px;
+        width: 200px;
+        margin: 10px;
+        padding: 10px;
+        text-align: center;
+    }
+
+    .liked-user-profile-image {
+        border: 3px solid #ffaa33;
+        border-radius: 50%;
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 10px;
+        overflow: hidden;
+    }
+
+    .liked-user-profile-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .liked-user-username {
+        font-weight: bold;
+    }
+</style>
+
+{% block content %}
+<div class="container">
+    <h1>Liked By</h1>
+    <div class="liked-users-container">
+        {% if liked_users %}
+            {% for user in liked_users %}
+                <a href="{% url 'profile' username=user %}" class="liked-user-card">
+                    <div class="liked-user-profile-image">
+                        <img src="{{ user.profile_image.url }}" alt="{{ user }}">
+                    </div>
+                    <div class="liked-user-username">
+                        {{ user }}
+                    </div>
+                </a>
+            {% endfor %}
+        {% else %}
+            <h4>No users have liked this post yet.</h4>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
