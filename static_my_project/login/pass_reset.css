@@ -52,8 +52,7 @@ body{
 }
 .wrapper form .input-box{
   height: 52px;
-  margin: 18px 0;
-  /*margin-bottom: 50px;*/
+  margin: 18px 0 50px;
 
 }
 form .input-box input{

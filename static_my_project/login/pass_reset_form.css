@@ -24,10 +24,10 @@ body{
 }
 .wrapper{
   position: relative;
-  max-width: 430px;
+  max-width: 500px;
   width: 100%;
   background: #fff;
-  padding: 34px;
+  padding: 85px;
   border-radius: 6px;
   box-shadow: 0 5px 10px rgba(0,0,0,0.2);
 }
@@ -48,12 +48,11 @@ body{
   /*background: #fe8116;*/
 }
 .wrapper form{
-  margin-top: 30px;
+  margin-top: 20px;
 }
 .wrapper form .input-box{
-  height: 52px;
-  margin: 18px 0;
-  /*margin-bottom: 50px;*/
+  height: 40px;
+  margin: 20px 0 30px;
 
 }
 form .input-box input{

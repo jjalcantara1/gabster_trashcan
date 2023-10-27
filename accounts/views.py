@@ -51,6 +51,7 @@ def register_view(request, *args, **kwargs):
     return render(request, 'accounts/register.html', context)
 
 
+
 def activate(request, uidb64, token):
     User = get_user_model()
     try:
@@ -60,14 +61,16 @@ def activate(request, uidb64, token):
         user = None
 
     if user is not None:
-        timestamp = user.date_joined  # Use the timestamp when the token was created
-        if not account_activation_token.is_token_expired(timestamp) and account_activation_token.check_token(user,
-                                                                                                             token):
-            user.is_active = True  # User will be active and verified after successful activation
+        current_timestamp = timezone.now()
+        token_expired = account_activation_token.is_token_expired(current_timestamp)
+        if not token_expired and account_activation_token.check_token(user, token):
+            user.is_active = True
             user.is_email_verified = True
             user.save()
             return render(request, 'accounts/email_ver_success.html', {})
         else:
+            if token_expired:
+                return HttpResponse('Activation link is expired!')
             return HttpResponse('Activation link is invalid or expired!')
     else:
         return HttpResponse('Activation link is invalid!')
@@ -167,10 +170,10 @@ def post(request):
 def testimonials(request):
     return render(request, "posts/testimonials.html", {})
 
+
 def customization(request):
     return render(request, "customization/customization.html", {})
 
 
 def password_reset(request):
     return render(request, "accounts/password_reset.html", {})
-
