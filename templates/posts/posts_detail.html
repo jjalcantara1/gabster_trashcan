@@ -39,7 +39,7 @@
                 <div class="d-flex post-actions">
                     <form method="post" class="like-form" data-like-url="{% url 'like' post.user.username post.id %}">
                         {% csrf_token %}
-                        <button onclick="changeIcon(this)" type="button" id="like" class="bg-green-500 text-white px-2 py-1 rounded-full flex items-center like-button">
+                        <button onclick="changeIcon(this)" type="button" id="like" class="bg-green-500 text-white px-2 py-1 rounded-full flex items-center like-button-post">
                             {% if post == foo.post %}
                                 {% if foo.is_liked %}
                                     <i class="fa-solid fa-heart" id="like"></i>
@@ -133,7 +133,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
     $(document).ready(function () {
-        $(".like-button").click(function () {
+        $(".like-button-post").click(function () {
             const likeForm = $(this).closest(".like-form");
 
             $.ajax({
