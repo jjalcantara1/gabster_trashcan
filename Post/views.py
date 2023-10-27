@@ -34,14 +34,23 @@ def create_post(request, username):
 
 
 @login_required
-def post_detail(request, post_id, username):
-    post = get_object_or_404(Post, pk=post_id)
-    user = request.user
-    liked_users = post.liked_by.all()
-    user_like = UserLike.objects.get(voter=user, post=post)
-    return render(request, 'posts/posts_detail.html', {'post': post,
-                                                       'liked_users': liked_users,
-                                                       'user_like': user_like})
+def post_detail(request, username, post_id):
+    user = get_object_or_404(UserAccount, username=username)
+    post = get_object_or_404(Post, pk=post_id, user=user)
+
+    user_like = None
+    if request.user.is_authenticated:
+        try:
+            user_like = UserLike.objects.get(voter=request.user, post=post)
+        except UserLike.DoesNotExist:
+            user_like = None
+
+    return render(request, 'Posts/posts_detail.html', {
+        'user': user,
+        'post': post,
+        'user_like': user_like,
+    })
+
 
 
 @login_required
