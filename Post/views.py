@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseForbidden, Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -14,6 +14,9 @@ from django.contrib import messages
 
 @login_required
 def create_post(request, username):
+    if request.user.username != username:
+        raise Http404("You are not allowed to create a post on this profile.")
+
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
@@ -31,7 +34,7 @@ def create_post(request, username):
 
 
 @login_required
-def post_detail(request, post_id,username):
+def post_detail(request, post_id, username):
     post = get_object_or_404(Post, pk=post_id)
     user = request.user
     liked_users = post.liked_by.all()
@@ -83,6 +86,23 @@ def likedby(request, post_id, username):
     post = Post.objects.get(id=post_id)
     liked_users = UserLike.objects.filter(post=post, is_liked=True)
     return render(request, 'posts/liked_by.html', {'post': post, 'liked_users': liked_users})
+
+
+@login_required
+def delete_post(request, username, post_id):
+    try:
+        post = Post.objects.get(id=post_id)
+        if request.user == post.user:
+            # Only allow deletion if the logged-in user is the owner of the post
+            post.delete()
+            return redirect('profile', username=username)
+        else:
+            # If the logged-in user is not the owner, return a forbidden response
+            return HttpResponseForbidden("You are not allowed to delete this post.")
+    except Post.DoesNotExist:
+        pass
+
+    return redirect('profile', username=username)
 
 
 @login_required

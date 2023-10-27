@@ -3,19 +3,23 @@
 {% block content %}
 <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
     <div class="card rounded" style="width: 60rem; max-height: none;">
-        <div class="card-header">
+        <div class="card-header d-flex justify-content-between">
             <a href="{% url 'profile' username=post.user.username %}">
-                <div class="d-flex align-items-center justify-content-between">
-                    <div class="d-flex align-items-center">
-                        <img class="img-xs rounded-circle" src="{{ post.user.profile.picture.url }}" alt="">
-                        <div class="ml-2">
-                            <p>{{ post.user.username }}</p>
-                            <p class="tx-11 text-muted">{{ post.createdAt }}</p>
-                        </div>
+                <div class="d-flex align-items-center">
+                    <img class="img-xs rounded-circle" src="{{ post.user.profile.picture.url }}" alt="">
+                    <div class="ml-2">
+                        <p>{{ post.user.username }}</p>
+                        <p class="tx-11 text-muted">{{ post.createdAt }}</p>
                     </div>
                 </div>
             </a>
+            {% if user == post.user %} {# Check if logged-in user is the profile user #}
+            <button type="button" class="btn-sm btn-outline-secondary ellipsis-button" data-toggle="modal" data-target="#deletePostModal">
+                <i class="far fa-ellipsis-v"></i>
+            </button>
+            {% endif %}
         </div>
+
         <div class="card-body" style="max-height: none;">
             <p class="mb-3 tx-14">{{ post.content }}</p>
 
@@ -36,23 +40,18 @@
                     <form method="post" class="like-form" data-like-url="{% url 'like' post.user.username post.id %}">
                         {% csrf_token %}
                         <button onclick="changeIcon(this)" type="button" id="like" class="bg-green-500 text-white px-2 py-1 rounded-full flex items-center like-button">
-
-
-                                            {% if post == foo.post %}
-                                                {% if foo.is_liked %}
-                                                    <i class="fa-solid fa-heart" id="like"></i>
-
-                                                {% else %}
-                                                    <i class="fa-regular fa-heart" id="like"></i>
-                                                {% endif %}
-
-                                            {% endif %}
-
-                                </button>
+                            {% if post == foo.post %}
+                                {% if foo.is_liked %}
+                                    <i class="fa-solid fa-heart" id="like"></i>
+                                {% else %}
+                                    <i class="fa-regular fa-heart" id="like"></i>
+                                {% endif %}
+                            {% endif %}
+                        </button>
                         <span class="ml-2 text-sm" id="likes-count">{{ post.likes }} </span>
                         <a href="{% url 'likedby' username=post.user.username post_id=post.id %}">
-         Likes
-    </a>
+                            Likes
+                        </a>
                     </form>
                 </div>
                 <div class="d-flex post-actions">
@@ -65,19 +64,32 @@
         </div>
     </div>
 </div>
-
-{#<!-- Modal -->#}
-{#<div id="likes-modal" class="modal">#}
-{#    <div class="modal-content">#}
-{#        <span class="close">&times;</span>#}
-{#        <h2>Liked by</h2>#}
-{#        <ul id="likes-list">#}
-{#            <!-- Usernames who liked the post will be added here dynamically -->#}
-{#        </ul>#}
-{#    </div>#}
-{#</div>#}
+{% if user == post.user %} {# Check if logged-in user is the profile user #}
+<div class="modal fade" id="deletePostModal" tabindex="-1" role="dialog" aria-labelledby="deletePostModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deletePostModalLabel">Delete Post</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete this post?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <form method="post" action="{% url 'delete_post' username=post.user.username post_id=post.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
 <style>
-    {#/* Modal styles */#}
+    /* Modal styles */
     {#.modal {#}
     {#    display: none;#}
     {#    position: fixed;#}
@@ -118,6 +130,7 @@
 
 {% block script %}
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
     $(document).ready(function () {
         $(".like-button").click(function () {
@@ -145,48 +158,9 @@
             icon.classList.add("fa-regular");
         } else {
             icon.classList.remove("fa-regular");
-            icon.classList.add("fa-solid");
+            icon.classList add("fa-solid");
         }
     }
-
-    {#    function showLikesModal() {#}
-    {#        const modal = document.getElementById("likes-modal");#}
-    {#        modal.style.display = "block";#}
-    {##}
-    {#        // Fetch the list of liked users from the server#}
-    {#        $.ajax({#}
-    {#            type: "GET",#}
-    {#            url: "{% url 'get_likes' post.user.username post.id %}",#}
-    {#            success: function (data) {#}
-    {#                const likedUsers = data.liked_users;#}
-    {#                const likesList = document.getElementById("likes-list");#}
-    {#                likesList.innerHTML = "";  // Clear previous entries#}
-    {#                likedUsers.forEach((user) => {#}
-    {#                    const listItem = document.createElement("li");#}
-    {#                    listItem.innerText = user;#}
-    {#                    likesList.appendChild(listItem);#}
-    {#                });#}
-    {#            },#}
-    {#            error: function (error) {#}
-    {#                console.error("Error: " + JSON.stringify(error));#}
-    {#            }#}
-    {#        });#}
-    {#    }#}
-    {##}
-    {#    const closeModal = document.querySelector(".close");#}
-    {#    closeModal.addEventListener("click", function () {#}
-    {#        const modal = document.getElementById("likes-modal");#}
-    {#        modal.style.display = "none";#}
-    {#    });#}
-    {##}
-    {#    const likesCount = document.getElementById("likes-count");#}
-    {#    likesCount.addEventListener("click", function () {#}
-    {#        showLikesModal();#}
-    {#    });#}
-    {#    $("#likes-count").click(function () {#}
-    {#showLikesModal();#}
-    {#});#}
-    {#});#}
 </script>
 {% endblock %}
 {% endblock %}

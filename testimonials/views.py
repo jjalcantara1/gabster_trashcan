@@ -1,4 +1,5 @@
 from django.db.models import Avg
+from django.http import HttpResponseForbidden
 from django.urls import reverse
 from .models import *
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -11,6 +12,9 @@ from django.contrib.auth.decorators import login_required
 def add_testimonial(request, user_to_username):
     user_to = get_object_or_404(UserAccount, username=user_to_username)
 
+    if user_to == request.user:
+        return HttpResponseForbidden("You cannot post a testimonial on your own profile.")
+
     if request.method == 'POST':
         form = TestimonialForm(request.POST)
         if form.is_valid():
@@ -20,7 +24,6 @@ def add_testimonial(request, user_to_username):
             testimonial.save()
             print("Testimonial saved successfully")
             form.cleaned_data['content'] = ""
-            # form.cleaned_data['rating'] = None  # Clear the rating field
 
             return redirect(reverse('view_testimonials', kwargs={'user_to_username': user_to_username}))
         else:
@@ -47,7 +50,7 @@ def view_testimonials(request, user_to_username):
         # If the user is viewing another user's profile
         testimonials_received = Testimonial.objects.filter(user_to=user).order_by('-createdAt')
 
-    return render(request, 'testimonial/view_testimonial.html', {
+    return render(request, 'profile/profile.html', {
         'user': user,
         'testimonials_received': testimonials_received,
     })
