@@ -11,5 +11,6 @@ from templates import *
 urlpatterns = [
     path('profile/<str:username>/<int:post_id>/like/', like, name='like'),
     path('get-likes/<str:username>/<int:post_id>/', views.get_likes, name='get_likes'),
+    path('profile/<str:username>/<int:post_id>/likedby', likedby, name='likedby'),
 
 ]

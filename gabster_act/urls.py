@@ -49,7 +49,8 @@ urlpatterns = [
     re_path(r'^addtestimonials/(?P<user_to_username>[\w.@+-]+)/$', add_testimonial, name='add_testimonial'),
     re_path(r'^createpost/(?P<username>[\w.@+-]+)/$', create_post, name='create_post'),
     re_path(r'^customization/(?P<username>[\w.@+-]+)/$', customization, name='customization'),
-    re_path(r'^post/(?P<post_id>\d+)/$', post_detail, name='post_detail'),
+    # re_path(r'^post/(?P<post_id>\d+)/$', post_detail, name='post_detail'),
+    re_path(r'^profile/(?P<username>[\w.@+-]+)/(?P<post_id>\d+)/$', post_detail, name='post_detail'),
     path('', include('Post.urls')),
 
     path('email_verification_sent/', views.resend_email_ver, name='email_verification_sent'),

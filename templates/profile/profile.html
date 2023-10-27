@@ -153,7 +153,7 @@
                             </a>
                         </div>
                         <div class="card-body">
-                            <a href="{% url 'post_detail' post.id %}">
+                            <a href="{% url 'post_detail' post.user.username post.id %}">
                                 <p class="mb-3 tx-14">{{ post.content }}</p>
                                 {% if post.post_type == "picture" and post.picture %}
                                     <img class="img-fluid" src="{{ post.picture.url }}" alt="">

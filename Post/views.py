@@ -31,13 +31,11 @@ def create_post(request, username):
 
 
 @login_required
-def post_detail(request, post_id):
+def post_detail(request, post_id,username):
     post = get_object_or_404(Post, pk=post_id)
     user = request.user
     liked_users = post.liked_by.all()
     user_like = UserLike.objects.get(voter=user, post=post)
-    print('userLike')
-    print('asd', user_like)
     return render(request, 'posts/posts_detail.html', {'post': post,
                                                        'liked_users': liked_users,
                                                        'user_like': user_like})
@@ -73,11 +71,19 @@ def like(request, username, post_id):
         return JsonResponse({'error': 'The post does not exist.'}, status=404)
 
 
-@login_required()
+@login_required
 def get_likes(request, post_id, username):
     post = get_object_or_404(Post, pk=post_id)
     liked_users = [user.username for user in post.liked_by.all()]
     return JsonResponse({'liked_users': liked_users})
+
+
+@login_required
+def likedby(request, post_id, username):
+    post = Post.objects.get(id=post_id)
+    liked_users = UserLike.objects.filter(post=post, is_liked=True)
+    return render(request, 'posts/liked_by.html', {'post': post, 'liked_users': liked_users})
+
 
 @login_required
 def customization(request, username):
