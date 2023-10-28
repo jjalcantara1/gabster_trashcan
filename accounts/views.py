@@ -1,3 +1,4 @@
+from django.http import HttpResponseBadRequest, HttpResponseNotFound
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import login, authenticate, logout
@@ -13,7 +14,7 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_str
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.template.loader import render_to_string
-from .tokens import account_activation_token
+from .tokens import account_activation_token, is_token_expired
 from django.core.mail import EmailMessage
 from django.contrib.auth import get_user_model
 
@@ -56,24 +57,24 @@ def activate(request, uidb64, token):
     User = get_user_model()
     try:
         uid = force_str(urlsafe_base64_decode(uidb64))
-        user = User.objects.get(pk=uid)
-    except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = User.objects.filter(pk=uid).first()
+    except (TypeError, ValueError, OverflowError):
         user = None
 
     if user is not None:
-        current_timestamp = timezone.now()
-        token_expired = account_activation_token.is_token_expired(current_timestamp)
-        if not token_expired and account_activation_token.check_token(user, token):
+        current_timestamp = timezone.localtime() # get current timestamp
+        token_expired = is_token_expired(current_timestamp) # check if token is expired
+        if account_activation_token.check_token(user, token):
             user.is_active = True
             user.is_email_verified = True
             user.save()
             return render(request, 'accounts/email_ver_success.html', {})
         else:
-            if token_expired:
-                return HttpResponse('Activation link is expired!')
-            return HttpResponse('Activation link is invalid or expired!')
+            if not token_expired:
+                return HttpResponseBadRequest('Activation link is expired!')
+            return HttpResponseBadRequest('Activation link is invalid or expired!')
     else:
-        return HttpResponse('Activation link is invalid!')
+        return HttpResponseNotFound('Activation link is invalid!')
 
 
 def logout_view(request):

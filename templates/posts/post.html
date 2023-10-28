@@ -40,7 +40,7 @@
                 <input type="file" name="{{ form.video.name }}" id="{{ form.video.id_for_label }}">
             </div>
 
-            <input id="submit-btn" type="submit"  value="Create Post" disabled>
+            <input id="submit-btn" type="submit"  value="Create Post" >
         </form>
 
 
@@ -89,23 +89,23 @@
                     }
                 });
                 function enableSubmitButton() {
-        // Get the post content
-        const content = document.getElementById('id_content').value;
+                    // Get the post content
+                    const content = document.getElementById('id_content').value;
 
-        // Get the file inputs for picture and video
-        const pictureInput = document.getElementById('{{ form.picture.id_for_label }}');
-        const videoInput = document.getElementById('{{ form.video.id_for_label }}');
+                    // Get the file inputs for picture and video
+                    const pictureInput = document.getElementById('{{ form.picture.id_for_label }}');
+                    const videoInput = document.getElementById('{{ form.video.id_for_label }}');
 
-        // Get the submit button
-        const submitButton = document.getElementById('submit-btn');
+                    // Get the submit button
+                    const submitButton = document.getElementById('submit-btn');
 
-        // Check if content is not empty or either picture or video input has a file selected
-        if (content.trim() !== '' || pictureInput.files.length > 0 || videoInput.files.length > 0) {
-            submitButton.disabled = false;
-        } else {
-            submitButton.disabled = true;
-        }
-    }
+                    // Check if content is not empty or either picture or video input has a file selected
+                    {#if (content.trim() !== '' || pictureInput.files.length > 0 || videoInput.files.length > 0) {#}
+                    {#    submitButton.disabled = false;#}
+                    {#} else {#}
+                    {#    submitButton.disabled = true;#}
+                    {#}#}
+                }
         </script>
 
 </body>

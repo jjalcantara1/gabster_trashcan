@@ -18,10 +18,11 @@ def create_post(request, username):
         raise Http404("You are not allowed to create a post on this profile.")
 
     if request.method == 'POST':
-        form = PostForm(request.POST, request.FILES)
+        form = PostForm(request.POST or None, request.FILES or None)
         if form.is_valid():
             user = request.user
-
+            print('shet')
+            print(request.POST)
             post = form.save(commit=False)
             post.user = user
             post.save()

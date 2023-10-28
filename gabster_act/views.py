@@ -35,7 +35,7 @@ def search(request):
 
         return render(request,'profile/search.html', {'users': users})
     else:
-        users = UserAccount.objects.all()
+        users = None
 
         return render(request, 'profile/search.html', {'users': users})
 

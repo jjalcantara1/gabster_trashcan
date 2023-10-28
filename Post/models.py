@@ -26,7 +26,7 @@ def upload_picture_path(instance, filename):
 
 class Post(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    content = models.CharField(max_length=500)
+    content = models.CharField(max_length=500, blank=True, null=True)
     post_type = models.CharField(max_length=20, choices=[('picture', 'Picture'), ('video', 'Video')], default=None,
                                  null=True)
     picture = models.ImageField(upload_to=upload_picture_path, blank=True, null=True, default=None)
