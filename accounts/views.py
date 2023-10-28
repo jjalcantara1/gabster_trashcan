@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import login, authenticate, logout
 from django.utils import timezone
-
+from verify_email.email_handler import send_verification_email
 from accounts.forms import RegistrationForm, AccountAuthenticationForm, UserAccount
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -14,7 +14,8 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_str
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.template.loader import render_to_string
-from .tokens import account_activation_token, is_token_expired
+from .tokens import account_activation_token
+from gabster_act import settings
 from django.core.mail import EmailMessage
 from django.contrib.auth import get_user_model
 
@@ -32,25 +33,30 @@ def register_view(request, *args, **kwargs):
             user.is_active = False  # False since not yet verified
             user.save()
 
-            # Send email verification link to the user
-            token = account_activation_token.make_token(user)
-            current_site = get_current_site(request)
-            mail_subject = 'Activation link has been sent to your email id'
-            message = render_to_string('accounts/acc_active_email.html', {
-                'user': user,
-                'domain': current_site.domain,
-                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-                'token': token
-            })
-            to_email = form.cleaned_data.get('email')
-            email = EmailMessage(mail_subject, message, to=[to_email])
-            email.send()
+            send_verification_email(request, form)
+
             return render(request, 'accounts/email_ver_sent.html', {})
         else:
             context['registration_form'] = form
 
     return render(request, 'accounts/register.html', context)
 
+
+def send_activation_email(request, user):
+    current_site = get_current_site(request)
+    mail_subject = 'Activation link has been sent to your email id'
+    message = render_to_string('accounts/acc_active_email.html', {
+        'user': user,
+        'domain': current_site.domain,
+        'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+        'token': account_activation_token.make_token(user),
+    })
+    email = EmailMessage(mail_subject, message, settings.EMAIL_HOST_USER, to=[user.email])
+
+    if email.send():
+        messages.success(request, 'Please confirm your email address to complete the registration')
+    else:
+        messages.error(request, 'Failed to send email confirmation. Please try again later.')
 
 
 def activate(request, uidb64, token):
@@ -61,20 +67,13 @@ def activate(request, uidb64, token):
     except (TypeError, ValueError, OverflowError):
         user = None
 
-    if user is not None:
-        current_timestamp = timezone.localtime() # get current timestamp
-        token_expired = is_token_expired(current_timestamp) # check if token is expired
-        if account_activation_token.check_token(user, token):
-            user.is_active = True
-            user.is_email_verified = True
-            user.save()
-            return render(request, 'accounts/email_ver_success.html', {})
-        else:
-            if not token_expired:
-                return HttpResponseBadRequest('Activation link is expired!')
-            return HttpResponseBadRequest('Activation link is invalid or expired!')
+    if user is not None and account_activation_token.check_token(user, token):
+        user.is_active = True
+        user.is_email_verified = True
+        user.save()
     else:
-        return HttpResponseNotFound('Activation link is invalid!')
+        return HttpResponseBadRequest('Activation link is expired!')
+    return render(request, 'accounts/email_ver_success.html', {})
 
 
 def logout_view(request):
@@ -88,8 +87,7 @@ def login_view(request, *args, **kwargs):
 
     user = request.user
     if user.is_authenticated:
-        if user.is_email_verified:
-            return redirect('profile_view')
+        return redirect('profile_view')
 
     destination = get_redirect_if_exists(request)
     print("destination: " + str(destination))
@@ -101,7 +99,7 @@ def login_view(request, *args, **kwargs):
             email = request.POST['email']
             password = request.POST['password']
             user = authenticate(email=email, password=password)
-            if user and user.is_email_verified:
+            if user and user.is_active:
                 login(request, user)
                 # destination = kwargs.get('next')
                 if destination:

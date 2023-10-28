@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'accounts',
     'search',
     'testimonials',
+    "verify_email.apps.VerifyEmailConfig",
     'colorfield',
 ]
 

@@ -53,6 +53,7 @@ urlpatterns = [
     re_path(r'^profile/(?P<username>[\w.@+-]+)/(?P<post_id>\d+)/$', post_detail, name='post_detail'),
     path('', include('Post.urls')),
 
+    path('verification/', include('verify_email.urls')),
     path('email_verification_sent/', views.resend_email_ver, name='email_verification_sent'),
     path('email_verification_success/', views.email_ver_success, name='email_verification_success'),
 
