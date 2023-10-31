@@ -24,7 +24,8 @@ def profile_view(request, username):
         'person': request.user,
         'testimonials_received': testimonials_received,
         'post': post,
-        'user_like': user_like
+        'user_like': user_like,
+        'profile_song': user.profile_song,
     }
     return render(request, 'profile/profile.html', context)
 

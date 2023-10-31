@@ -91,7 +91,7 @@ class UserAccount(AbstractBaseUser):
     first_name = models.CharField(max_length=30)
     profile_image = models.ImageField(upload_to=get_profile_image_filepath, blank=True, null=True,
                                       default=get_default_profile_image)
-    profile_song = models.FileField(upload_to=get_profile_song_filepath, blank=True, null=True)
+    profile_song = models.FileField(upload_to=get_profile_song_filepath, blank=True, null=True, default=None)
     profile_background = models.ImageField(upload_to=get_profile_background_filepath, blank=True, null=True)
     hide_email = models.BooleanField(default=True)
     bio = models.CharField(max_length=300, null=True, blank=True)

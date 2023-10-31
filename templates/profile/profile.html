@@ -63,7 +63,14 @@
                         <label class="tx-11 font-weight-bold mb-0 text-uppercase">Email:</label>
                         <p class="text-muted">{{user.email}}</p>
                     </div>
-
+                     <div>
+                            {% if user.profile_song %}
+                            <audio controls autoplay loop style="width: 100%;">
+                                <source src="{{ user.profile_song.url }}" type="audio/mpeg">
+                                Your browser does not support the audio element.
+                            </audio>
+                            {% endif %}
+                        </div>
                 </div>
             </div>
           <div id="gallery-section">
@@ -280,5 +287,48 @@
         }
     }
 </script>
+    <style>
+    .music-player {
+        background-color: {{ user.color }}; /* Use the user's profile color */
+        padding: 10px;
+        border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+    .music-card {
+            background: none;
+            border: none;
+        }
+    audio {
+        width: 100%;
+        background-color: transparent;
+        border: none;
+        outline: none;
+    }
+
+    audio::-webkit-media-controls-panel {
+        background-color: transparent;
+    }
+
+    audio::-webkit-media-controls {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: transparent;
+        border: none;
+    }
+
+    audio::-webkit-media-controls-play-button {
+        font-size: 24px;
+        color: #fff; /* You can change the color */
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+    }
+
+    audio::-webkit-media-controls-volume-slider {
+        width: 80px;
+    }
+</style>
 {% endblock %}
 {% endblock %}
