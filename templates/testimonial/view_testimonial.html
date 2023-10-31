@@ -63,7 +63,7 @@
     <div class="testimonial-container">
      {% if testimonials_received %}
         {% for testimonial in testimonials_received %}
-            <a href="{% url 'testimonial_detail' testimonial.user_to.username testimonial.id %}" class="testimonial-card">
+            <a href="{% url 'testimonial_detail' testimonial.user_to.username testimonial.id %}?came_from=view_testimonials" class="testimonial-card">
                 <div class="col-md-12 grid-margin">
                     <div class="card rounded">
                         <div class="testimonial-header">

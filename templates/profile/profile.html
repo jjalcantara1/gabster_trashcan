@@ -227,7 +227,7 @@
             <div class="testimonials-scrollable-container" >
                                 {% for testimonial in testimonials_received %}
                                     <div style="background: {{ user.color}}"  id="testimonial-border" class="d-flex justify-content-between mb-3 pb-1">
-                                    <a href="{% url 'testimonial_detail' user_to_username=testimonial.user_to.username testimonial_id=testimonial.id %}">
+                                    <a href="{% url 'testimonial_detail' user_to_username=testimonial.user_to.username testimonial_id=testimonial.id %}?came_from=profile">
                                         <div class="d-flex hover-pointer">
                                             <img class="img-xs rounded-circle" id="testimonial-profile-pic"
                                                  src="{%    static 'profile/friends.png' %}"
