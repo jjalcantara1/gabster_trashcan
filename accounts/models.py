@@ -12,14 +12,16 @@ from colorfield.fields import ColorField
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
 
-
 # BaseUserManager- managing users
 
 
 # Create your models here.
-
+def get_default_profile_cover():
+    return "default.png"
 def get_default_profile_image():
     return "default.png"
+def get_default_profile_background():
+    return "background.png"
 
 
 class MyAccountManager(BaseUserManager):
@@ -55,9 +57,13 @@ class MyAccountManager(BaseUserManager):
 def get_profile_image_filepath(self, filename):
     return f'profile_images/{self.pk}/{"profile_image.png"}'
 
-
 def get_profile_image_filename(self):
     return str(self.profile_image)[str(self.profile_image).index(f'profile_images/{self.pk}/'):]
+
+def get_profile_cover_filepath(self, filename):
+    return f'profile_covers/{self.pk}/{"profile_cover.png"}'
+def get_profile_cover_filename(self):
+    return str(self.profile_cover)[str(self.profile_cover).index(f'profile_covers/{self.pk}/'):]
 
 
 def get_profile_song_filepath(self, filename):
@@ -77,7 +83,11 @@ def get_profile_background_filename(self):
 def has_module_perms(self, app_label):
     return self.is_superuser
 
+class Location(models.Model):
+    name = models.CharField(max_length=50)
 
+    def __str__(self):
+        return self.name
 class UserAccount(AbstractBaseUser):
     email = models.EmailField(verbose_name='email', max_length=60, unique=True)
     username = models.CharField(max_length=20, unique=True) # I put it as true
@@ -88,16 +98,18 @@ class UserAccount(AbstractBaseUser):
     is_staff = models.BooleanField(default=False)
     is_email_verified = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
-    first_name = models.CharField(max_length=30)
-    profile_image = models.ImageField(upload_to=get_profile_image_filepath, blank=True, null=True,
-                                      default=get_default_profile_image)
+    profile_image = models.ImageField(upload_to='profile_images', blank=True, null=True,
+                                      default='default.png')
+    profile_cover = models.ImageField(upload_to='profile_covers', blank=True, null=True,
+                                      default='default.png')
     profile_song = models.FileField(upload_to=get_profile_song_filepath, blank=True, null=True, default=None)
-    profile_background = models.ImageField(upload_to=get_profile_background_filepath, blank=True, null=True)
+    profile_background = models.ImageField(upload_to='profile_backgrounds', blank=True, null=True,
+                                      default='background.png')
     hide_email = models.BooleanField(default=True)
     bio = models.CharField(max_length=300, null=True, blank=True)
     location = models.CharField(max_length=100, null=True, blank=True)
-    color = ColorField(default='#fe8116')
-    backgroundColor = models.TextField(default='linear-gradient(to right, rgba(88,44,4,0.9), rgba(44,22,5, 0.9))')
+    color = ColorField(default='#3a3b3c')
+    backgroundColor = ColorField(default='linear-gradient(to right, rgba(44,15,85,0.9), rgba(44,15,38, 0.9))')
     font_preference = models.CharField(max_length=50, default='"Poppins", sans-serif')
 
     USERNAME_FIELD = 'email'

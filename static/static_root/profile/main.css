@@ -1,6 +1,6 @@
 body{
     background-color: #151617;
-    background-image: url("https://cdn.steamstatic.com/steamcommunity/public/images/items/1442870/d53c0b372a5453f222d5201a43b408f7e5d7fd7a.jpg");
+    /*background-image: url("https://cdn.steamstatic.com/steamcommunity/public/images/items/1442870/d53c0b372a5453f222d5201a43b408f7e5d7fd7a.jpg");*/
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
@@ -405,7 +405,7 @@ d-flex justify-content-between mb-2 pb-2 border-bottom {
 #upper-profile{
     margin-top: 10px;
     border-radius: 5px 5px 0px 0px;
-    background: linear-gradient(to right, rgba(40,36,36,0.9), rgba(44,22,5, 0.9));
+    /*background: linear-gradient(to right, rgba(40,36,36,0.9), rgba(44,22,5, 0.9));*/
 
 }
 
@@ -413,7 +413,7 @@ d-flex justify-content-between mb-2 pb-2 border-bottom {
     border-radius: 0px 0px 5px 5px;
     margin-bottom: 10px;
     padding-bottom: 10px;
-    background: linear-gradient(to right, rgba(40,36,36,0.9), rgba(44,22,5, 0.9));
+    /*background: linear-gradient(to right, rgba(40,36,36,0.9), rgba(44,22,5, 0.9));*/
 }
 
 .card-body{

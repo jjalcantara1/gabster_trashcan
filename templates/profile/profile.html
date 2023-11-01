@@ -5,14 +5,14 @@
       <div class="container">
 
 <div class="profile-page tx-13">
-        <div class="row" id="upper-profile">
+        <div style="background: {{ user.backgroundColor}}" class="row" id="upper-profile">
 
         <div class="col-12 grid-margin">
             <div style="background: {{ user.color}}"  class="profile-header">
                 <div style="background: {{ user.color}}" class="cover">
                     <div class="gray-shade"></div>
                     <figure>
-                        <img src="https://staticg.sportskeeda.com/editor/2022/10/6298c-16668805486397-1920.jpg?w=840 class="img-fluid" alt="profile cover">
+                        <img src="{{ user.profile_cover.url }}" class="img-fluid" alt="profile cover">
                     </figure>
 
                     <div class="cover-body d-flex justify-content-between align-items-center">
@@ -25,7 +25,7 @@
                                     <input  style="background: {{ user.color}}" class="post-btn" type="submit" value="Create Post">
                                 </a>
                             {% endif %}
-                            <img class="profile-pic" src="{% static 'profile/profile.png' %}" alt="profile">
+                            <img class="profile-pic" src="{{ user.profile_image.url }}" alt="profile">
 
 
                             <span class="profile-name">{{user.username}}</span>
@@ -38,7 +38,7 @@
             </div>
         </div>
     </div>
-    <div class="row profile-body" id="lower-profile">
+    <div style="background: {{ user.backgroundColor}}" class="row profile-body" id="lower-profile">
 
 
 

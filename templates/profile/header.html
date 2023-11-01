@@ -8,6 +8,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family={{ user.font_preference }}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Roboto&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
@@ -32,14 +33,6 @@
                 <button type="submit"><i class="bi bi-search" value="Search"></i></button>
         </form>
 
-{#            <div class="color-button">#}
-{#                <button id="lightmode"><i class="bi bi-brightness-high-fill"></i></button>#}
-{#                <button id="darkmode"><i class="bi bi-moon-fill"></i></button>#}
-{#            </div>#}
-
-
-
-
 <div class="dropdown">
 
     <a class = "btn btn-success btn-l mt-3" id="button">
@@ -58,107 +51,107 @@
 </body>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 {#    <script src="script.js"></script>#}
-<script>
-        const blackButton = document.getElementById('blackButton');
-        const viridianButton = document.getElementById('viridianButton');
-        const gunmetalButton = document.getElementById('gunmetalButton');
-        const beigeButton = document.getElementById('beigeButton');
-        const contentBoxes = document.querySelectorAll();
-        const fadeBoxes = document.querySelectorAll('.gray-shade');
-        const body = document.body;
-
-        // Check if there's a saved background color in localStorage
-        const savedBackgroundColor = localStorage.getItem('backgroundColor');
-        const savedTextColor = localStorage.getItem('textColor');
-        const savedContentColor = localStorage.getItem('contentColor');
-        const savedFadeColor = localStorage.getItem('fadeColor');
-
-        if (savedBackgroundColor) {
-            body.style.backgroundColor = savedBackgroundColor;
-            contentBoxes.forEach(box => {
-                box.style.backgroundColor = savedContentColor;
-            });
-            fadeBoxes.forEach(box => {
-                box.style.backgroundColor = savedFadeColor;
-            });
-        }
-
-        if (savedTextColor) {
-            contentBoxes.forEach(box => {
-                box.style.color = savedTextColor;
-            });
-        }
-
-         viridianButton.addEventListener('click', () => {
-            body.style.backgroundColor =' #55917F';
-            contentBoxes.forEach(box => {
-                box.style.color = 'black';
-                box.style.backgroundColor = '#FCB5B5'; // Change content box color to green
-            });
-            fadeBoxes.forEach(box => {
-                box.style.background = `linear-gradient(0deg, #FCB5B5, transparent)`; // Change fade box color to green
-            });
-
-            // Save the background, content color, and text color to localStorage
-            localStorage.setItem('backgroundColor', '#55917F');
-            localStorage.setItem('textColor', 'black');
-            localStorage.setItem('contentColor', '#FCB5B5 ');
-            localStorage.setItem('fadeColor', savedFadeColor);
-        });
-
-        beigeButton.addEventListener('click', () => {
-            body.style.backgroundColor =' #fff0db';
-            contentBoxes.forEach(box => {
-                box.style.color = 'black';
-                box.style.backgroundColor = '#FE8116'; // Change content box color to green
-            });
-            fadeBoxes.forEach(box => {
-                box.style.background = `linear-gradient(0deg, #FE8116, transparent)`; // Change fade box color to green
-            });
-
-            // Save the background, content color, and text color to localStorage
-            localStorage.setItem('backgroundColor', '#fff0db');
-            localStorage.setItem('textColor', 'black');
-            localStorage.setItem('contentColor', '#FE8116');
-            localStorage.setItem('fadeColor', savedFadeColor);
-        });
-
-                gunmetalButton.addEventListener('click', () => {
-            body.style.backgroundColor =' #1B2D2A';
-            contentBoxes.forEach(box => {
-                box.style.color = '#1B2D2A';
-                box.style.backgroundColor = '#6BAB90'; // Change content box color to green
-            });
-            fadeBoxes.forEach(box => {
-                box.style.background = `linear-gradient(0deg, #6BAB90, transparent)`; // Change fade box color to green
-            });
-
-            // Save the background, content color, and text color to localStorage
-            localStorage.setItem('backgroundColor', '#1B2D2A');
-            localStorage.setItem('textColor', 'black');
-            localStorage.setItem('contentColor', '#6BAB90');
-            localStorage.setItem('fadeColor', savedFadeColor);
-        });
-
-        blackButton.addEventListener('click', () => {
-            body.style.backgroundColor =' #171717';
-            contentBoxes.forEach(box => {
-                box.style.color = 'black';
-                box.style.backgroundColor = '#FE8116'; // Change content box color to green
-            });
-            fadeBoxes.forEach(box => {
-                box.style.background = `linear-gradient(0deg, #FE8116, transparent)`; // Change fade box color to green
-            });
-
-            // Save the background, content color, and text color to localStorage
-            localStorage.setItem('backgroundColor', '#171717');
-            localStorage.setItem('textColor', 'black');
-            localStorage.setItem('contentColor', '#FE8116');
-            localStorage.setItem('fadeColor', savedFadeColor);
-        });
-
-
-    </script>
+{#<script>#}
+{#        const blackButton = document.getElementById('blackButton');#}
+{#        const viridianButton = document.getElementById('viridianButton');#}
+{#        const gunmetalButton = document.getElementById('gunmetalButton');#}
+{#        const beigeButton = document.getElementById('beigeButton');#}
+{#        const contentBoxes = document.querySelectorAll();#}
+{#        const fadeBoxes = document.querySelectorAll('.gray-shade');#}
+{#        const body = document.body;#}
+{##}
+{#        // Check if there's a saved background color in localStorage#}
+{#        const savedBackgroundColor = localStorage.getItem('backgroundColor');#}
+{#        const savedTextColor = localStorage.getItem('textColor');#}
+{#        const savedContentColor = localStorage.getItem('contentColor');#}
+{#        const savedFadeColor = localStorage.getItem('fadeColor');#}
+{##}
+{#        if (savedBackgroundColor) {#}
+{#            body.style.backgroundColor = savedBackgroundColor;#}
+{#            contentBoxes.forEach(box => {#}
+{#                box.style.backgroundColor = savedContentColor;#}
+{#            });#}
+{#            fadeBoxes.forEach(box => {#}
+{#                box.style.backgroundColor = savedFadeColor;#}
+{#            });#}
+{#        }#}
+{##}
+{#        if (savedTextColor) {#}
+{#            contentBoxes.forEach(box => {#}
+{#                box.style.color = savedTextColor;#}
+{#            });#}
+{#        }#}
+{##}
+{#         viridianButton.addEventListener('click', () => {#}
+{#            body.style.backgroundColor =' #55917F';#}
+{#            contentBoxes.forEach(box => {#}
+{#                box.style.color = 'black';#}
+{#                box.style.backgroundColor = '#FCB5B5'; // Change content box color to green#}
+{#            });#}
+{#            fadeBoxes.forEach(box => {#}
+{#                box.style.background = `linear-gradient(0deg, #FCB5B5, transparent)`; // Change fade box color to green#}
+{#            });#}
+{##}
+{#            // Save the background, content color, and text color to localStorage#}
+{#            localStorage.setItem('backgroundColor', '#55917F');#}
+{#            localStorage.setItem('textColor', 'black');#}
+{#            localStorage.setItem('contentColor', '#FCB5B5 ');#}
+{#            localStorage.setItem('fadeColor', savedFadeColor);#}
+{#        });#}
+{##}
+{#        beigeButton.addEventListener('click', () => {#}
+{#            body.style.backgroundColor =' #fff0db';#}
+{#            contentBoxes.forEach(box => {#}
+{#                box.style.color = 'black';#}
+{#                box.style.backgroundColor = '#FE8116'; // Change content box color to green#}
+{#            });#}
+{#            fadeBoxes.forEach(box => {#}
+{#                box.style.background = `linear-gradient(0deg, #FE8116, transparent)`; // Change fade box color to green#}
+{#            });#}
+{##}
+{#            // Save the background, content color, and text color to localStorage#}
+{#            localStorage.setItem('backgroundColor', '#fff0db');#}
+{#            localStorage.setItem('textColor', 'black');#}
+{#            localStorage.setItem('contentColor', '#FE8116');#}
+{#            localStorage.setItem('fadeColor', savedFadeColor);#}
+{#        });#}
+{##}
+{#                gunmetalButton.addEventListener('click', () => {#}
+{#            body.style.backgroundColor =' #1B2D2A';#}
+{#            contentBoxes.forEach(box => {#}
+{#                box.style.color = '#1B2D2A';#}
+{#                box.style.backgroundColor = '#6BAB90'; // Change content box color to green#}
+{#            });#}
+{#            fadeBoxes.forEach(box => {#}
+{#                box.style.background = `linear-gradient(0deg, #6BAB90, transparent)`; // Change fade box color to green#}
+{#            });#}
+{##}
+{#            // Save the background, content color, and text color to localStorage#}
+{#            localStorage.setItem('backgroundColor', '#1B2D2A');#}
+{#            localStorage.setItem('textColor', 'black');#}
+{#            localStorage.setItem('contentColor', '#6BAB90');#}
+{#            localStorage.setItem('fadeColor', savedFadeColor);#}
+{#        });#}
+{##}
+{#        blackButton.addEventListener('click', () => {#}
+{#            body.style.backgroundColor =' #171717';#}
+{#            contentBoxes.forEach(box => {#}
+{#                box.style.color = 'black';#}
+{#                box.style.backgroundColor = '#FE8116'; // Change content box color to green#}
+{#            });#}
+{#            fadeBoxes.forEach(box => {#}
+{#                box.style.background = `linear-gradient(0deg, #FE8116, transparent)`; // Change fade box color to green#}
+{#            });#}
+{##}
+{#            // Save the background, content color, and text color to localStorage#}
+{#            localStorage.setItem('backgroundColor', '#171717');#}
+{#            localStorage.setItem('textColor', 'black');#}
+{#            localStorage.setItem('contentColor', '#FE8116');#}
+{#            localStorage.setItem('fadeColor', savedFadeColor);#}
+{#        });#}
+{##}
+{##}
+{#    </script>#}
 </html>
 
 

@@ -27,8 +27,11 @@ class Migration(migrations.Migration):
                 ('is_superuser', models.BooleanField(default=False)),
                 ('first_name', models.CharField(max_length=30)),
                 ('profile_image', models.ImageField(blank=True, default=accounts.models.get_default_profile_image, null=True, upload_to=accounts.models.get_profile_image_filepath)),
+                ('profile_cover', models.ImageField(blank=True, default=accounts.models.get_default_profile_cover, null=True, upload_to=accounts.models.get_profile_cover_filepath)),
+                ('profile_background', models.ImageField(blank=True, default=accounts.models.get_default_profile_background, null=True, upload_to=accounts.models.get_profile_background_filepath)),
                 ('profile_song', models.FileField(blank=True, null=True, upload_to=accounts.models.get_profile_song_filepath)),
-                ('profile_background', models.ImageField(blank=True, null=True, upload_to=accounts.models.get_profile_background_filepath)),
+                # ('profile_background', models.ImageField(blank=True, null=True, upload_to=accounts.models.get_profile_background_filepath)),
+
                 ('hide_email', models.BooleanField(default=True)),
             ],
             options={
