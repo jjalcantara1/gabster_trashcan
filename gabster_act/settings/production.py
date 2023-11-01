@@ -125,10 +125,19 @@ EMAIL_HOST_USER = 'HAUGabster@gmail.com'
 EMAIL_HOST_PASSWORD = 'zrus ndax kuiy ysvv'
 EMAIL_DEBUG = True
 
-EXPIRE_AFTER = "5m"
+EXPIRE_AFTER = "1m"
 
 LOGIN_REDIRECT_URL = '/'
 
 LOGIN_URL = 'login'
 
-LOGOUT_REDIRECT_URL = '/login/'
+HTML_MESSAGE_TEMPLATE = "accounts/acc_active_email.html"
+
+VERIFICATION_SUCCESS_TEMPLATE = "accounts/email_ver_success.html"
+
+VERIFICATION_FAILED_TEMPLATE = "accounts/email_ver_failed.html"
+
+LINK_EXPIRED_TEMPLATE = "accounts/email_ver_expired.html"
+
+
+

@@ -42,21 +42,21 @@ def register_view(request, *args, **kwargs):
     return render(request, 'accounts/register.html', context)
 
 
-def send_activation_email(request, user):
-    current_site = get_current_site(request)
-    mail_subject = 'Activation link has been sent to your email id'
-    message = render_to_string('accounts/acc_active_email.html', {
-        'user': user,
-        'domain': current_site.domain,
-        'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-        'token': account_activation_token.make_token(user),
-    })
-    email = EmailMessage(mail_subject, message, settings.EMAIL_HOST_USER, to=[user.email])
-
-    if email.send():
-        messages.success(request, 'Please confirm your email address to complete the registration')
-    else:
-        messages.error(request, 'Failed to send email confirmation. Please try again later.')
+# def send_activation_email(request, user):
+#     current_site = get_current_site(request)
+#     mail_subject = 'Activation link has been sent to your email id'
+#     message = render_to_string('accounts/acc_active_email.html', {
+#         'user': user,
+#         'domain': current_site.domain,
+#         'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+#         'token': account_activation_token.make_token(user),
+#     })
+#     email = EmailMessage(mail_subject, message, settings.EMAIL_HOST_USER, to=[user.email])
+#
+#     if email.send():
+#         messages.success(request, 'Please confirm your email address to complete the registration')
+#     else:
+#         messages.error(request, 'Failed to send email confirmation. Please try again later.')
 
 
 def activate(request, uidb64, token):
@@ -114,7 +114,7 @@ def login_view(request, *args, **kwargs):
     return render(request, 'accounts/login.html', {'form': form})
 
 
-def resend_email_ver(request):
+def resend_email_ver(request):  # not included in package
     if request.method == 'POST':
         email = request.POST.get('email')  # get email from form
 
@@ -126,8 +126,8 @@ def resend_email_ver(request):
                 user.update_user_joined_date()  # updates timestamp prior to request
 
                 current_site = get_current_site(request)
-                mail_subject = 'Activation link has been sent to your email id'
-                message = render_to_string('accounts/acc_active_email.html', {
+                mail_subject = 'Resend Email Verification Mail'
+                message = render_to_string('accounts/email_ver_resend_email.html', {
                     'user': user,
                     'domain': current_site.domain,
                     'uid': urlsafe_base64_encode(force_bytes(user.pk)),
@@ -139,7 +139,7 @@ def resend_email_ver(request):
                 messages.success(request, 'A new verification email has been sent to your email address.')
                 return render(request, 'accounts/email_ver_sent.html', {})
             else:
-                return HttpResponse('Your email is already verified.')
+                return messages.error(request, 'Your email is already verified.')
         else:
             messages.error(request, 'Invalid email address.')
 
