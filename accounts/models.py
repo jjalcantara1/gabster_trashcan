@@ -12,14 +12,19 @@ from colorfield.fields import ColorField
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
 
+
 # BaseUserManager- managing users
 
 
 # Create your models here.
 def get_default_profile_cover():
     return "default.png"
+
+
 def get_default_profile_image():
     return "default.png"
+
+
 def get_default_profile_background():
     return "background.png"
 
@@ -57,11 +62,15 @@ class MyAccountManager(BaseUserManager):
 def get_profile_image_filepath(self, filename):
     return f'profile_images/{self.pk}/{"profile_image.png"}'
 
+
 def get_profile_image_filename(self):
     return str(self.profile_image)[str(self.profile_image).index(f'profile_images/{self.pk}/'):]
 
+
 def get_profile_cover_filepath(self, filename):
     return f'profile_covers/{self.pk}/{"profile_cover.png"}'
+
+
 def get_profile_cover_filename(self):
     return str(self.profile_cover)[str(self.profile_cover).index(f'profile_covers/{self.pk}/'):]
 
@@ -73,6 +82,7 @@ def get_profile_song_filepath(self, filename):
 def get_profile_song_filename(self):
     return str(self.profile_song)[str(self.profile_song).index(f'profile_songs/{self.pk}/'):]
 
+
 def get_profile_background_filepath(self, filename):
     return f"profile_backgrounds/{self.pk}/{'profile_background.png'}"
 
@@ -80,17 +90,21 @@ def get_profile_background_filepath(self, filename):
 def get_profile_background_filename(self):
     return str(self.profile_background)[str(self.profile_background).index(f'profile_backgrounds/{self.pk}/'):]
 
+
 def has_module_perms(self, app_label):
     return self.is_superuser
+
 
 class Location(models.Model):
     name = models.CharField(max_length=50)
 
     def __str__(self):
         return self.name
+
+
 class UserAccount(AbstractBaseUser):
     email = models.EmailField(verbose_name='email', max_length=60, unique=True)
-    username = models.CharField(max_length=20, unique=True) # I put it as true
+    username = models.CharField(max_length=20, unique=True)  # I put it as true
     date_joined = models.DateField(verbose_name='date joined', auto_now_add=True)
     last_login = models.DateTimeField(verbose_name='last login', auto_now='True')
     is_admin = models.BooleanField(default=False)
@@ -104,7 +118,7 @@ class UserAccount(AbstractBaseUser):
                                       default='default.png')
     profile_song = models.FileField(upload_to=get_profile_song_filepath, blank=True, null=True, default=None)
     profile_background = models.ImageField(upload_to='profile_backgrounds', blank=True, null=True,
-                                      default='background.png')
+                                           default='background.png')
     hide_email = models.BooleanField(default=True)
     bio = models.CharField(max_length=300, null=True, blank=True)
     location = models.CharField(max_length=100, null=True, blank=True)

@@ -143,20 +143,18 @@ body{
 
 .profile-page .profile-header .cover .cover-body .profile-pic {
     border-radius: 50%;
-    width: 100px;
+    height: 80px;
+    width: 80px;
+    object-fit: cover;
 
-}
 
-@media (max-width: 767px) {
-    .profile-page .profile-header .cover .cover-body .profile-pic {
-        width: 70px;
-    }
 }
 
 .profile-page .profile-header .cover .cover-body .profile-name {
-    font-size: 30px;
+    font-size: 35px;
     font-weight: 620;
     margin-left: 17px;
+    line-height: 35px;
 }
 
 .profile-page .profile-header .header-links {
@@ -232,6 +230,8 @@ body{
 }
 .rounded-circle {
     border-radius: 50% !important;
+    background-size: cover;
+    background-position: center center;
 }
 img {
     vertical-align: middle;
@@ -242,8 +242,13 @@ img {
     border-radius: 0 0 0 0;
 }
 .card-header {
-    padding: 0.875rem 1.5rem;
-    margin-bottom: 0;
+    /*padding: 0.875rem 1.5rem;*/
+    margin-bottom: -10px;
+    margin-top: -2px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-right: 10px;
+    padding-left: 20px;
     /*background-color: rgba(0, 0, 0, 0);*/
 }
 
@@ -251,8 +256,8 @@ img {
     border-radius: 0 0 0 0;
 }
 .card-footer {
-    padding: 0.875rem 1.5rem;
-    /*background-color: rgba(0, 0, 0, 0);*/
+    padding-right: 10px;
+    padding-left: 10px;
 }
 
 .grid-margin {
@@ -282,8 +287,8 @@ img {
 
 .gallery {
 	border-radius: 10px;
-	height: 80px;
-	width: 80px;
+	height: 70px;
+	width: 70px;
 }
 
 d-flex justify-content-between mb-2 pb-2 border-bottom {
@@ -294,36 +299,26 @@ d-flex justify-content-between mb-2 pb-2 border-bottom {
     margin-top: 17px;
 }
 
-#gallery-section .gal{
-    padding: 10px;
-}
-
 .post-btn {
-    margin-top: 10px;
-    width: 150px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    color: #fff;
-    transition: background 0.5s, color 0.5s;
-    border: 1px solid black;
-    border-radius: 20px;
+    width: 100px;
+    padding-bottom: 16px;
+    border: 1px;
     position: absolute;
-    top: 40px;
-    left: 1125px;
+    bottom: 10px;
+    right: 10px;
+    font-weight: 560;
+    color: #24262e;
 }
 
 .testimonial-btn {
-    margin-top: 10px;
-    width: 150px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    color: #fff;
-    transition: background 0.5s, color 0.5s;
-    border: 1px solid black;
-    border-radius: 20px;
+    width: 135px;
+    padding-bottom: 16px;
+    border: 1px;
     position: absolute;
-    top: 40px;
-    left: 1125px;
+    bottom: 10px;
+    right: 10px;
+    font-weight: 560;
+    color: #24262e;
 }
 
 #user-search {
@@ -448,12 +443,23 @@ d-flex justify-content-between mb-2 pb-2 border-bottom {
     margin-right: 10px;
 }
 #like{
-    margin-bottom: 10px;
+    margin-right: -6px;
     background: none;
     border: none;
-    color: darkred;
+    color: #FE8116;
     font-size: 20px;
 }
-/*.card, .card-body, .profile-header, .cover, .testimonial-btn, .post-btn, #gallery-bg, #testimonial-border{*/
-/*     background: {{ user.color }};style="background: {{ user.color}}"*/
-/*}*/
+#comment{
+    margin-right: -6px;
+    background: none;
+    border: none;
+    color: #FE8116;
+    font-size: 20px;
+}
+#user-posts{
+    padding-left: 8px;
+    font-size: 14px;
+    margin-top: 15px;
+    margin-bottom: 0px;
+    line-height: 16px;
+}
