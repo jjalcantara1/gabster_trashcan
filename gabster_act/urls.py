@@ -35,7 +35,7 @@ from Post.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home_screen_view, name='home'),
-    # path('', include('accounts.urls')),
+    path('', include('accounts.urls')),
 
     # path('post/', post, name='post'),
     path('login/', login_view, name='login'),

@@ -154,20 +154,9 @@ def get_redirect_if_exists(request):
     return redirect
 
 
-# def profile_view(request):
-#     return redirect('profile')
-
-
 def email_ver_success(request):
     return render(request, 'accounts/email_ver_success.html', {})
 
-
-def post(request):
-    return render(request, "posts/post.html", {})
-
-
-def testimonials(request):
-    return render(request, "posts/testimonials.html", {})
 
 
 def customization(request):
@@ -176,3 +165,22 @@ def customization(request):
 
 def password_reset(request):
     return render(request, "accounts/password_reset.html", {})
+
+
+@login_required
+def delete_account(request):
+    if request.method == "POST":
+        user = request.user  # Get the currently logged-in user
+        user_to_delete = get_user_model().objects.get(pk=user.pk)  # Retrieve the user to be deleted by primary key
+
+        # Verify that the request.user matches the user being deleted
+        if user == user_to_delete:
+            user_to_delete.delete()
+            logout(request)
+            return redirect('home')  # Redirect to the home page or any other desired page after account deletion
+        else:
+            # Handle the case where the request.user doesn't match the user to be deleted
+            # You can display an error message or take appropriate action.
+            return render(request, 'accounts/delete_account_error.html')
+
+    return render(request, 'accounts/delete_account_confirmation.html')
