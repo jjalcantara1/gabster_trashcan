@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'testimonials',
     "verify_email.apps.VerifyEmailConfig",
     'colorfield',
+    'contact',
 ]
 
 MIDDLEWARE = [

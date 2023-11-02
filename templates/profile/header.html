@@ -23,28 +23,34 @@
 <body>
     <div class="header">
         <header id="header">
-    <a id="logo" href="{% url 'profile' request.user.username %}">
+    <a id="logo" href="{% if request.user.is_authenticated %}{% url 'profile' request.user.username %}{% endif %}">
         <img src="{% static 'profile/orange.png' %}" id="logo">
     </a>
 
-
+    {% if user.is_authenticated %}
         <form id='searchForm' class ="box" action = "{% url 'search' %}" method="get">
                 <input class="input input--text" id="formInput#search" type="text" name="search_query"
                        placeholder="Search a user" value="{{ search_query }}"/>
                 <button type="submit"><i class="bi bi-search" value="Search"></i></button>
         </form>
 
-<div class="dropdown">
+        <div class="dropdown">
 
-    <a class = "btn btn-success btn-l mt-3" id="button">
-        <img src="{% static 'profile/profile.png' %}" >
-    </a>
-    <div class="dropdown-content" id="myDropdown">
-        <a href="{% url 'customization' user %}">Edit Profile</a>
-        <a href='/delete-account'>Delete Account</a>
-        <a href="/logout ">Log Out</a>
-    </div>
-</div>
+            <a class = "btn btn-success btn-l mt-3" id="button">
+                <img src="{% static 'profile/profile.png' %}" >
+            </a>
+            <div class="dropdown-content" id="myDropdown">
+                <a href="{% url 'customization' user %}">Edit Profile</a>
+                 {% if user.is_superuser %}
+                        <a href='/contact'>View Messages</a>
+                    {% else %}
+                        <a href='/contact'>Help</a>
+                    {% endif %}
+                <a href='/delete-account'>Delete Account</a>
+                <a href="/logout ">Log Out</a>
+            </div>
+        </div>
+    {% endif %}
         </header>
 
     </div>

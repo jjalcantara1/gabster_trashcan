@@ -19,7 +19,7 @@ def profile_view(request, username):
     testimonials_received = Testimonial.objects.filter(user_to=user).order_by('-createdAt')
     post = Post.objects.filter(user=user).order_by('-createdAt')
     color_form = ColorPreferenceForm(instance=user)
-    background_color_form = BackgroundColorPreferenceForm(  instance=user)
+    background_color_form = BackgroundColorPreferenceForm(instance=user)
     locations = Location.objects.all()
     font_form = FontPreferenceForm(instance=request.user)
     user_like = UserLike.objects.filter(voter=user, post__in=Post.objects.all())
@@ -43,6 +43,7 @@ def profile_view(request, username):
         'color_form': color_form,
         'user_color': user.color,
         'profile_song': user.profile_song,
+        'background_color_form': background_color_form,
     }
     return render(request, 'profile/profile.html', context)
 
