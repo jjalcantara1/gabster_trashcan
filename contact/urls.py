@@ -6,7 +6,6 @@ from contact.views import *
 urlpatterns = [
     path('contact/', contact_view, name='contact'),
     path('send_email/<str:subject>/<str:email>/<str:name>/', send_email, name='send_email'),
-    path('contact/success/', contact_success, name='contact_success'),
 ]
 
 if settings.DEBUG:

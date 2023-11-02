@@ -41,16 +41,39 @@
                         </div>
 
                         <div class="mb-4">
-                            <label for="comment" class="block text-gray-600 text-md font-semibold">LEAVE A COMMENT</label>
+                            <label for="comment" class="block text-gray-600 text-md font-semibold">LEAVE A MESSAGE</label>
                             <textarea class="w-full py-2 px-3 border rounded-lg" id="comment" name="comment" placeholder="Leave a Comment Here" style="height: 100px" required></textarea>
                         </div>
 
-                        <button type="submit" class="w-full py-2 px-4 text-white rounded-lg bg-red-800 hover:bg-red-700">SUBMIT</button>
+                        <button type="submit" class="w-full py-2 px-4 text-white rounded-lg bg-red-800 hover:bg-red-700" data-bs-target="#successModal">SUBMIT</button>
                     </form>
                 </div>
             </div>
         {% endif %}
     </div>
+        <!-- Modal for Success Message -->
+    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="successModalLabel">Success</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Your message has been sent successfully.
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://kit.fontawesome.com/1aebf17ad5.js" crossorigin="anonymous"></script>
-</script>
+    {% if success_message %}
+        <script>
+            // Show the success modal
+            $(document).ready(function() {
+                $('#successModal').modal('show');
+            });
+        </script>
+    {% endif %}
+
 {% endblock content %}

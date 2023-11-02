@@ -47,15 +47,14 @@ def contact_view(request):
         comment = request.POST.get("comment")
         query = Contact(name=name, email=email, subject=subject, comment=comment)
         query.save()
-        # messages.info(request, "Thanks For Reaching Us! We will get back to you soon...")
-        return redirect('/contact')
+        success_message = "Your message has been sent successfully."
+        return render(request, 'contact/contact.html', {'contacts': contacts, 'success_message': success_message})
 
     return render(request, 'contact/contact.html', {'contacts': contacts})
 def send_email(request, subject, email, name):
     subject = ('Re:' + subject)
     email = email
     name = name
-    # comment = comment
     print(subject)
 
     if request.method == "POST":
@@ -65,7 +64,6 @@ def send_email(request, subject, email, name):
             'name': name,
             'email': email,
             'comment': message,
-            # 'comment': comment,
             'subject': subject,
 
         }
@@ -76,11 +74,8 @@ def send_email(request, subject, email, name):
             try:
                 send_mail(subject, plain_message, settings.EMAIL_HOST_USER, [email], html_message=html_message)
                 return redirect('/')
-                # return render(request, 'core/contact.html', {'message': 'Message sent successfully'})
             except BadHeaderError:
                 return HttpResponse('Invalid header found.')
-                # return render("core:contact-list")
-                # return redirect('success')
         else:
             return HttpResponse('Invalid form data')
     context = {
@@ -89,6 +84,3 @@ def send_email(request, subject, email, name):
         'name': name,
     }
     return render(request, 'contact/email_response.html', context)
-def contact_success(request, *args, **kwargs):
-    context = {}  # allows to pass variables in the view
-    return render(request, 'contact/contact_success.html', context)
