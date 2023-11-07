@@ -25,7 +25,12 @@
                                     <input  style="background: {{ user.color}}" class="post-btn" type="submit" value="Create Post">
                                 </a>
                             {% endif %}
-                            <img class="profile-pic" src="{% static 'profile/profile.png' %}" alt="profile">
+                            {% if user.is_superuser %}
+                                 <a href="{% url 'admin_panel' %}">
+                                    <input style="background: {{ user.color }}" class="post-btn" type="submit" value="Admin">
+                                  </a>
+                            {% endif %}
+                            <img class="profile-pic" src="{% static 'profile/profile.png' %}" alt="profile">z
 
 
                             <span class="profile-name">{{user.username}}</span>
