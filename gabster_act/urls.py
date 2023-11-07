@@ -33,6 +33,7 @@ from django.contrib.auth import views as auth_views
 from Post.views import *
 
 urlpatterns = [
+    path('gasbter_admin/', include('admin_custom.urls')),
     path('admin/', admin.site.urls),
     path('', home_screen_view, name='home'),
     path('', include('accounts.urls')),

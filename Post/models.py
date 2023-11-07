@@ -37,7 +37,12 @@ class Post(models.Model):
     liked_by = models.ManyToManyField(UserAccount, related_name='liked_posts', blank=True)
 
     def __str__(self):
-        return str(self.content)
+        if self.post_type == 'picture':
+            return os.path.basename(self.picture.name)
+        if self.post_type == 'video':
+            return os.path.basename(self.video.name)
+        else:
+            return str(self.content)
 
     def __repr__(self):
         return f"Post('{self.content}', '{self.createdAt}')"
@@ -51,6 +56,8 @@ class Post(models.Model):
         post.video = video
         post.save()
         return post
+
+
 
 
 @receiver(post_save, sender=Post)
