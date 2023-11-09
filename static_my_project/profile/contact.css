@@ -166,3 +166,11 @@ textarea{
             color: #2d2d2d; /* Change the text color */
             cursor: not-allowed; /* Change the cursor style */
 }
+
+.contacts{
+    margin-bottom: 20px;
+    height: 100%;
+}
+.contacts-body{
+  padding: 10px;
+}
