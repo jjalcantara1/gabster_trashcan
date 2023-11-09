@@ -40,111 +40,102 @@
                 <input type="file" name="{{ form.video.name }}" id="{{ form.video.id_for_label }}">
             </div>
 
-            <input id="submit-btn" type="submit"  value="Create Post" >
+            <input id="submit-btn" type="submit"  value="Create Post">
         </form>
 
 
-
-                <div class="col-md-8 col-xl-6 middle-wrapper">
-                    <div class="row" id="posts-container">
-                        <!-- Existing posts will be appended here dynamically -->
-                    </div>
-                </div>
-
-        <script>
+     <script>
     document.addEventListener('DOMContentLoaded', function() {
-    let pictureRadio = document.querySelector('input[value="picture"]');
-    let videoRadio = document.querySelector('input[value="video"]');
-    let pictureInput = document.querySelector('input[name="{{ form.picture.name }}"]');
-    let videoInput = document.querySelector('input[name="{{ form.video.name }}"]');
+        let pictureRadio = document.querySelector('input[value="picture"]');
+        let videoRadio = document.querySelector('input[value="video"]');
+        let pictureInput = document.querySelector('input[name="{{ form.picture.name }}"]');
+        let videoInput = document.querySelector('input[name="{{ form.video.name }}"]');
+        let contentInput = document.querySelector('input[name="{{ form.content.name }}');
 
-    let currentSelection = null;
+        let currentSelection = null;
 
-    pictureRadio.addEventListener('change', function() {
-        toggleUploadSection('picture-upload', 'video-upload', pictureInput, videoInput);
-    });
+        pictureRadio.addEventListener('change', function() {
+            toggleUploadSection('picture-upload', 'video-upload', pictureInput, videoInput);
+        });
 
-    videoRadio.addEventListener('change', function() {
-        toggleUploadSection('video-upload', 'picture-upload', videoInput, pictureInput);
-    });
+        videoRadio.addEventListener('change', function() {
+            toggleUploadSection('video-upload', 'picture-upload', videoInput, pictureInput);
+        });
 
-    function toggleUploadSection(showSectionId, hideSectionId, showFileInput, hideFileInput) {
-        let showSection = document.getElementById(showSectionId);
-        let hideSection = document.getElementById(hideSectionId);
+        function toggleUploadSection(showSectionId, hideSectionId, showFileInput, hideFileInput) {
+            let showSection = document.getElementById(showSectionId);
+            let hideSection = document.getElementById(hideSectionId);
 
-        hideFileInput.disabled = true;
+            hideFileInput.disabled = true;
 
-        if (currentSelection === showSectionId) {
-            return;
+            if (currentSelection === showSectionId) {
+                return;
+            }
+
+            showFileInput.value = '';
+            showFileInput.disabled = false;
+
+            showSection.style.display = 'block';
+            hideSection.style.display = 'none';
+
+            currentSelection = showSectionId;
+            enableSubmitButton(contentInput, pictureInput, videoInput);
         }
 
-        showFileInput.value = '';
-        showFileInput.disabled = false;
+        function enableSubmitButton(contentInput, pictureInput, videoInput) {
+            // Get the submit button
+            const submitButton = document.getElementById('submit-btn');
+            const errorMessages = document.getElementById('error-messages');
+            errorMessages.innerHTML = ''; // Clear previous error messages
 
-        showSection.style.display = 'block';
-        hideSection.style.display = 'none';
-
-        currentSelection = showSectionId;
-    }
-
-    function enableSubmitButton() {
-        // Get the post content
-        const content = document.getElementById('{{ form.content.id_for_label }}').value;
-
-        // Get the file inputs for picture and video
-        const pictureInput = document.getElementById('{{ form.picture.id_for_label }}');
-        const videoInput = document.getElementById('{{ form.video.id_for_label }}');
-
-        // Get the submit button
-        const submitButton = document.getElementById('submit-btn');
-
-        // Check if content is not empty or either picture or video input has a file selected
-        if (content.trim() !== '' || (pictureInput.files.length > 0 && validateFileExtensions(pictureInput, videoInput)) || (videoInput.files.length > 0 && validateFileExtensions(pictureInput, videoInput))) {
-            submitButton.disabled = false;
-        } else {
-            submitButton.disabled = true;
-        }
-    }
-
-    function validateFileExtensions(pictureInput, videoInput) {
-        // Allowed file extensions for picture and video
-        const allowedPictureExtensions = ['.jpg', '.jpeg', '.png', '.gif'];
-        const allowedVideoExtensions = ['.mp4', '.avi', '.mov', '.mkv'];
-
-        // Helper function to get the file extension from a filename
-        function getFileExtension(filename) {
-            return filename.split('.').pop().toLowerCase();
-        }
-
-        // Validate picture input
-        if (pictureInput.files.length > 0) {
-            const fileExtension = getFileExtension(pictureInput.files[0].name);
-            if (!allowedPictureExtensions.includes('.' + fileExtension)) {
-                alert('Invalid picture file format. Please select a valid image file.');
-                return false;
+            // Check if content is not empty or either picture or video input has a file selected
+            if (contentInput.value.trim() !== '' || (pictureInput.files.length > 0 && validateFileExtensions(pictureInput)) || (videoInput.files.length > 0 && validateFileExtensions(videoInput))) {
+                submitButton.disabled = false;
+            } else {
+                submitButton.disabled = true;
+                errorMessages.innerHTML = 'Please fill out all required fields and upload a valid picture or video file.';
             }
         }
 
-        // Validate video input
-        if (videoInput.files.length > 0) {
-            const fileExtension = getFileExtension(videoInput.files[0].name);
-            if (!allowedVideoExtensions.includes('.' + fileExtension)) {
-                alert('Invalid video file format. Please select a valid video file.');
-                return false;
+        function validateFileExtensions(fileInput) {
+            // Allowed file extensions for picture and video
+            const allowedPictureExtensions = ['.jpg', '.jpeg', '.png', '.gif'];
+            const allowedVideoExtensions = ['.mp4', '.avi', '.mov', '.mkv'];
+
+            // Helper function to get the file extension from a filename
+            function getFileExtension(filename) {
+                return filename.split('.').pop().toLowerCase();
             }
+
+            if (fileInput.files.length > 0) {
+                const fileExtension = getFileExtension(fileInput.files[0].name);
+                if (fileInput === pictureInput) {
+                    if (!allowedPictureExtensions.includes('.' + fileExtension)) {
+                        errorMessages.innerHTML = 'Invalid picture file format. Please select a valid image file.';
+                        return false;
+                    }
+                } else if (fileInput === videoInput) {
+                    if (!allowedVideoExtensions.includes('.' + fileExtension)) {
+                        errorMessages.innerHTML = 'Invalid video file format. Please select a valid video file.';
+                        return false;
+                    }
+                }
+            }
+
+            return true;
         }
 
-        return true;
-    }
+        // Add event listeners for file inputs to trigger validation
+        pictureInput.addEventListener('change', function() {
+            enableSubmitButton(contentInput, pictureInput, videoInput);
+        });
+        videoInput.addEventListener('change', function() {
+            enableSubmitButton(contentInput, pictureInput, videoInput);
+        });
 
-    // Add event listeners for file inputs to trigger validation
-    pictureInput.addEventListener('change', enableSubmitButton);
-    videoInput.addEventListener('change', enableSubmitButton);
-
-    // Initial validation
-    enableSubmitButton();
-});
-
+        // Initial validation
+        enableSubmitButton(contentInput, pictureInput, videoInput);
+    });
 </script>
 
 

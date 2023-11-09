@@ -10,22 +10,31 @@
                             <div class="row">
 
         <div class="col-12 grid-margin">
-            <div class="profile-header"  id="user-cover">
-                <div class="cover">
+            <div style="background: {{ user.backgroundColor}}; border-radius: 5px;" class="row" id="upper-profile">
+
+        <div class="col-12 grid-margin">
+            <a style="color: #24262e; text-decoration: none;" href="{% url 'profile' user.username%}">
+            <div style="background: {{ user.color}}"  class="profile-header">
+                <div style="background: {{ user.color}}" class="cover">
                     <div class="gray-shade"></div>
                     <figure>
-                        <img src="https://staticg.sportskeeda.com/editor/2022/10/6298c-16668805486397-1920.jpg?w=840 class="img-fluid" alt="profile cover">
+                        <img src="{{ user.profile_cover.url }}" class="img-fluid" alt="profile cover">
                     </figure>
 
                     <div class="cover-body d-flex justify-content-between align-items-center">
                         <div>
+{##}
+{#                            {% if person.username != user.username %}#}
+{#                                <a href="{% url 'add_testimonial' user_to_username=user.username %}"><input style="background: {{ user.color}}"  class="testimonial-btn" type="submit" value="Add Testimonial"></a>#}
+{#                            {% else %}#}
+{#                                <a href="{% url 'create_post' user %}">#}
+{#                                    <input  style="background: {{ user.color}}" class="post-btn" type="submit" value="Create Post">#}
+{#                                </a>#}
+{#                            {% endif %}#}
+                            <img class="profile-pic" src="{{ user.profile_image.url }}" alt="profile">
 
-                            <a id="logo" href="{% url 'profile' user.username%}">
-                                <img class="profile-pic" src="{% static 'profile/profile.png' %}" alt="profile">
-                            </a>
 
-
-                            <a id="user-search" href="{% url 'profile' user.username%}">{{user.username}}</a>
+                            <span class="profile-name">{{user.username}}</span>
                         </div>
                     </div>
                 </div>
@@ -33,6 +42,7 @@
 
                 </div>
             </div>
+            </a>
         </div>
     </div>
 </div>
@@ -45,5 +55,10 @@
     <h3> </h3>
     {% endif %}
 </div>
+    <style>
+    body{
+        background: #181414;
+    }
+    </style>
 {% endblock %}
 
