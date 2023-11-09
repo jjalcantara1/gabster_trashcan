@@ -180,16 +180,6 @@ body{
     transition: all .2s ease;
 }
 
-.profile-page .profile-header .header-links ul li:hover,
-.profile-page .profile-header .header-links ul li.active {
-    color: #727cf5;
-}
-
-.profile-page .profile-header .header-links ul li:hover a,
-.profile-page .profile-header .header-links ul li.active a {
-    color: #727cf5;
-}
-
 .profile-page .profile-body .left-wrapper .social-links a {
     width: 30px;
     height: 30px;
@@ -320,6 +310,10 @@ d-flex justify-content-between mb-2 pb-2 border-bottom {
     font-weight: 560;
     color: #24262e;
 }
+.testimonials{
+    font-weight: 560;
+    color: #24262e;
+}
 
 #user-search {
     font-size: 30px;
@@ -328,6 +322,7 @@ d-flex justify-content-between mb-2 pb-2 border-bottom {
     text-decoration: none;
     color: #29262b;
 }
+
 #searchForm{
     margin-left: 250px;
     height: 5vh;
@@ -338,7 +333,6 @@ d-flex justify-content-between mb-2 pb-2 border-bottom {
     color: #FE8116;
     background-color: #3a3b3c;
 }
-
 .dropdown {
     position: relative;
     display: inline-block;
@@ -361,7 +355,7 @@ d-flex justify-content-between mb-2 pb-2 border-bottom {
 .dropdown-content a {
     height: 6vh;
     color: #fe8116;
-    padding: 12px 16px;
+    padding: 10px 12px;
     text-decoration: none;
     display: block;
 }
@@ -394,7 +388,7 @@ d-flex justify-content-between mb-2 pb-2 border-bottom {
         border-style: solid;
         border-width:0px;
         border-radius: 3px;
-        padding-top: 20px;
+        padding-top: 10px;
 }
 
 #upper-profile{
@@ -428,6 +422,10 @@ d-flex justify-content-between mb-2 pb-2 border-bottom {
         display:inline;
         align-items: center;
 }
+#testimonial-sentence{
+    padding-left: 20px;
+    color: black;
+}
 
 #testimonial-border a{
         text-decoration: none;
@@ -440,7 +438,8 @@ d-flex justify-content-between mb-2 pb-2 border-bottom {
     width: 35px;
     overflow: hidden;
     margin-left: 10px;
-    margin-right: 10px;
+    margin-right: 15px;
+    object-fit: cover;
 }
 #like{
     margin-right: -6px;
@@ -456,6 +455,15 @@ d-flex justify-content-between mb-2 pb-2 border-bottom {
     color: #FE8116;
     font-size: 20px;
 }
+
+#delete{
+    margin-right: -6px;
+    background: none;
+    border: none;
+    color: #FE8116;
+    font-size: 20px;
+}
+
 #user-posts{
     padding-left: 8px;
     font-size: 14px;
@@ -463,19 +471,55 @@ d-flex justify-content-between mb-2 pb-2 border-bottom {
     margin-bottom: 0px;
     line-height: 16px;
 }
-.btn-danger {
-    background-color: rgb(36, 37, 38);
-    height: 6vh;
-    color: #fe8116;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
+.liked-users-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 20px;
+    }
 
+    .liked-user-card {
+        border: 1px solid #cc5d00;
+        border-radius: 10px;
+        width: 200px;
+        margin: 10px;
+        padding: 10px;
+        text-align: center;
+    }
+
+    .liked-user-profile-image {
+        border: 3px solid #ffaa33;
+        border-radius: 50%;
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 10px;
+        overflow: hidden;
+    }
+
+    .liked-user-profile-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .liked-user-username {
+        font-weight: bold;
+    }
+
+.testimonial-item {
+    margin-bottom: 20px;
+    height: 100%;
 }
 
+.card-header {
+    padding: 10px;
+}
 
-.btn-danger:hover {
-    border-radius: 10px ;
-    border: None;
-    background-color: #3a3b3c;
+.testimonial-body {
+    padding-top: 10px;
+}
+
+.testimonial-list {
+    list-style: none;
+    padding: 10px 20px 0px 20px;
 }
