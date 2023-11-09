@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     "verify_email.apps.VerifyEmailConfig",
     'colorfield',
     'contact',
+    'customization',
 ]
 
 MIDDLEWARE = [

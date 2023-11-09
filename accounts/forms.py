@@ -70,10 +70,11 @@ class AccountAuthenticationForm(forms.Form):
 
 
 
-# class ProfileUpdateForm(forms.ModelForm):
-#     class Meta:
-#         model = UserAccount
-#         fields = ['email', 'username', 'bio', 'address', 'location', 'profile_image', 'profile_background', 'color']
+
+class ProfileUpdateForm(forms.ModelForm):
+    class Meta:
+        model = UserAccount
+        fields = ['profile_image', 'profile_cover', 'profile_song', 'profile_background', 'bio', 'location', 'color', 'backgroundColor', 'font_preference']
 class ColorPreferenceForm(forms.ModelForm):
     class Meta:
         model = UserAccount

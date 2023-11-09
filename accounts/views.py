@@ -18,7 +18,8 @@ from .tokens import account_activation_token
 from gabster_act import settings
 from django.core.mail import EmailMessage
 from django.contrib.auth import get_user_model
-
+from django.contrib import messages
+from .forms import ProfileUpdateForm
 
 def register_view(request, *args, **kwargs):
     user = request.user
@@ -160,8 +161,7 @@ def email_ver_success(request):
 
 
 
-def customization(request):
-    return render(request, "customization/customization.html", {})
+
 
 
 def password_reset(request):
@@ -185,3 +185,19 @@ def delete_account(request):
             return render(request, 'accounts/delete_account_error.html')
 
     return render(request, 'accounts/delete_account_confirmation.html')
+
+@login_required
+def profile_update_view(request):
+    if request.method == 'POST':
+        form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Your profile was successfully updated!')
+            return redirect('profile', username=request.user.username)  # Redirect to the current user's profile
+    else:
+        form = ProfileUpdateForm(instance=request.user)
+
+    context = {
+        'form': form
+    }
+    return render(request, 'customization/profile_update.html', context)

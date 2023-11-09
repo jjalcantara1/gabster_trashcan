@@ -1,92 +1,101 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gabster Sign up</title>
-  <link rel="stylesheet" href="{% static 'customization/customization.css' %}">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&display=swap" rel="stylesheet">
-
-</head>
-<body>
+{#{% load static %}#}
+{#<!DOCTYPE html>#}
+{#<html lang="en" dir="ltr">#}
+{#<head>#}
+{#  <meta charset="UTF-8">#}
+{#  <meta name="viewport" content="width=device-width, initial-scale=1.0">#}
+{#  <title>Gabster Sign up</title>#}
+{#  <link rel="stylesheet" href="{% static 'customization/customization.css' %}">#}
+{#  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">#}
+{#  <link rel="preconnect" href="https://fonts.googleapis.com">#}
+{#  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>#}
+{#  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&display=swap" rel="stylesheet">#}
+{##}
+{#</head>#}
+{#<body>#}
 {#<form method="POST" enctype="multipart/form-data" class="mt-4">#}
 {#                {% csrf_token %}#}
-  <div class="wrapper">
-    <header>
-      <h1 style="align-content: center">Profile</h1>
-    </header>
-      <form class="form-signin" method="post"> {% csrf_token %}
-
-            <div class="input-box">
-              <input type="text" name="email" id="inputLocation" class="form-control" placeholder="Location " required value="{{ user.location }}">
-      </div>
-
-        <div class="input-box">
-            <textarea id="inputBio" name="content" rows="4" cols="50" class="text" oninput="enableSubmitButton()" placeholder="Say something about yourself."></textarea>
-            </div>
-        <div class="mb-4 w-1/2">
-            <label for="{{ form.color.id_for_label }}">Choose a color:</label>
-            <input type="color" id="color" name="color" value="{{ user.color }}">
-        </div>
-
-        <div class="mb-4 w-1/2">
-            <label for="{{ form.color.id_for_label }}">Choose a background color:</label>
-            <input type="color" id="color" name="color" value="{{ user.backgroundColor }}">
-        </div>
-
-          <div class="mb-4 w-1/2">
-              <label for="{{ p_form.image.id_for_label }}" class="block text-gray-600 font-medium">Background Image:</label>
-              <input type="file" id="profile-image" name="image" class="border border-gray-300 p-2 rounded w-full">
-          </div>
-
-          <div class="mb-4 w-1/2">
-              <label for="{{ p_form.image.id_for_label }}" class="block text-gray-600 font-medium">Profile Picture:</label>
-              <input type="file" id="profile-image" name="image" class="border border-gray-300 p-2 rounded w-full">
-          </div>
-
-          <div class="mb-4 w-1/2">
-              <label for="{{ p_form.image.id_for_label }}" class="block text-gray-600 font-medium">Profile Cover:</label>
-              <input type="file" id="profile-image" name="image" class="border border-gray-300 p-2 rounded w-full">
-          </div>
-
-    <button class="hover:bg-red-900 text-white font-semibold py-2 px-4 rounded w-1/8" style = "background: {{ user.profile.color }}" type="submit">Update Profile</button>
+{#  <div class="wrapper">#}
+{#    <header>#}
+{#      <h1 style="align-content: center">Profile</h1>#}
+{#    </header>#}
+{#      <form class="form-signin" method="post"> {% csrf_token %}#}
+{##}
+{#            <div class="input-box">#}
+{#              <input type="text" name="email" id="inputLocation" class="form-control" placeholder="Location " required value="{{ user.location }}">#}
+{#      </div>#}
+{##}
+{#        <div class="input-box">#}
+{#            <textarea id="inputBio" name="content" rows="4" cols="50" class="text" oninput="enableSubmitButton()" placeholder="Say something about yourself."></textarea>#}
+{#            </div>#}
+{#        <div class="mb-4 w-1/2">#}
+{#            <label for="{{ form.color.id_for_label }}">Choose a color:</label>#}
+{#            <input type="color" id="color" name="color" value="{{ user.color }}">#}
+{#        </div>#}
+{##}
+{#        <div class="mb-4 w-1/2">#}
+{#            <label for="{{ form.color.id_for_label }}">Choose a background color:</label>#}
+{#            <input type="color" id="color" name="color" value="{{ user.backgroundColor }}">#}
+{#        </div>#}
+{##}
+{#          <div class="mb-4 w-1/2">#}
+{#              <label for="{{ p_form.image.id_for_label }}" class="block text-gray-600 font-medium">Background Image:</label>#}
+{#              <input type="file" id="profile-image" name="image" class="border border-gray-300 p-2 rounded w-full">#}
+{#          </div>#}
+{##}
+{#          <div class="mb-4 w-1/2">#}
+{#              <label for="{{ p_form.image.id_for_label }}" class="block text-gray-600 font-medium">Profile Picture:</label>#}
+{#              <input type="file" id="profile-image" name="image" class="border border-gray-300 p-2 rounded w-full">#}
+{#          </div>#}
+{##}
+{#          <div class="mb-4 w-1/2">#}
+{#              <label for="{{ p_form.image.id_for_label }}" class="block text-gray-600 font-medium">Profile Cover:</label>#}
+{#              <input type="file" id="profile-image" name="image" class="border border-gray-300 p-2 rounded w-full">#}
+{#          </div>#}
+{##}
+{#    <button class="hover:bg-red-900 text-white font-semibold py-2 px-4 rounded w-1/8" style = "background: {{ user.profile.color }}" type="submit">Update Profile</button>#}
     {#        </form>#}
-</body>
-<script>
-        // JavaScript code to handle color selection
-        document.addEventListener('DOMContentLoaded', function() {
-            const submitButton = document.getElementById('submit-button');
-
-            submitButton.addEventListener('click', function() {
-                const selectedColor = document.querySelector('input[name="color"]:checked');
-
-                if (selectedColor) {
-                    alert('Selected color: ' + selectedColor.value);
-                } else {
-                    alert('Please select a color.');
-                }
-            });
-        });
-    </script>
-<script>
-        // JavaScript code to handle color selection
-        document.addEventListener('DOMContentLoaded', function() {
-            const submitButton = document.getElementById('submit-button');
-
-            submitButton.addEventListener('click', function() {
-                const selectedColor = document.querySelector('input[name="color"]:checked');
-
-                if (selectedColor) {
-                    alert('Selected color: ' + selectedColor.value);
-                } else {
-                    alert('Please select a color.');
-                }
-            });
-        });
-    </script>
-
-</html>
+{#</body>#}
+{#<script>#}
+{#        // JavaScript code to handle color selection#}
+{#        document.addEventListener('DOMContentLoaded', function() {#}
+{#            const submitButton = document.getElementById('submit-button');#}
+{##}
+{#            submitButton.addEventListener('click', function() {#}
+{#                const selectedColor = document.querySelector('input[name="color"]:checked');#}
+{##}
+{#                if (selectedColor) {#}
+{#                    alert('Selected color: ' + selectedColor.value);#}
+{#                } else {#}
+{#                    alert('Please select a color.');#}
+{#                }#}
+{#            });#}
+{#        });#}
+{#    </script>#}
+{#<script>#}
+{#        // JavaScript code to handle color selection#}
+{#        document.addEventListener('DOMContentLoaded', function() {#}
+{#            const submitButton = document.getElementById('submit-button');#}
+{##}
+{#            submitButton.addEventListener('click', function() {#}
+{#                const selectedColor = document.querySelector('input[name="color"]:checked');#}
+{##}
+{#                if (selectedColor) {#}
+{#                    alert('Selected color: ' + selectedColor.value);#}
+{#                } else {#}
+{#                    alert('Please select a color.');#}
+{#                }#}
+{#            });#}
+{#        });#}
+{#    </script>#}
+{##}
+{#</html>#}
+{% extends 'profile/header.html' %}  <!-- Use your actual base template -->
+{% block content %}
+  <h2>Update Profile</h2>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Update</button>
+  </form>
+{% endblock %}

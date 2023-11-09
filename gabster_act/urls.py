@@ -19,9 +19,10 @@ from django.template.defaulttags import url
 from django.urls import path, include, re_path  # para mainclude ung views ng posts app
 from django.conf import settings
 from django.conf.urls.static import static
+
 from testimonials import views
 from testimonials.views import view_testimonials, testimonial_detail, add_testimonial, delete_testimonial
-from accounts.views import login_view, register_view, logout_view, customization
+from accounts.views import login_view, register_view, logout_view
 from .views import *
 from templates import *
 from testimonials import views
@@ -36,6 +37,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('accounts.urls')),
     path('', include('contact.urls')),
+    path('', include('customization.urls')),
+
 
     # path('post/', post, name='post'),
     path('', login_view, name='login'),
@@ -51,7 +54,7 @@ urlpatterns = [
             name='delete_testimonial'),
 
     re_path(r'^createpost/(?P<username>[\w.@+-]+)/$', create_post, name='create_post'),
-    re_path(r'^customization/(?P<username>[\w.@+-]+)/$', customization, name='customization'),
+    # re_path(r'^customization/(?P<username>[\w.@+-]+)/$', customization, name='customization'),
     # re_path(r'^post/(?P<post_id>\d+)/$', post_detail, name='post_detail'),
     re_path(r'^profile/(?P<username>[\w.@+-]+)/(?P<post_id>\d+)/$', post_detail, name='post_detail'),
     path('', include('Post.urls')),

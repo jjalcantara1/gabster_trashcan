@@ -115,19 +115,19 @@ def delete_post(request, username, post_id):
     return redirect('profile', username=username)
 
 
-@login_required
-def customization(request, username):
-    if request.method == 'POST':
-        form = PostForm(request.POST, request.FILES)
-        if form.is_valid():
-            user = request.user
-
-            post = form.save(commit=False)
-            post.user = user
-            post.save()
-
-            return redirect('profile', username=username)
-    else:
-        form = PostForm()
-
-    return render(request, 'customization/customization.html', {'form': form})
+# @login_required
+# def customization(request, username):
+#     if request.method == 'POST':
+#         form = PostForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             user = request.user
+#
+#             post = form.save(commit=False)
+#             post.user = user
+#             post.save()
+#
+#             return redirect('profile', username=username)
+#     else:
+#         form = PostForm()
+#
+#     return render(request, 'customization/customization.html', {'form': form})

@@ -23,6 +23,7 @@ from .views import *
 
 urlpatterns = [
     path('delete-account/', delete_account, name='delete_account'),
+    path('profile/update/', profile_update_view, name='profile_update'),
 ]
 
 if settings.DEBUG:
