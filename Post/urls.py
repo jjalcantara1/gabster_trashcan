@@ -3,7 +3,7 @@ from django.urls import path, include, re_path  # para mainclude ung views ng tw
 from django.conf import settings
 from django.conf.urls.static import static
 
-from comment.views import comment_post
+from comment.views import comment_post, delete_comment
 from .import views
 from .views import *
 from templates import *
@@ -15,5 +15,5 @@ urlpatterns = [
     path('profile/<str:username>/<int:post_id>/likedby', likedby, name='likedby'),
     path('profile/<str:username>/<int:post_id>/delete/', delete_post, name='delete_post'),
     path('comment_post/<int:post_id>/', comment_post, name='comment_post'),
-
+    path('profile/<str:username>/<int:post_id>/delete/', delete_comment, name='delete_comment'),
 ]
