@@ -27,9 +27,9 @@ def profile_view(request, username):
     user_like = UserLike.objects.filter(voter=user, post__in=Post.objects.all())
 
     # Only allow users to update their own profile
-    if request.user != user:
-        messages.error(request, "You cannot edit someone else's profile.")
-        return redirect('some_other_view')  # Redirect to a different view such as the home page or user's own profile
+    # if request.user != user:
+    #     messages.error(request, "You cannot edit someone else's profile.")
+    #     return redirect('search')  # Redirect to a different view such as the home page or user's own profile
 
     if request.method == 'POST':
         # Assuming the submit button for the profile update has the name 'profile_update'
@@ -38,7 +38,7 @@ def profile_view(request, username):
             if profile_form.is_valid():
                 profile_form.save()
                 messages.success(request, 'Your profile was successfully updated!')
-                return redirect('profile_view', username=username)  # Redirect to the updated profile page
+                return redirect('profile_view', username=request.user.username)  # Redirect to the updated profile page
     else:
         profile_form = ProfileUpdateForm(instance=user)
 
