@@ -13,7 +13,7 @@
                     </div>
                 </div>
             </a>
-            {% if user == post.user %} {# Check if logged-in user is the profile user #}
+            {% if user.is_authenticated and user == request.user %} {# Check if the logged-in user is the owner of the post #}
             <button type="button" class="btn-sm btn-outline-secondary ellipsis-button" data-toggle="modal" data-target="#deletePostModal">
                 <i class="far fa-ellipsis-v"></i>
             </button>
