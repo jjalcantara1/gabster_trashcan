@@ -37,19 +37,37 @@ class RegistrationForm(UserCreationForm):
         raise forms.ValidationError(f"Username {username} is already in use.")
 
 
-class AccountAuthenticationForm(forms.ModelForm):
+class AccountAuthenticationForm(forms.Form):
+    username = forms.CharField(label='Username or Email', widget=forms.TextInput(attrs={
+        "class": "form-control"
+    }))
     password = forms.CharField(label='Password', widget=forms.PasswordInput)
-
-    class Meta:
-        model = UserAccount
-        fields = ('email', 'password')
+    #
+    # class Meta:
+    #     model = UserAccount
+    #     fields = ('email', 'password')
 
     def clean(self):
-        if self.is_valid():
-            email = self.cleaned_data['email']
-            password = self.cleaned_data['password']
-            if not authenticate(email=email, password=password):  # if password is incorrect
-                raise forms.ValidationError('Invalid Login')
+        username = self.cleaned_data.get('username')
+        password = self.cleaned_data.get('password')
+        user = authenticate(username=username, password=password)
+        if user is None:
+            user = authenticate(email=username, password=password)
+
+        if not user or not user.is_active:
+            raise forms.ValidationError("Sorry, that login was invalid. Please try again.")
+        return self.cleaned_data
+
+    def login(self, request):
+        username = self.cleaned_data.get('username')
+        password = self.cleaned_data.get('password')
+        user = authenticate(username=username, password=password)
+        if user is None:
+            user = authenticate(email=username, password=password)
+
+        return user
+
+
 
 
 # class ProfileUpdateForm(forms.ModelForm):

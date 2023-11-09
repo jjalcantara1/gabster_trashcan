@@ -126,8 +126,8 @@ class UserAccount(AbstractBaseUser):
     backgroundColor = ColorField(default='linear-gradient(to right, rgba(44,15,85,0.9), rgba(44,15,38, 0.9))')
     font_preference = models.CharField(max_length=50, default='"Poppins", sans-serif')
 
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username']
+    USERNAME_FIELD = 'username'
+    REQUIRED_FIELDS = ['email']
 
     objects = MyAccountManager()
 

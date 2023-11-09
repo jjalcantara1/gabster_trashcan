@@ -83,6 +83,7 @@ def logout_view(request):
 
 def login_view(request, *args, **kwargs):
     # form = AccountAutheticationForm(request.POST)
+    form = AccountAuthenticationForm()
     context = {}
 
     user = request.user
@@ -93,12 +94,12 @@ def login_view(request, *args, **kwargs):
     print("destination: " + str(destination))
 
     if request.POST:
-        form = AccountAuthenticationForm(request.POST)
+        form = AccountAuthenticationForm(request.POST or None)
         print(form.non_field_errors())
         if form.is_valid():
-            email = request.POST['email']
-            password = request.POST['password']
-            user = authenticate(email=email, password=password)
+            # email = request.POST['username']
+            # password = request.POST['password']
+            user = form.login(request)
             if user and user.is_active:
                 login(request, user)
                 # destination = kwargs.get('next')
@@ -110,7 +111,7 @@ def login_view(request, *args, **kwargs):
                 form = AccountAuthenticationForm()
 
                 context['login_form'] = form
-    form = AccountAuthenticationForm(request.POST)
+
     return render(request, 'accounts/login.html', {'form': form})
 
 
