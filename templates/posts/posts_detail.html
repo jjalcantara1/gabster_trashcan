@@ -54,6 +54,39 @@
             </div>
         </div>
     </div>
+        <!-- Display existing comments -->
+    <div class="card mb-4" style="width: 60rem; max-height: none;">
+        <div class="card-body">
+
+        {% for comment in comments %}
+            <div class="media mb-3">
+                <img src="{{ comment.user.profile_image.url }}" class="mr-3 rounded-circle" alt="{{ comment.user.username }}" style="width: 50px; height: 50px;">
+                <div class="media-body">
+                    <h5 class="mt-0">{{ comment.user.username }}</h5>
+                    <p>{{ comment.content }}</p>
+                </div>
+            </div>
+        {% endfor %}
+
+        </div>
+    </div>
+
+    <!-- Comment Form -->
+    <div class="card mb-4" style="width: 60rem; max-height: none;">
+        <div class="card-body">
+            <form method="post" id="comment-form" action="{% url 'comment_post' post.id %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    {{ comment_form.content.label_tag }}
+                    <label for="{{ comment_form.content.id_for_label }}"></label>
+                    <textarea class="form-control" name="{{ comment_form.content.name }}" id="{{ comment_form.content.id_for_label }}" rows="4">{{ comment_form.content.value }}</textarea>
+                    <small class="form-text text-muted">{{ comment_form.content.help_text }}</small>
+                </div>
+                <button type="submit" class="btn btn-primary">Add Comment</button>
+            </form>
+        </div>
+    </div>
+
 </div>
 {% if user.is_authenticated and user == request.user %}
 <div class="modal fade" id="deletePostModal" tabindex="-1" role="dialog" aria-labelledby="deletePostModalLabel" aria-hidden="true">

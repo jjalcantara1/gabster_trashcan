@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'colorfield',
     'contact',
     'customization',
+    'comment'
 ]
 
 MIDDLEWARE = [
