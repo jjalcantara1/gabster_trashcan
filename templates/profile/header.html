@@ -40,10 +40,18 @@
         <img src="{{ user.profile_image.url }}" >
     </a>
     <div class="dropdown-content" id="myDropdown">
-        <a href="{% url 'customization' user %}"> Profile</a>
-        <a href=" ">Settings</a>
-        <a href="/logout ">Log Out</a>
-    </div>
+                <a href="{% url 'customization' user %}">Edit Profile</a>
+                 {% if user.is_superuser %}
+                <a href='/contact'>View Messages</a>
+                    {% else %}
+                <a href='/contact'>Help</a>
+                    {% endif %}
+                <a href='/delete-account'>Delete Account</a>
+                    {% if user.is_superuser %}
+                <a href="{% url 'admin_panel'  %}">Admin Panel</a>
+                    {% endif %}
+                <a href="/logout ">Log Out</a>
+            </div>
 </div>
         </header>
 
