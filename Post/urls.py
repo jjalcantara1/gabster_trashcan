@@ -15,5 +15,5 @@ urlpatterns = [
     path('profile/<str:username>/<int:post_id>/likedby', likedby, name='likedby'),
     path('profile/<str:username>/<int:post_id>/delete/', delete_post, name='delete_post'),
     path('comment_post/<int:post_id>/', comment_post, name='comment_post'),
-    path('profile/<str:username>/<int:post_id>/delete/', delete_comment, name='delete_comment'),
+    path('profile/<str:username>/<int:post_id>/<int:comment_id>/delete/', delete_comment, name='delete_comment'),
 ]
