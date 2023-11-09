@@ -1,46 +1,55 @@
 {% extends "profile/header.html" %}
 {% load static %}
 {% block content %}
-<div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
-    <div class="card rounded" style="width: 60rem;max-height: none; background: {{ user.color}};">
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+    <div class="card rounded" style="width: 60rem; max-height: none;">
         <div class="card-header d-flex justify-content-between">
-            <a style="text-decoration: none;padding-top: 15px;" href="{% url 'profile' username=post.user.username %}">
+            <a href="{% url 'profile' username=post.user.username %}">
                 <div class="d-flex align-items-center">
-                    <img class="img-xs rounded-circle" src="{{ user.profile_image.url }}" alt="" style = "object-fit: cover" style="margin-right: 15px">
-                    <div style="padding: 0px 0px 0px 10px" class="ml-2">
-                        <h5  style="color:#24262e;">{{ post.user.username }}</h5>
+                    <img class="img-xs rounded-circle" src="{{ post.user.profile.picture.url }}" alt="">
+                    <div class="ml-2">
+                        <p>{{ post.user.username }}</p>
                         <p class="tx-11 text-muted">{{ post.createdAt }}</p>
                     </div>
                 </div>
             </a>
-            {% if user == post.user %} {# Check if logged-in user is the profile user #}
-            <button type="button" id="delete" class="btn-sm delete-button" data-toggle="modal" data-target="#deletePostModal">
-                <i style="padding-right: 18px" class="bi bi-trash3"></i>
+            {% if user.is_authenticated and user == request.user %} {# Check if the logged-in user is the owner of the post #}
+            <button type="button" class="btn-sm btn-outline-secondary ellipsis-button" data-toggle="modal" data-target="#deletePostModal">
+                <i class="far fa-ellipsis-v"></i>
             </button>
             {% endif %}
         </div>
 
-        <div class="card-body">
-                            <a href="{% url 'post_detail' post.user.username post.id %}">
-                                <p class="mb-3 tx-14">{{ post.content }}</p>
-                                {% if post.post_type == "picture" and post.picture %}
-                                    <img class="img-fluid" src="{{ post.picture.url }}" alt="">
-                                {% elif post.post_type == "video" and post.video %}
-                                    <video controls>
-                                        <source src="{{ post.video.url }}" type="video/mp4">
-                                        Your browser does not support the video tag.
-                                    </video>
-                                {% else %}
-                                {% endif %}
-                            </a>
-                        </div>
+        <div class="card-body" style="max-height: none;">
+            <p class="mb-3 tx-14">{{ post.content }}</p>
+
+            {% if post.post_type == "picture" and post.picture %}
+                <img class="img-fluid" src="{{ post.picture.url }}" alt="">
+            {% elif post.post_type == "video" and post.video %}
+                <video controls>
+                    <source src="{{ post.video.url }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            {% else %}
+
+            {% endif %}
+        </div>
         <div class="card-footer">
             <div class="d-flex justify-content-between">
                 <div class="d-flex post-actions">
                     <form method="post" class="like-form" data-like-url="{% url 'like' post.user.username post.id %}">
                         {% csrf_token %}
+                        <button onclick="changeIcon(this)" type="button" id="like" class="bg-green-500 text-white px-2 py-1 rounded-full flex items-center like-button-post">
+                            {% if post == foo.post %}
+                                {% if foo.is_liked %}
+                                    <i class="fa-solid fa-heart" id="like"></i>
+                                {% else %}
+                                    <i class="fa-regular fa-heart" id="like"></i>
+                                {% endif %}
+                            {% endif %}
+                        </button>
                         <span class="ml-2 text-sm" id="likes-count">{{ post.likes }} </span>
-                        <a style="text-decoration: none; color: #24262e;" href="{% url 'likedby' username=post.user.username post_id=post.id %}">
+                        <a href="{% url 'likedby' username=post.user.username post_id=post.id %}">
                             Likes
                         </a>
                     </form>
