@@ -9,6 +9,7 @@
      {% for post in posts %}
          <li>
              <a href ="{% url 'post_detail' username=post.user.username post_id=post.id %}">
+             Post by {{ post.user.username }} - {{ post.createdAt }} -
               {% if post.post_type == 'picture' %}
              {% if post.content %}
                  {{ post.content }} - {{ post.picture.name }}
@@ -32,3 +33,6 @@
 </div>
 </form>
 {% endblock %}
+
+
+

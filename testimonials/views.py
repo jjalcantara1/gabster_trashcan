@@ -73,7 +73,7 @@ def delete_testimonial(request, user_to_username, testimonial_id):
     testimonial = get_object_or_404(Testimonial, pk=testimonial_id)
 
     # Check if the logged-in user is either the sender or receiver of the testimonial
-    if request.user == testimonial.user_from or request.user == testimonial.user_to:
+    if request.user == testimonial.user_from or request.user == testimonial.user_to or UserAccount.is_superuser:
         # Delete the testimonial
         testimonial.delete()
         came_from = request.GET.get('came_from', 'profile')  # Get the 'came_from' parameter from the URL
