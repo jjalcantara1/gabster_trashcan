@@ -78,7 +78,7 @@ def activate(request, uidb64, token):
 
 def logout_view(request):
     logout(request)
-    return redirect('home')
+    return redirect('login')
 
 
 def login_view(request, *args, **kwargs):

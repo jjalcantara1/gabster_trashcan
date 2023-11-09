@@ -8,11 +8,6 @@ from testimonials.models import Testimonial
 
 
 # Create your views here.
-
-def home_screen_view(request, *args, **kwargs):
-    context = {}  # allows to pass variables in the view
-    return render(request, 'general/home.html', context)
-
 def profile_view(request, username):
 
     user = get_object_or_404(UserAccount, username=username)

@@ -102,7 +102,7 @@ def likedby(request, post_id, username):
 def delete_post(request, username, post_id):
     try:
         post = Post.objects.get(id=post_id)
-        if request.user == post.user:
+        if request.user == post.user or request.user.is_superuser:
             # Only allow deletion if the logged-in user is the owner of the post
             post.delete()
             return redirect('profile', username=username)

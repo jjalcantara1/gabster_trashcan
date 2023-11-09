@@ -25,7 +25,6 @@ from accounts.views import login_view, register_view, logout_view, customization
 from .views import *
 from templates import *
 from testimonials import views
-from general.views import home_screen_view
 # from django.conf.urls import url
 # from accounts.views import *
 from accounts import views
@@ -35,12 +34,11 @@ from Post.views import *
 urlpatterns = [
     path('gasbter_admin/', include('admin_custom.urls')),
     path('admin/', admin.site.urls),
-    path('', home_screen_view, name='home'),
     path('', include('accounts.urls')),
     path('', include('contact.urls')),
 
     # path('post/', post, name='post'),
-    path('login/', login_view, name='login'),
+    path('', login_view, name='login'),
     path('logout/', logout_view, name='logout'),
     path('register/', register_view, name='register'),
 
