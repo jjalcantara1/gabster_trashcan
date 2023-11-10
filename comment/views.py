@@ -43,4 +43,4 @@ def delete_comment(request, username, post_id, comment_id):
     except Post.DoesNotExist:
         pass
 
-    return redirect('post_detail', username=username, post_id=post_id)
+    return redirect('post_detail', username=username, post_id=post_id , comment_id=comment_id)
