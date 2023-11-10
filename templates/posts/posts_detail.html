@@ -119,23 +119,29 @@
     </div>
 </div>
 {% endif %}
-{% endblock %}
+
 
 {% block script %}
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
-     $(document).ready(function () {
-        $(".like-button-post").click(function () {
+    $(document).ready(function () {
+        $(".like-button-post").click(function (event) {
+            event.preventDefault(); // Prevent the default form submit action
             const likeForm = $(this).closest(".like-form");
+            const likeButton = $(this);
+
+            console.log('Like button clicked'); // Debugging line
 
             $.ajax({
                 type: "POST",
                 url: likeForm.data("like-url"),
                 data: likeForm.serialize(),
                 success: function (data) {
-                    const likeCount = likeForm.find(".text-sm");
-                    likeCount.text(data.likes + " Likes");
+                    console.log('AJAX success'); // Debugging line
+                    const likeCount = likeForm.find("#likes-count");
+                    likeCount.text(data.likes);
+                    changeIcon(likeButton);
                 },
                 error: function (error) {
                     console.error("Error: " + JSON.stringify(error));
@@ -143,22 +149,29 @@
             });
         });
     });
+
     function changeIcon(button) {
-        const icon = button.querySelector("i");
-        if (icon.classList.contains("fa-solid")) {
-            icon.classList.remove("fa-solid");
-            icon.classList.add("fa-regular");
+        const icon = button.find("i");
+        if (icon.hasClass("fa-solid")) {
+            icon.removeClass("fa-solid").addClass("fa-regular");
         } else {
-            icon.classList.remove("fa-regular");
-            icon.classList.add("fa-solid");
+            icon.removeClass("fa-regular").addClass("fa-solid");
         }
     }
-        // Toggle comments section
-        $('.comment-btn').click(function() {
-            $('html, body').animate({
-                scrollTop: $("#comments-section").offset().top
-            }, 1000);
+
+    // Toggle comments section
+   $('.comment-btn').click(function() {
+            $("#comments-section").slideToggle('slow', function() {
+                // Check if the comments section is now visible
+                if ($("#comments-section").is(":visible")) {
+                    // Scroll to the comments section
+                    $('html, body').animate({
+                        scrollTop: $("#comments-section").offset().top
+                    }, 1000);
+                }
+            });
         });
-    });
+
 </script>
+{% endblock %}
 {% endblock %}
