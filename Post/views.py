@@ -5,6 +5,8 @@ from django.views.decorators.http import require_POST
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 from accounts.models import UserAccount
+from comment.forms import CommentForm
+from comment.models import Comment
 from .models import Post, UserLike
 from django.urls import reverse_lazy
 from django import forms
@@ -38,6 +40,7 @@ def create_post(request, username):
 def post_detail(request, username, post_id):
     user = get_object_or_404(UserAccount, username=username)
     post = get_object_or_404(Post, pk=post_id, user=user)
+    comments = Comment.objects.filter(post=post)  # Get the comments for the post
 
     user_like = None
     if request.user.is_authenticated:
@@ -46,11 +49,26 @@ def post_detail(request, username, post_id):
         except UserLike.DoesNotExist:
             user_like = None
 
+    # Instantiate an empty comment form
+    comment_form = CommentForm()
+
+    if request.method == 'POST':
+        comment_form = CommentForm(request.POST)
+        if comment_form.is_valid():
+            new_comment = comment_form.save(commit=False)
+            new_comment.post = post
+            new_comment.user = request.user
+            new_comment.save()
+            return redirect('post_detail', username=username, post_id=post_id)
+
     return render(request, 'Posts/posts_detail.html', {
         'user': user,
         'post': post,
         'user_like': user_like,
+        'comments': comments,  # Add the comments to the context
+        'comment_form': comment_form,  # Add the comment form to the context
     })
+
 
 
 
