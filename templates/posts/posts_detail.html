@@ -92,7 +92,7 @@
                 </div>
             </div>
              {% if user.is_authenticated and user == request.user %}
-            <button type="button" id="delete" class="btn-sm delete-button" data-toggle="modal" data-target="#deleteCommentModal">
+            <button type="button" id="delete" class="btn-sm delete-button" data-toggle="modal" data-target="#deleteCommentModal" data-comment-id="{{ comment.id }}">
                 <i style="padding-right: 18px" class="bi bi-trash3">{{ comment.id }}</i>
             </button>
             {% endif %}
@@ -131,17 +131,17 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="deleteCommentModalLabel">Delete Post</h5>
+                <h5 class="modal-title" id="deleteCommentModalLabel">Delete Comment</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                Are you sure you want to delete this Post?
+                Are you sure you want to delete this comment?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <form method="post" action="{% url 'delete_comment' username=post.user.username post_id=post.id comment_id=51 %}" id="delete-comment-form">
+                <form method="post" action="{% url 'delete_comment' username=post.user.username post_id=post.id comment_id=0 as base_delete_url %}" id="delete-comment-form">
                     {% csrf_token %}
                     <button type="submit" class="btn btn-danger">Delete</button>
                 </form>
@@ -201,12 +201,18 @@
                 }
             });
         });
- $('#deleteCommentModal').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget);
-    var commentId = button.data('comment-id');
-    var formAction = "{% url 'delete_comment' username=user.username post_id=post.id comment_id=51 %}"
+$('#deleteCommentModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget); // Button that triggered the modal
+    var commentId = button.data('comment-id'); // Extract comment ID from the button
+    var baseAction = "{{ base_delete_url }}"; // Ensure this variable is correctly obtained
+    var formAction = baseAction.replace("0", commentId); // Replace '0' with the actual comment ID
     var modal = $(this);
     modal.find('#delete-comment-form').attr('action', formAction);
+    console.log("Form action at modal show: ", formAction); // Log the form action
+});
+
+$('#delete-comment-form').on('submit', function() {
+    console.log("Form action at form submission: ", $(this).attr('action')); // Log the form action at submission
 });
 
 </script>
